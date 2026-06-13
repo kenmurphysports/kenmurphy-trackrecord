@@ -1,1 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 Track Record — Ken Murphy Sports</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, serif; background: #f0ece4; color: #0d1b2a; }
+  .container { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; }
+  h1 { font-size: 28px; font-weight: normal; color: #0d1b2a; margin-bottom: 4px; }
+  .subtitle { font-size: 14px; color: #7a8a9a; margin-bottom: 2rem; font-family: Arial, sans-serif; }
+
+  /* Stat cards */
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 2rem; }
+  .stat { background: #fff; border: 1px solid #e0dbd2; border-radius: 6px; padding: 1rem 1.2rem; }
+  .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #7a8a9a; font-family: Arial, sans-serif; margin-bottom: 6px; }
+  .stat-value { font-size: 26px; font-weight: bold; color: #0d1b2a; font-family: Arial, sans-serif; }
+  .stat-value.green { color: #1a7a4a; }
+  .stat-value.gold { color: #c9a84c; }
+
+  /* Monthly grid */
+  .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #7a8a9a; font-family: Arial, sans-serif; margin-bottom: .75rem; }
+  .month-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 2rem; }
+  .month-card { background: #fff; border: 1px solid #e0dbd2; border-radius: 6px; padding: .75rem; text-align: center; }
+  .month-name { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: #7a8a9a; font-family: Arial, sans-serif; margin-bottom: 5px; }
+  .month-rec { font-size: 14px; font-weight: bold; color: #0d1b2a; font-family: Arial, sans-serif; }
+  .month-pnl { font-size: 12px; font-family: Arial, sans-serif; margin-top: 3px; }
+
+  /* Filters */
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .btn { background: #fff; border: 1px solid #c9a84c; border-radius: 4px; padding: 5px 14px; font-size: 13px; cursor: pointer; color: #0d1b2a; font-family: Arial, sans-serif; transition: all 0.15s; }
+  .btn:hover { background: #0d1b2a; color: #c9a84c; border-color: #0d1b2a; }
+  .btn.active { background: #0d1b2a; color: #c9a84c; border-color: #0d1b2a; }
+
+  /* Summary line */
+  .result-summary { font-size: 13px; color: #7a8a9a; font-family: Arial, sans-serif; margin-bottom: .75rem; }
+
+  /* Table */
+  .tbl-wrap { background: #fff; border: 1px solid #e0dbd2; border-radius: 6px; overflow: hidden; }
+  .tbl-scroll { max-height: 520px; overflow-y: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; font-family: Arial, sans-serif; }
+  th { background: #0d1b2a; color: #c9a84c; padding: 10px 12px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; font-weight: normal; position: sticky; top: 0; z-index: 1; }
+  td { padding: 9px 12px; border-bottom: 1px solid #f0ece4; color: #0d1b2a; vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #faf8f4; }
+  .badge { display: inline-block; font-size: 11px; font-weight: bold; padding: 2px 8px; border-radius: 3px; font-family: Arial, sans-serif; }
+  .badge-W { background: #e6f4ec; color: #1a7a4a; }
+  .badge-L { background: #fdecea; color: #b03030; }
+  .badge-Push, .badge-PPD, .badge-Pending { background: #f0ece4; color: #7a8a9a; }
+  .sport-tag { font-size: 11px; color: #7a8a9a; background: #f0ece4; padding: 2px 7px; border-radius: 3px; }
+  .pnl-pos { color: #1a7a4a; font-weight: bold; }
+  .pnl-neg { color: #b03030; font-weight: bold; }
+  .pnl-neu { color: #7a8a9a; }
+
+  /* Footer note */
+  .note { font-size: 12px; color: #7a8a9a; font-family: Arial, sans-serif; margin-top: 1.5rem; line-height: 1.6; border-top: 1px solid #e0dbd2; padding-top: 1rem; }
+
+  @media (max-width: 600px) {
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .month-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+<div style="background:#0d1b2a;padding:12px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;">
+  <a href="https://www.kenmurphysports.com" style="font-family:Georgia,serif;color:#c9a84c;font-size:18px;text-decoration:none;font-weight:bold;letter-spacing:.02em;">Ken Murphy Sports</a>
+  <a href="https://www.kenmurphysports.com/#/portal/signup" style="background:#c9a84c;color:#0d1b2a;font-family:Arial,sans-serif;font-size:13px;font-weight:bold;padding:8px 20px;border-radius:4px;text-decoration:none;letter-spacing:.04em;">Subscribe Now</a>
+</div>
+<div class="container">
+  <h1>2026 Track Record</h1>
+  <p class="subtitle">January 2 – June 6, 2026 &nbsp;·&nbsp; All results publicly documented</p>
+
+  <div class="stat-grid">
+    <div class="stat"><div class="stat-label">2026 Record</div><div class="stat-value">92 – 74</div></div>
+    <div class="stat"><div class="stat-label">Win Rate</div><div class="stat-value green">55.4%</div></div>
+    <div class="stat"><div class="stat-label">Units Won</div><div class="stat-value green">+13.77</div></div>
+    <div class="stat"><div class="stat-label">NYK Futures</div><div class="stat-value gold" style="font-size:18px;">Pending +165</div></div>
+  </div>
+
+  <div class="section-label">Monthly Breakdown</div>
+  <div class="month-grid" id="monthGrid"></div>
+
+  <div class="section-label">Filter by Sport</div>
+  <div class="filters" id="filters"></div>
+
+  <div class="result-summary" id="resultSummary"></div>
+
+  <div class="tbl-wrap">
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:88px">Date</th>
+            <th style="width:64px">Sport</th>
+            <th>Selection</th>
+            <th style="width:60px">Odds</th>
+            <th style="width:56px">Result</th>
+            <th style="width:68px;text-align:right">Units</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:2rem;padding:1.5rem;background:#0d1b2a;border-radius:6px;">
+    <p style="font-family:Georgia,serif;color:#f0ece4;font-size:16px;margin-bottom:1rem;">The record speaks for itself. Ready to get started?</p>
+    <a href="#/portal/signup" style="display:inline-block;background:#c9a84c;color:#0d1b2a;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;padding:12px 32px;border-radius:4px;text-decoration:none;letter-spacing:.04em;">Subscribe Now</a>
+  </div>
+
+  <div class="note">
+    Unit P&amp;L reflects actual wager sizing and odds. A winning 1-unit wager at -150 returns +0.67 units; a winning 1-unit wager at +130 returns +1.30 units. Half-unit selections are sized accordingly. NYK NBA Championship futures (+165, 1 unit) are excluded from totals pending resolution. All results are documented as placed — wins, losses, pushes, and postponements included.
+  </div>
+</div>
+
+<script>
+const MONTHLY = [
+  {name:"Jan",w:25,l:6,pnl:14.23},
+  {name:"Feb",w:11,l:16,pnl:-2.79},
+  {name:"Mar",w:21,l:21,pnl:0.83},
+  {name:"Apr",w:18,l:16,pnl:1.03},
+  {name:"May",w:14,l:12,pnl:0.81},
+  {name:"Jun",w:3,l:3,pnl:-0.35}
+];
+
+const DATA = [
+  {date:"2026-01-02",sel:"2TP ML TXST/NAVY -200",odds:"-200",sport:"CFB",wl:"W",pnl:1.0},
+  {date:"2026-01-02",sel:"Le Moyne -5.5 Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-01-03",sel:"2TT CAR +9/SF +8.5",odds:"-125",sport:"NFL",wl:"L",pnl:-1.25},
+  {date:"2026-01-03",sel:"HEDGE SEA -2.5 Half Unit",odds:"-110",sport:"NFL",wl:"W",pnl:0.5},
+  {date:"2026-01-03",sel:"Miss State +9.5 Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-01-05",sel:"EMU +1.5",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-01-07",sel:"Over 151.5 ARK vs. Ole Miss",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-01-08",sel:"DET Half Unit",odds:"-140",sport:"NHL",wl:"W",pnl:0.5},
+  {date:"2026-01-09",sel:"IND -4",odds:"-110",sport:"CFB",wl:"W",pnl:1.0},
+  {date:"2026-01-09",sel:"ORE +4 OFFSET of IND -4 Half Unit",odds:"-125",sport:"CFB",wl:"L",pnl:-0.625},
+  {date:"2026-01-10",sel:"Under 140 Hofstra vs. Monmouth",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-01-10",sel:"Oregon State +2.5",odds:"-110",sport:"CBB",wl:"L",pnl:-1.1},
+  {date:"2026-01-10",sel:"TOR One Unit FLAT",odds:"-165",sport:"NHL",wl:"W",pnl:0.606},
+  {date:"2026-01-11",sel:"1H JAX +0.5 Half Unit",odds:"-110",sport:"NFL",wl:"L",pnl:-0.55},
+  {date:"2026-01-12",sel:"MTL One Unit FLAT",odds:"-179",sport:"NHL",wl:"W",pnl:0.559},
+  {date:"2026-01-13",sel:"Texas A&M +9.5",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-01-14",sel:"Over 146 Rhode Isl. vs. VCU Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-01-15",sel:"CBJ One Unit FLAT",odds:"-155",sport:"NHL",wl:"W",pnl:0.645},
+  {date:"2026-01-17",sel:"3TT BUF+7.5/SEA-1/U46.5 NE Half Unit",odds:"160",sport:"NFL",wl:"W",pnl:0.8},
+  {date:"2026-01-18",sel:"Under 137 Tulane vs. UNT Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-01-19",sel:"IND to WIN CFB Championship +130",odds:"130",sport:"CFB",wl:"W",pnl:1.3},
+  {date:"2026-01-21",sel:"Indiana State +9",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-01-22",sel:"Wisconsin -5.5 Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-01-24",sel:"Over 145 NIU vs. Murray State",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-01-24",sel:"Kansas -4.5",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-01-25",sel:"SEA -2",odds:"-110",sport:"NFL",wl:"W",pnl:1.0},
+  {date:"2026-01-27",sel:"Over 154 UCON vs. Providence",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-01-27",sel:"2H U 159 UCON vs. Prov Hedge 0.5u",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-01-29",sel:"Longwood +2.5",odds:"-110",sport:"CBB",wl:"L",pnl:-1.1},
+  {date:"2026-01-30",sel:"Over 156.5 Provf vs VILL Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-01-30",sel:"Wright State -3 Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-02-01",sel:"CLE State +9",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-02-03",sel:"Under 142 SIUE vs. Linden Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-02-04",sel:"Navy -3.5",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-02-05",sel:"Cal Santa Barbara -3",odds:"-105",sport:"CBB",wl:"L",pnl:-1.05},
+  {date:"2026-02-06",sel:"Murray State Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-02-07",sel:"Under 139.5 Drexel vs Elon Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-02-07",sel:"Over 152.5 Stony Brook vs NE Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-02-07",sel:"Delaware State -1.5 Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-02-08",sel:"2TP UVA/SEA (Super Bowl)",odds:"-130",sport:"CBB/NFL",wl:"W",pnl:1.0},
+  {date:"2026-02-08",sel:"2TT NEP +11/Under 51.5",odds:"-110",sport:"NFL",wl:"L",pnl:-1.1},
+  {date:"2026-02-09",sel:"Under 143.5 Drake vs. Valparaiso",odds:"-110",sport:"CBB",wl:"L",pnl:-1.1},
+  {date:"2026-02-12",sel:"Under 133.5 Drexel Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-02-17",sel:"Nebraska +2 Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-02-18",sel:"2TP Clem/St. Johns -120 One Unit FLAT",odds:"-110",sport:"CBB",wl:"L",pnl:-1.0},
+  {date:"2026-02-18",sel:"Under 145.5 Duq vs. La Salle Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-02-19",sel:"Alabama State +5.5 Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-02-19",sel:"Over 152 High Point Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-02-19",sel:"Montana -130 Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-02-20",sel:"Green Bay +6.5",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-02-21",sel:"UTRGV -3.5",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-02-22",sel:"Wisconsin -160 One Unit FLAT",odds:"-160",sport:"CBB",wl:"W",pnl:0.625},
+  {date:"2026-02-24",sel:"STL -3.5",odds:"-110",sport:"CBB",wl:"L",pnl:-1.1},
+  {date:"2026-02-24",sel:"2H STL -5.5 Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-02-26",sel:"Stetson +7.5 Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-02-26",sel:"2TP ML Utah Tech/Cal Baptist",odds:"125",sport:"CBB",wl:"W",pnl:1.25},
+  {date:"2026-02-26",sel:"UC Riverside +11.5 Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-02-28",sel:"Over 149.5 Arizona",odds:"-110",sport:"CBB",wl:"L",pnl:-1.1},
+  {date:"2026-03-01",sel:"2TP ILL-CHI/UNC WIL",odds:"123",sport:"CBB",wl:"L",pnl:-1.0},
+  {date:"2026-03-02",sel:"Duke -9.5",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-03-02",sel:"Duke ML/DAL (NHL)",odds:"-115",sport:"CBB/NHL",wl:"W",pnl:1.0},
+  {date:"2026-03-04",sel:"Over 161.5 Wright St. vs. CLE St Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-03-04",sel:"Wagner +5.5 Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-03-05",sel:"St. Thomas -5 Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-03-06",sel:"TXST -118 Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-03-06",sel:"S. Alabama -4.5 Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-03-07",sel:"Arkansas +4.5",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-03-07",sel:"2H MO -2",odds:"-110",sport:"CBB",wl:"L",pnl:-1.1},
+  {date:"2026-03-07",sel:"STL -6 Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-03-07",sel:"New Mexico +7.5 Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-03-07",sel:"Oklahoma +7.5 Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-03-07",sel:"Mt. St. Marys +3.5 Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-03-09",sel:"3TP N. COL/Duke win ACC/FLA win SEC",odds:"185",sport:"CBB",wl:"L",pnl:-1.0},
+  {date:"2026-03-10",sel:"Over 162 OSU vs. COL",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-03-11",sel:"PIT +9.5",odds:"-110",sport:"CBB",wl:"L",pnl:-1.1},
+  {date:"2026-03-12",sel:"FSU +17",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-03-13",sel:"1H Ohio State +7.5",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-03-14",sel:"St. Josephs +7 Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-03-15",sel:"Over 164.5 ARK vs. VAN Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-03-04",sel:"USA to win World Baseball Classic",odds:"-115",sport:"MLB",wl:"L",pnl:-1.15},
+  {date:"2026-03-17",sel:"Venezuela Half Unit",odds:"225",sport:"MLB",wl:"W",pnl:1.125},
+  {date:"2026-03-17",sel:"MD Bal County +1 Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-03-17",sel:"Over 158.5 Texas Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-03-18",sel:"Under 138.5 Nebraska",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-03-20",sel:"Akron +7.5",odds:"-110",sport:"CBB",wl:"L",pnl:-1.1},
+  {date:"2026-03-21",sel:"STL +12.5",odds:"-110",sport:"CBB",wl:"L",pnl:-1.1},
+  {date:"2026-03-22",sel:"2TP ML PUR/FLA One Unit FLAT",odds:"-195",sport:"CBB",wl:"L",pnl:-1.0},
+  {date:"2026-03-22",sel:"2H Iowa State -3",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-03-26",sel:"Texas +7.5 Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-03-26",sel:"2TP NRFI CIN/NRFI PHI Half Unit",odds:"215",sport:"MLB",wl:"L",pnl:-0.5},
+  {date:"2026-03-27",sel:"St. Johns +7 Half Unit",odds:"-110",sport:"CBB",wl:"W",pnl:0.5},
+  {date:"2026-03-27",sel:"Over 7 runs SEA vs. CLE Half Unit",odds:"-110",sport:"MLB",wl:"L",pnl:-0.55},
+  {date:"2026-03-28",sel:"F5 CHC -0.5 runs One Unit FLAT",odds:"-145",sport:"MLB",wl:"W",pnl:0.69},
+  {date:"2026-03-28",sel:"CHC -1.5 runs Half Unit",odds:"-120",sport:"MLB",wl:"W",pnl:0.5},
+  {date:"2026-03-28",sel:"Over 138.5 Illinois vs. Iowa Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-03-29",sel:"Over 7.5 runs TB vs. STL Half Unit",odds:"-110",sport:"MLB",wl:"W",pnl:0.5},
+  {date:"2026-03-29",sel:"BAY -3.5",odds:"-110",sport:"CBB",wl:"W",pnl:1.0},
+  {date:"2026-03-29",sel:"Under 146.5 MICH vs. TN Half Unit",odds:"-110",sport:"CBB",wl:"L",pnl:-0.55},
+  {date:"2026-03-30",sel:"KC F5 -0.5 runs",odds:"-115",sport:"MLB",wl:"W",pnl:1.0},
+  {date:"2026-03-30",sel:"KC One Unit FLAT",odds:"-150",sport:"MLB",wl:"W",pnl:0.667},
+  {date:"2026-04-01",sel:"F5 Miami One Unit FLAT",odds:"-135",sport:"MLB",wl:"W",pnl:0.741},
+  {date:"2026-04-03",sel:"WAS -2.5 runs Half Unit",odds:"-110",sport:"MLB",wl:"L",pnl:-0.55},
+  {date:"2026-04-04",sel:"Over 10 runs ATH vs. HOU Half Unit",odds:"-110",sport:"MLB",wl:"W",pnl:0.5},
+  {date:"2026-04-04",sel:"Illinois One Unit FLAT",odds:"-125",sport:"MLB",wl:"L",pnl:-1.0},
+  {date:"2026-04-05",sel:"Over 7.5 runs CWS vs. TOR Half Unit",odds:"-110",sport:"MLB",wl:"L",pnl:-0.55},
+  {date:"2026-04-06",sel:"MIL -117 Half Unit",odds:"-117",sport:"MLB",wl:"W",pnl:0.504},
+  {date:"2026-04-06",sel:"F5 Under 3.5 runs LAA vs. ATL",odds:"-110",sport:"MLB",wl:"L",pnl:-1.0},
+  {date:"2026-04-07",sel:"F5 Under 3.5 runs Miami Half Unit",odds:"-120",sport:"MLB",wl:"W",pnl:0.5},
+  {date:"2026-04-07",sel:"LAA Half Unit",odds:"120",sport:"MLB",wl:"L",pnl:-0.5},
+  {date:"2026-04-08",sel:"F5 Under 4 runs TEX vs SEA Half Unit",odds:"-120",sport:"MLB",wl:"W",pnl:0.5},
+  {date:"2026-04-08",sel:"Under 7.5 runs TEX vs. SEA Half Unit",odds:"-105",sport:"MLB",wl:"W",pnl:0.552},
+  {date:"2026-04-09",sel:"Aggregate four players 1.0u",odds:"650",sport:"PGA",wl:"L",pnl:-1.0},
+  {date:"2026-04-10",sel:"Under 9 runs Tor vs. Min Half Unit",odds:"-110",sport:"MLB",wl:"L",pnl:-0.55},
+  {date:"2026-04-11",sel:"NRFI KC vs. CWS Half Unit",odds:"-110",sport:"MLB",wl:"L",pnl:-0.55},
+  {date:"2026-04-11",sel:"Under 9 runs KC vs. CWS Half Unit",odds:"-105",sport:"MLB",wl:"W",pnl:0.505},
+  {date:"2026-04-12",sel:"F5 U 4.5 CIN vs LAA Half Unit FLAT",odds:"-125",sport:"MLB",wl:"L",pnl:-0.63},
+  {date:"2026-04-12",sel:"F5 Under 3.5 TB vs NYY Half Unit",odds:"100",sport:"MLB",wl:"W",pnl:0.5},
+  {date:"2026-04-13",sel:"BUF to win in regulation only",odds:"-124",sport:"NHL",wl:"W",pnl:1.0},
+  {date:"2026-04-15",sel:"PROP O3.5 Ks Kochanowicz +140 0.5u",odds:"140",sport:"MLB",wl:"W",pnl:0.7},
+  {date:"2026-04-17",sel:"LAA F5 One Unit FLAT",odds:"-165",sport:"MLB",wl:"W",pnl:0.606},
+  {date:"2026-04-18",sel:"Over 9.5 LAA vs. SD Half Unit",odds:"-115",sport:"MLB",wl:"L",pnl:-0.58},
+  {date:"2026-04-19",sel:"TT Over 4 runs NYY",odds:"-115",sport:"MLB",wl:"W",pnl:1.0},
+  {date:"2026-04-21",sel:"CHC",odds:"-116",sport:"MLB",wl:"W",pnl:1.0},
+  {date:"2026-04-24",sel:"ATL One Unit FLAT",odds:"-137",sport:"MLB",wl:"W",pnl:0.73},
+  {date:"2026-04-24",sel:"NYM -1.5 runs",odds:"105",sport:"MLB",wl:"L",pnl:-1.05},
+  {date:"2026-04-24",sel:"CHC Half Unit",odds:"142",sport:"MLB",wl:"W",pnl:0.71},
+  {date:"2026-04-24",sel:"MIL Half Unit",odds:"110",sport:"MLB",wl:"L",pnl:-0.5},
+  {date:"2026-04-25",sel:"F5 ATH",odds:"119",sport:"MLB",wl:"W",pnl:0.595},
+  {date:"2026-04-26",sel:"F5 U 8 runs ARI vs SD Half Unit",odds:"-115",sport:"MLB",wl:"W",pnl:0.504},
+  {date:"2026-04-26",sel:"F5 KC Half Unit",odds:"-105",sport:"MLB",wl:"L",pnl:-0.53},
+  {date:"2026-04-27",sel:"F5 NYY -0.5 run Half Unit",odds:"-105",sport:"MLB",wl:"W",pnl:0.505},
+  {date:"2026-04-28",sel:"F5 Over 4 runs PHI vs. SF Half Unit",odds:"-125",sport:"MLB",wl:"L",pnl:-0.63},
+  {date:"2026-04-29",sel:"2TP TB+1.5/NYY Half Unit",odds:"171",sport:"MLB",wl:"L",pnl:-0.5},
+  {date:"2026-04-30",sel:"PHI -1.5 runs Half Unit",odds:"155",sport:"MLB",wl:"L",pnl:-0.5},
+  {date:"2026-05-01",sel:"PHI Half Unit",odds:"-116",sport:"MLB",wl:"W",pnl:0.5},
+  {date:"2026-05-02",sel:"Over 3.5 runs STL",odds:"-125",sport:"MLB",wl:"L",pnl:-1.25},
+  {date:"2026-05-03",sel:"TB",odds:"-118",sport:"MLB",wl:"W",pnl:1.0},
+  {date:"2026-05-04",sel:"F5 Under 4.5 runs Half Unit",odds:"-110",sport:"MLB",wl:"W",pnl:0.5},
+  {date:"2026-05-04",sel:"TB",odds:"-120",sport:"MLB",wl:"W",pnl:1.0},
+  {date:"2026-05-04",sel:"Atlanta Half Unit",odds:"135",sport:"MLB",wl:"L",pnl:-0.5},
+  {date:"2026-05-06",sel:"Atlanta Half Unit",odds:"120",sport:"MLB",wl:"L",pnl:-0.5},
+  {date:"2026-05-12",sel:"PIT -1.5 runs One Unit FLAT",odds:"-125",sport:"MLB",wl:"W",pnl:0.8},
+  {date:"2026-05-13",sel:"NRFI MIL vs. SD Half Unit",odds:"-150",sport:"MLB",wl:"W",pnl:0.5},
+  {date:"2026-05-15",sel:"F5 ATL One Unit FLAT",odds:"-138",sport:"MLB",wl:"W",pnl:0.725},
+  {date:"2026-05-16",sel:"F5 Under 6 runs ARI vs. COL 0.5u",odds:"100",sport:"MLB",wl:"W",pnl:1.0},
+  {date:"2026-05-16",sel:"TB One Unit FLAT",odds:"-134",sport:"MLB",wl:"L",pnl:-1.0},
+  {date:"2026-05-17",sel:"PGA Championship Aggregate 1.5u",odds:"900",sport:"PGA",wl:"L",pnl:-1.5},
+  {date:"2026-05-18",sel:"F5 TB One Unit Flat",odds:"-140",sport:"MLB",wl:"W",pnl:0.714},
+  {date:"2026-05-18",sel:"F5 TB -0.5 runs",odds:"100",sport:"MLB",wl:"W",pnl:0.5},
+  {date:"2026-05-19",sel:"F5 Boston Half Unit",odds:"-125",sport:"MLB",wl:"W",pnl:0.504},
+  {date:"2026-05-20",sel:"STL Half Unit",odds:"-114",sport:"MLB",wl:"L",pnl:-0.57},
+  {date:"2026-05-22",sel:"F5 TB",odds:"125",sport:"MLB",wl:"L",pnl:-0.5},
+  {date:"2026-05-23",sel:"F5 Under 4 runs LAA vs. TEX 0.5u",odds:"-120",sport:"MLB",wl:"Push",pnl:0},
+  {date:"2026-05-24",sel:"BAL One Unit FLAT",odds:"-125",sport:"MLB",wl:"L",pnl:-1.0},
+  {date:"2026-05-25",sel:"Over 9 runs LAD vs. COL Half Unit",odds:"100",sport:"MLB",wl:"L",pnl:-0.5},
+  {date:"2026-05-26",sel:"ARI F5",odds:"-110",sport:"MLB",wl:"W",pnl:1.0},
+  {date:"2026-05-27",sel:"2TP ARI/NYY Half Unit",odds:"177",sport:"MLB",wl:"W",pnl:0.885},
+  {date:"2026-05-28",sel:"PGA Colonial Ludvig Aberg Top 10",odds:"130",sport:"PGA",wl:"L",pnl:-1.0},
+  {date:"2026-05-29",sel:"PROP Ketel Marte Half Unit",odds:"125",sport:"MLB",wl:"L",pnl:-0.5},
+  {date:"2026-05-30",sel:"TB -1.5 runs",odds:"140",sport:"MLB",wl:"L",pnl:-1.0},
+  {date:"2026-05-31",sel:"TB -1.5 runs",odds:"100",sport:"MLB",wl:"W",pnl:1.0},
+  {date:"2026-06-02",sel:"TT Over 4 runs CWS Half Unit",odds:"-115",sport:"MLB",wl:"Push",pnl:0},
+  {date:"2026-06-02",sel:"TB One Unit FLAT",odds:"-135",sport:"MLB",wl:"L",pnl:-1.0},
+  {date:"2026-06-03",sel:"F5 PHI -0.5 runs One Unit FLAT",odds:"-155",sport:"MLB",wl:"W",pnl:0.645},
+  {date:"2026-06-03",sel:"3TP ALL F5 PHI/NYY/LAD 0.5u",odds:"283",sport:"MLB",wl:"L",pnl:-0.5},
+  {date:"2026-06-03",sel:"NBA Championship NYK",odds:"165",sport:"NBA",wl:"Pending",pnl:0},
+  {date:"2026-06-04",sel:"MIL -1.5 runs Half Unit",odds:"100",sport:"MLB",wl:"L",pnl:-0.5},
+  {date:"2026-06-05",sel:"NRFI LAD vs. LAA Half Unit",odds:"-115",sport:"MLB",wl:"W",pnl:0.504},
+  {date:"2026-06-06",sel:"Boston Half Unit PPD",odds:"105",sport:"MLB",wl:"PPD",pnl:0},
+  {date:"2026-06-06",sel:"NRFI TOR vs. BAL Half Unit",odds:"-115",sport:"MLB",wl:"W",pnl:0.504}
+];
+
+// Build monthly grid
+const mg = document.getElementById('monthGrid');
+MONTHLY.forEach(m => {
+  const pct = Math.round(m.w / (m.w + m.l) * 100);
+  const pnlColor = m.pnl >= 0 ? '#1a7a4a' : '#b03030';
+  const sign = m.pnl >= 0 ? '+' : '';
+  mg.innerHTML += `<div class="month-card">
+    <div class="month-name">${m.name}</div>
+    <div class="month-rec">${m.w}–${m.l} (${pct}%)</div>
+    <div class="month-pnl" style="color:${pnlColor}">${sign}${m.pnl.toFixed(2)}u</div>
+  </div>`;
+});
+
+// Build filters
+const sports = ['All','CBB','MLB','NFL','NHL','CFB','PGA','NBA'];
+let active = 'All';
+const fe = document.getElementById('filters');
+sports.forEach(s => {
+  const b = document.createElement('button');
+  b.className = 'btn' + (s === 'All' ? ' active' : '');
+  b.textContent = s;
+  b.onclick = () => {
+    active = s;
+    document.querySelectorAll('.btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    render();
+  };
+  fe.appendChild(b);
+});
+
+function render() {
+  const sorted = [...DATA].sort((a, b) => b.date.localeCompare(a.date));
+  const filtered = active === 'All' ? sorted : sorted.filter(r => r.sport.includes(active));
+  const core = filtered.filter(r => r.wl === 'W' || r.wl === 'L');
+  const w = core.filter(r => r.wl === 'W').length;
+  const l = core.filter(r => r.wl === 'L').length;
+  const pct = core.length ? Math.round(w / (w + l) * 100) : 0;
+  const unitTotal = filtered.reduce((s, r) => s + r.pnl, 0);
+  const sign = unitTotal >= 0 ? '+' : '';
+  document.getElementById('resultSummary').textContent =
+    `Showing ${filtered.length} selections — ${w}W ${l}L (${pct}%) — ${sign}${unitTotal.toFixed(2)} units${active !== 'All' ? ' in ' + active : ''}`;
+
+  document.getElementById('tbody').innerHTML = filtered.map(r => {
+    let pnlHtml;
+    if (r.wl === 'W') pnlHtml = `<span class="pnl-pos">+${r.pnl.toFixed(2)}</span>`;
+    else if (r.wl === 'L') pnlHtml = `<span class="pnl-neg">${r.pnl.toFixed(2)}</span>`;
+    else pnlHtml = `<span class="pnl-neu">—</span>`;
+    return `<tr>
+      <td style="color:#7a8a9a;font-size:12px">${r.date.slice(5)}</td>
+      <td><span class="sport-tag">${r.sport}</span></td>
+      <td>${r.sel}</td>
+      <td style="color:#7a8a9a">${r.odds}</td>
+      <td><span class="badge badge-${r.wl}">${r.wl}</span></td>
+      <td style="text-align:right">${pnlHtml}</td>
+    </tr>`;
+  }).join('');
+}
+render();
+</script>
+</body>
+</html>
 
