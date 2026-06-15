@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -163,13 +164,47 @@
     .stat-card .value { font-size: 1.3rem; }
     .controls, .table-section, .sport-breakdown, .chart-section { padding-left: 16px; padding-right: 16px; }
   }
+  .topnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #081320;
+    padding: 10px 32px;
+    border-bottom: 1px solid #1e3048;
+  }
+  .topnav-home {
+    color: #a09880;
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.15s;
+  }
+  .topnav-home:hover { color: #c9a84c; }
+  .topnav-sub {
+    background: #c9a84c;
+    color: #0d1b2a;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 7px 18px;
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+  .topnav-sub:hover { background: #e0bc60; }
 </style>
 </head>
 <body>
 
+<div class="topnav">
+  <a class="topnav-home" href="https://www.kenmurphysports.com">&#8592; Ken Murphy Sports</a>
+  <a class="topnav-sub" href="https://www.kenmurphysports.com/#/portal/signup">Subscribe Now</a>
+</div>
 <div class="header">
   <h1>Ken Murphy Sports &mdash; 2026 Track Record</h1>
-  <p>Measured &middot; Selective &middot; Accountable &nbsp;&middot;&nbsp; All selections documented in real time</p>
+  <p>Measured &middot; Selective &middot; Accountable &nbsp;&middot;&nbsp; All Selections Updated Daily</p>
 </div>
 
 <div class="stats-bar" id="statsBar"></div>
