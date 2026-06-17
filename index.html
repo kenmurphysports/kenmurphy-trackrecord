@@ -53,6 +53,35 @@
     margin-top: 8px;
     font-style: italic;
   }
+  .header-nav {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .header-nav a {
+    display: inline-block;
+    padding: 7px 20px;
+    border-radius: 4px;
+    font-family: 'Georgia', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.15s;
+  }
+  .header-nav a:hover { opacity: 0.85; }
+  .nav-subscribe {
+    background: var(--gold);
+    color: var(--navy);
+  }
+  .nav-site {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+  }
   /* STAT CARDS */
   .stats-grid {
     display: grid;
@@ -243,6 +272,10 @@
   <h1>Ken Murphy Sports</h1>
   <div class="tagline">Measured &nbsp;·&nbsp; Selective &nbsp;·&nbsp; Accountable</div>
   <div class="updated">2026 Season Track Record &nbsp;·&nbsp; Updated through June 17, 2026</div>
+  <div class="header-nav">
+    <a href="https://kenmurphysports.com/subscribe/" class="nav-subscribe">Subscribe</a>
+    <a href="https://kenmurphysports.com/" class="nav-site">← Back to Site</a>
+  </div>
 </div>
 
 <div class="stats-grid" id="statsGrid">
