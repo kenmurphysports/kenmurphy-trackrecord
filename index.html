@@ -1,438 +1,1991 @@
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ken Murphy Sports — 2026 Track Record</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Georgia', serif; background: #0d1b2a; color: #f0ece4; min-height: 100vh; }
+<!-- saved from url=(0049)file:///C:/Users/kenmu/Downloads/index%20(6).html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ken Murphy Sports | 2026 Track Record</title>
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #122040;
+    --navy-light: #1a2f55;
+    --gold: #c9a84c;
+    --gold-light: #e2c06e;
+    --gold-dim: #a07c30;
+    --off-white: #f5f0e8;
+    --text-muted: #8fa3c0;
+    --win: #4caf80;
+    --loss: #e05555;
+    --push: #8fa3c0;
+    --ppd: #c9a84c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--navy);
+    color: var(--off-white);
+    font-family: 'Georgia', serif;
+    min-height: 100vh;
+  }
+  /* HEADER */
   .header {
-    background: #0d1b2a;
-    border-bottom: 2px solid #c9a84c;
-    padding: 28px 32px 20px;
+    background: linear-gradient(180deg, #060e1c 0%, var(--navy) 100%);
+    border-bottom: 2px solid var(--gold);
+    padding: 28px 24px 20px;
     text-align: center;
   }
-  .header h1 { font-size: 1.9rem; color: #c9a84c; letter-spacing: 0.04em; font-weight: normal; }
-  .header p { color: #a09880; font-size: 0.85rem; margin-top: 6px; letter-spacing: 0.08em; text-transform: uppercase; }
-
-  .stats-bar {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+  .header h1 {
+    font-size: 1.9rem;
+    letter-spacing: 0.08em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+  .header .tagline {
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .header .updated {
+    font-size: 0.72rem;
+    color: var(--gold-dim);
+    margin-top: 8px;
+    font-style: italic;
+  }
+  /* STAT CARDS */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 12px;
-    padding: 24px 32px;
-    background: #0d1b2a;
-    border-bottom: 1px solid #1e3048;
+    padding: 24px 20px 0;
+    max-width: 980px;
+    margin: 0 auto;
   }
   .stat-card {
-    background: #132233;
-    border: 1px solid #1e3a55;
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-light);
+    border-top: 3px solid var(--gold);
     border-radius: 6px;
-    padding: 16px 28px;
+    padding: 14px 12px 12px;
     text-align: center;
-    min-width: 130px;
   }
-  .stat-card .label { font-size: 0.7rem; color: #8a9bb0; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
-  .stat-card .value { font-size: 1.6rem; color: #c9a84c; font-weight: bold; }
-  .stat-card .value.green { color: #4caf82; }
-  .stat-card .value.record { color: #f0ece4; font-size: 1.3rem; }
-
+  .stat-card .label {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .stat-card .value {
+    font-size: 1.65rem;
+    font-weight: bold;
+    color: var(--gold-light);
+    letter-spacing: 0.02em;
+  }
+  .stat-card .value.green { color: var(--win); }
+  .stat-card .value.record { font-size: 1.3rem; }
+  /* CHART */
   .chart-section {
-    padding: 28px 32px;
-    background: #0d1b2a;
-    border-bottom: 1px solid #1e3048;
+    max-width: 980px;
+    margin: 24px auto 0;
+    padding: 0 20px;
   }
-  .chart-section h2 { font-size: 0.85rem; color: #8a9bb0; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: normal; }
-  .chart-wrap { position: relative; height: 220px; }
-
-  .controls {
+  .chart-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .chart-wrap {
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-light);
+    border-radius: 6px;
+    padding: 16px;
+  }
+  #plSvg { width: 100%; display: block; }
+  /* FILTERS */
+  .filter-bar {
+    max-width: 980px;
+    margin: 20px auto 0;
+    padding: 0 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    padding: 20px 32px;
-    background: #0d1b2a;
-    border-bottom: 1px solid #1e3048;
     align-items: center;
   }
-  .controls label { font-size: 0.75rem; color: #8a9bb0; text-transform: uppercase; letter-spacing: 0.08em; margin-right: 4px; }
+  .filter-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-right: 4px;
+  }
   .filter-btn {
-    background: #132233;
-    border: 1px solid #1e3a55;
-    color: #a09880;
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-light);
+    color: var(--text-muted);
     padding: 5px 14px;
-    border-radius: 4px;
+    border-radius: 20px;
+    font-size: 0.75rem;
     cursor: pointer;
-    font-size: 0.78rem;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     transition: all 0.15s;
   }
   .filter-btn.active, .filter-btn:hover {
-    background: #c9a84c;
-    border-color: #c9a84c;
-    color: #0d1b2a;
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy);
+    font-weight: bold;
   }
-  .search-input {
-    background: #132233;
-    border: 1px solid #1e3a55;
-    color: #f0ece4;
-    padding: 5px 12px;
-    border-radius: 4px;
-    font-size: 0.78rem;
-    outline: none;
-    width: 220px;
+  /* TABLE */
+  .table-section {
+    max-width: 980px;
+    margin: 16px auto 40px;
+    padding: 0 20px;
   }
-  .search-input:focus { border-color: #c9a84c; }
-
-  .table-section { padding: 0 32px 48px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 16px; }
-  th {
-    background: #132233;
-    color: #8a9bb0;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.7rem;
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 6px;
+    border: 1px solid var(--navy-light);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    min-width: 560px;
+  }
+  thead tr {
+    background: var(--navy-light);
+  }
+  thead th {
     padding: 10px 12px;
     text-align: left;
-    border-bottom: 1px solid #1e3a55;
-    cursor: pointer;
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
     white-space: nowrap;
-    font-weight: normal;
+    cursor: pointer;
+    user-select: none;
   }
-  th:hover { color: #c9a84c; }
-  td { padding: 8px 12px; border-bottom: 1px solid #122030; color: #c8c0b4; vertical-align: top; }
-  tr:hover td { background: #132233; }
-  .win { color: #4caf82; font-weight: bold; }
-  .loss { color: #e05c5c; font-weight: bold; }
-  .push { color: #8a9bb0; }.ppd { color: #8a9bb0; }
-  .pnl-pos { color: #4caf82; }
-  .pnl-neg { color: #e05c5c; }
-  .pnl-zero { color: #8a9bb0; }
-  .sport-badge {
+  thead th:hover { color: var(--gold-light); }
+  thead th .sort-arrow { margin-left: 4px; opacity: 0.5; }
+  thead th.sorted .sort-arrow { opacity: 1; color: var(--gold-light); }
+  tbody tr {
+    border-bottom: 1px solid rgba(26,47,85,0.6);
+    transition: background 0.1s;
+  }
+  tbody tr:hover { background: rgba(201,168,76,0.05); }
+  tbody td {
+    padding: 9px 12px;
+    white-space: nowrap;
+  }
+  .td-date { color: var(--text-muted); font-size: 0.75rem; }
+  .td-selection { color: var(--off-white); white-space: normal; min-width: 180px; }
+  .td-sport span {
     display: inline-block;
     padding: 2px 7px;
     border-radius: 3px;
-    font-size: 0.68rem;
-    letter-spacing: 0.05em;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
     font-weight: bold;
+    background: var(--navy-light);
+    color: var(--text-muted);
   }
-  .sport-MLB { background: #1a3a5c; color: #5ea8e0; }
-  .sport-CBB { background: #2a1a3c; color: #a06ecc; }
-  .sport-NFL { background: #1a3a22; color: #5ec87a; }
-  .sport-NHL { background: #1a2a3c; color: #4e9cd4; }
-  .sport-CFB { background: #2a2a1a; color: #c4b84a; }
-  .sport-PGA { background: #1a3a28; color: #5ecaaa; }
-  .sport-NBA { background: #3a1a1a; color: #e06060; }
-  .sport-WC  { background: #1a2a3a; color: #60a0cc; }
-  .sport-other { background: #2a2a2a; color: #9a9a9a; }
-
-  .no-results { text-align: center; padding: 40px; color: #4a5a6a; font-style: italic; }
-
-  .sport-breakdown {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 0 32px 20px;
-  }
-  .sport-card {
-    background: #132233;
-    border: 1px solid #1e3a55;
-    border-radius: 5px;
-    padding: 10px 16px;
-    font-size: 0.78rem;
-    min-width: 110px;
-  }
-  .sport-card .sname { color: #c9a84c; font-weight: bold; margin-bottom: 4px; }
-  .sport-card .swl { color: #a09880; }
-  .sport-card .spnl { margin-top: 3px; }
-
-  .section-label {
-    padding: 16px 32px 4px;
+  .td-sport span.MLB { background: #1a3040; color: #5ab4e0; }
+  .td-sport span.CBB { background: #1a2840; color: #7b9fe0; }
+  .td-sport span.NFL { background: #1a2820; color: #5ae07b; }
+  .td-sport span.NHL { background: #201a40; color: #a07be0; }
+  .td-sport span.PGA { background: #1a3020; color: #7be07b; }
+  .td-sport span.NBA { background: #401a1a; color: #e07b5a; }
+  .td-sport span.WC  { background: #301a30; color: #e07be0; }
+  .td-odds { color: var(--text-muted); }
+  .td-wager { color: var(--off-white); }
+  .td-result .badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 3px;
     font-size: 0.7rem;
-    color: #5a6a7a;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-  }
-
-  @media (max-width: 640px) {
-    .header { padding: 20px 16px 14px; }
-    .stats-bar { padding: 16px; gap: 8px; }
-    .stat-card { padding: 12px 16px; min-width: 100px; }
-    .stat-card .value { font-size: 1.3rem; }
-    .controls, .table-section, .sport-breakdown, .chart-section { padding-left: 16px; padding-right: 16px; }
-  }
-  .topnav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #081320;
-    padding: 10px 32px;
-    border-bottom: 1px solid #1e3048;
-  }
-  .topnav-home {
-    color: #a09880;
-    text-decoration: none;
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition: color 0.15s;
-  }
-  .topnav-home:hover { color: #c9a84c; }
-  .topnav-sub {
-    background: #c9a84c;
-    color: #0d1b2a;
-    text-decoration: none;
-    font-size: 0.75rem;
     font-weight: bold;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 7px 18px;
-    border-radius: 4px;
-    transition: background 0.15s;
   }
-  .topnav-sub:hover { background: #e0bc60; }
+  .badge-W { background: rgba(76,175,128,0.18); color: var(--win); border: 1px solid rgba(76,175,128,0.35); }
+  .badge-L { background: rgba(224,85,85,0.18); color: var(--loss); border: 1px solid rgba(224,85,85,0.35); }
+  .badge-PUSH { background: rgba(143,163,192,0.18); color: var(--push); border: 1px solid rgba(143,163,192,0.35); }
+  .badge-PPD  { background: rgba(201,168,76,0.18); color: var(--ppd);  border: 1px solid rgba(201,168,76,0.35); }
+  .td-pl { font-weight: bold; }
+  .td-pl.pos { color: var(--win); }
+  .td-pl.neg { color: var(--loss); }
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    border-top: 1px solid var(--navy-light);
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .footer a { color: var(--gold-dim); text-decoration: none; }
+  @media (max-width: 600px) {
+    .header h1 { font-size: 1.3rem; }
+    .stat-card .value { font-size: 1.3rem; }
+  }
 </style>
 </head>
 <body>
 
-<div class="topnav">
-  <a class="topnav-home" href="https://www.kenmurphysports.com">&#8592; Ken Murphy Sports</a>
-  <a class="topnav-sub" href="https://www.kenmurphysports.com/#/portal/signup">Subscribe Now</a>
-</div>
 <div class="header">
-  <h1>Ken Murphy Sports &mdash; 2026 Track Record</h1>
-  <p>Measured &middot; Selective &middot; Accountable &nbsp;&middot;&nbsp; All Selections Updated Daily</p>
+  <h1>Ken Murphy Sports</h1>
+  <div class="tagline">Measured &nbsp;·&nbsp; Selective &nbsp;·&nbsp; Accountable</div>
+  <div class="updated">2026 Season Track Record &nbsp;·&nbsp; Updated through June 17, 2026</div>
 </div>
 
-<div class="stats-bar" id="statsBar"></div>
+<div class="stats-grid" id="statsGrid">
+    <div class="stat-card"><div class="label">Record</div><div class="value record">102–80–3</div></div>
+    <div class="stat-card"><div class="label">Win Rate</div><div class="value">56.0%</div></div>
+    <div class="stat-card"><div class="label">Total Plays</div><div class="value">185</div></div>
+    <div class="stat-card"><div class="label">Units P&amp;L</div><div class="value green">+17.96</div></div>
+  </div>
 
 <div class="chart-section">
-  <h2>Cumulative Unit P&amp;L &mdash; 2026 Season</h2>
-  <div class="chart-wrap"><canvas id="pnlChart"></canvas></div>
+  <div class="chart-title">Cumulative Units P&amp;L — 2026 Season</div>
+  <div class="chart-wrap">
+    <svg id="plSvg" height="160" viewBox="0 0 906 160" width="906"><line x1="48" y1="127.62962962962963" x2="886" y2="127.62962962962963" stroke="#2a4070" stroke-width="1.5"></line><text x="42" y="131.62962962962962" text-anchor="end" font-size="9" fill="#8fa3c0" font-family="Georgia,serif">+0u</text><line x1="48" y1="105.77777777777779" x2="886" y2="105.77777777777779" stroke="#1a2f55" stroke-width="0.5"></line><text x="42" y="109.77777777777779" text-anchor="end" font-size="9" fill="#8fa3c0" font-family="Georgia,serif">+5u</text><line x1="48" y1="83.92592592592592" x2="886" y2="83.92592592592592" stroke="#1a2f55" stroke-width="0.5"></line><text x="42" y="87.92592592592592" text-anchor="end" font-size="9" fill="#8fa3c0" font-family="Georgia,serif">+10u</text><line x1="48" y1="62.074074074074076" x2="886" y2="62.074074074074076" stroke="#1a2f55" stroke-width="0.5"></line><text x="42" y="66.07407407407408" text-anchor="end" font-size="9" fill="#8fa3c0" font-family="Georgia,serif">+15u</text><line x1="48" y1="40.22222222222222" x2="886" y2="40.22222222222222" stroke="#1a2f55" stroke-width="0.5"></line><text x="42" y="44.22222222222222" text-anchor="end" font-size="9" fill="#8fa3c0" font-family="Georgia,serif">+20u</text><line x1="48" y1="18.370370370370377" x2="886" y2="18.370370370370377" stroke="#1a2f55" stroke-width="0.5"></line><text x="42" y="22.370370370370377" text-anchor="end" font-size="9" fill="#8fa3c0" font-family="Georgia,serif">+25u</text><line x1="48" y1="123.25925925925927" x2="52.52972972972973" y2="121.07407407407408" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="52.52972972972973" y1="121.07407407407408" x2="57.05945945945946" y2="126.53703703703704" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="57.05945945945946" y1="126.53703703703704" x2="61.58918918918919" y2="124.35185185185186" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="61.58918918918919" y1="124.35185185185186" x2="66.11891891891892" y2="122.16666666666666" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="66.11891891891892" y1="122.16666666666666" x2="70.64864864864865" y2="117.7962962962963" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="70.64864864864865" y1="117.7962962962963" x2="75.17837837837838" y2="113.42592592592592" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="75.17837837837838" y1="113.42592592592592" x2="79.7081081081081" y2="111.24074074074073" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="79.7081081081081" y1="111.24074074074073" x2="84.23783783783784" y2="106.87037037037037" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="84.23783783783784" y1="106.87037037037037" x2="88.76756756756757" y2="109.60185185185185" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="88.76756756756757" y1="109.60185185185185" x2="93.29729729729729" y2="105.23148148148148" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="93.29729729729729" y1="105.23148148148148" x2="97.82702702702703" y2="110.03888888888889" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="97.82702702702703" y1="110.03888888888889" x2="102.35675675675677" y2="107.39000740740741" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="102.35675675675677" y1="107.39000740740741" x2="106.88648648648649" y2="109.79371111111111" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="106.88648648648649" y1="109.79371111111111" x2="111.41621621621621" y2="107.35198518518519" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="111.41621621621621" y1="107.35198518518519" x2="115.94594594594595" y2="102.98161481481482" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="115.94594594594595" y1="102.98161481481482" x2="120.47567567567567" y2="100.79642962962963" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="120.47567567567567" y1="100.79642962962963" x2="125.00540540540541" y2="97.97666666666667" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="125.00540540540541" y1="97.97666666666667" x2="129.53513513513514" y2="94.48037037037037" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="129.53513513513514" y1="94.48037037037037" x2="134.0648648648649" y2="92.29518518518519" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="134.0648648648649" y1="92.29518518518519" x2="138.59459459459458" y2="86.6137037037037" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="138.59459459459458" y1="86.6137037037037" x2="143.12432432432433" y2="82.24333333333334" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="143.12432432432433" y1="82.24333333333334" x2="147.65405405405406" y2="80.05814814814815" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="147.65405405405406" y1="80.05814814814815" x2="152.18378378378378" y2="75.68777777777778" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="152.18378378378378" y1="75.68777777777778" x2="156.71351351351353" y2="71.3174074074074" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="156.71351351351353" y1="71.3174074074074" x2="161.24324324324326" y2="66.94703703703703" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="161.24324324324326" y1="66.94703703703703" x2="165.77297297297298" y2="62.57666666666666" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="165.77297297297298" y1="62.57666666666666" x2="170.3027027027027" y2="64.98037037037037" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="170.3027027027027" y1="64.98037037037037" x2="174.83243243243243" y2="69.78777777777779" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="174.83243243243243" y1="69.78777777777779" x2="179.36216216216218" y2="67.6025925925926" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="179.36216216216218" y1="67.6025925925926" x2="183.8918918918919" y2="65.41740740740741" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="183.8918918918919" y1="65.41740740740741" x2="188.42162162162163" y2="61.047037037037036" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="188.42162162162163" y1="61.047037037037036" x2="192.95135135135135" y2="63.450740740740734" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="192.95135135135135" y1="63.450740740740734" x2="197.4810810810811" y2="59.08037037037036" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="197.4810810810811" y1="59.08037037037036" x2="202.01081081081082" y2="63.669259259259256" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="202.01081081081082" y1="63.669259259259256" x2="206.54054054054055" y2="61.48407407407408" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="206.54054054054055" y1="61.48407407407408" x2="211.07027027027027" y2="63.88777777777777" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="211.07027027027027" y1="63.88777777777777" x2="215.60000000000002" y2="66.29148148148148" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="215.60000000000002" y1="66.29148148148148" x2="220.12972972972975" y2="68.69518518518518" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="220.12972972972975" y1="68.69518518518518" x2="224.65945945945947" y2="64.32481481481481" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="224.65945945945947" y1="64.32481481481481" x2="229.1891891891892" y2="69.13222222222223" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="229.1891891891892" y1="69.13222222222223" x2="233.71891891891892" y2="73.93962962962962" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="233.71891891891892" y1="73.93962962962962" x2="238.24864864864867" y2="76.34333333333333" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="238.24864864864867" y1="76.34333333333333" x2="242.7783783783784" y2="78.74703703703703" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="242.7783783783784" y1="78.74703703703703" x2="247.30810810810812" y2="83.1174074074074" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="247.30810810810812" y1="83.1174074074074" x2="251.83783783783784" y2="80.93222222222222" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="251.83783783783784" y1="80.93222222222222" x2="256.36756756756756" y2="83.33592592592593" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="256.36756756756756" y1="83.33592592592593" x2="260.8972972972973" y2="85.73962962962962" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="260.8972972972973" y1="85.73962962962962" x2="265.42702702702707" y2="88.14333333333335" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="265.42702702702707" y1="88.14333333333335" x2="269.95675675675676" y2="83.77296296296295" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="269.95675675675676" y1="83.77296296296295" x2="274.4864864864865" y2="79.40259259259258" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="274.4864864864865" y1="79.40259259259258" x2="279.0162162162162" y2="75.4294888888889" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="279.0162162162162" y1="75.4294888888889" x2="283.54594594594596" y2="80.23689629629631" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="283.54594594594596" y1="80.23689629629631" x2="288.0756756756757" y2="82.6406" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="288.0756756756757" y1="82.6406" x2="292.6054054054054" y2="80.45541481481482" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="292.6054054054054" y1="80.45541481481482" x2="297.13513513513516" y2="74.99245185185185" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="297.13513513513516" y1="74.99245185185185" x2="301.66486486486485" y2="72.80726666666666" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="301.66486486486485" y1="72.80726666666666" x2="306.1945945945946" y2="77.61467407407406" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="306.1945945945946" y1="77.61467407407406" x2="310.72432432432436" y2="81.98504444444443" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="310.72432432432436" y1="81.98504444444443" x2="315.25405405405405" y2="77.61467407407406" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="315.25405405405405" y1="77.61467407407406" x2="319.7837837837838" y2="73.24430370370371" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="319.7837837837838" y1="73.24430370370371" x2="324.31351351351356" y2="75.64800740740742" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="324.31351351351356" y1="75.64800740740742" x2="328.84324324324325" y2="73.46282222222221" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="328.84324324324325" y1="73.46282222222221" x2="333.372972972973" y2="71.27763703703704" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="333.372972972973" y1="71.27763703703704" x2="337.9027027027027" y2="73.68134074074075" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="337.9027027027027" y1="73.68134074074075" x2="342.43243243243245" y2="76.08504444444443" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="342.43243243243245" y1="76.08504444444443" x2="346.9621621621622" y2="71.71467407407408" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="346.9621621621622" y1="71.71467407407408" x2="351.4918918918919" y2="76.52208148148148" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="351.4918918918919" y1="76.52208148148148" x2="356.02162162162165" y2="78.92578518518518" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="356.02162162162165" y1="78.92578518518518" x2="360.55135135135134" y2="76.7406" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="360.55135135135134" y1="76.7406" x2="365.0810810810811" y2="74.55541481481481" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="365.0810810810811" y1="74.55541481481481" x2="369.61081081081085" y2="76.95911851851852" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="369.61081081081085" y1="76.95911851851852" x2="374.14054054054054" y2="81.32948888888889" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="374.14054054054054" y1="81.32948888888889" x2="378.6702702702703" y2="76.95911851851852" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="378.6702702702703" y1="76.95911851851852" x2="383.20000000000005" y2="81.76652592592592" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="383.20000000000005" y1="81.76652592592592" x2="387.72972972972974" y2="77.39615555555557" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="387.72972972972974" y1="77.39615555555557" x2="392.2594594594595" y2="73.0257851851852" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="392.2594594594595" y1="73.0257851851852" x2="396.7891891891892" y2="75.4294888888889" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="396.7891891891892" y1="75.4294888888889" x2="401.31891891891894" y2="77.83319259259258" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="401.31891891891894" y1="77.83319259259258" x2="405.8486486486487" y2="82.85911851851853" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="405.8486486486487" y1="82.85911851851853" x2="410.3783783783784" y2="77.94245185185184" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="410.3783783783784" y1="77.94245185185184" x2="414.90810810810814" y2="80.34615555555555" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="414.90810810810814" y1="80.34615555555555" x2="419.43783783783783" y2="82.74985925925925" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="419.43783783783783" y1="82.74985925925925" x2="423.9675675675676" y2="78.37948888888889" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="423.9675675675676" y1="78.37948888888889" x2="428.49729729729734" y2="83.1868962962963" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="428.49729729729734" y1="83.1868962962963" x2="433.02702702702703" y2="87.99430370370371" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="433.02702702702703" y1="87.99430370370371" x2="437.5567567567568" y2="92.36467407407407" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="437.5567567567568" y1="92.36467407407407" x2="442.08648648648654" y2="87.99430370370371" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="442.08648648648654" y1="87.99430370370371" x2="446.61621621621623" y2="85.80911851851852" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="446.61621621621623" y1="85.80911851851852" x2="451.145945945946" y2="87.99430370370371" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="451.145945945946" y1="87.99430370370371" x2="455.6756756756757" y2="85.80911851851852" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="455.6756756756757" y1="85.80911851851852" x2="460.20540540540543" y2="88.21282222222221" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="460.20540540540543" y1="88.21282222222221" x2="464.7351351351352" y2="85.19857777777779" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="464.7351351351352" y1="85.19857777777779" x2="469.2648648648648" y2="83.01339259259258" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="469.2648648648648" y1="83.01339259259258" x2="473.7945945945946" y2="85.41709629629631" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="473.7945945945946" y1="85.41709629629631" x2="478.3243243243243" y2="83.23191111111112" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="478.3243243243243" y1="83.23191111111112" x2="482.8540540540541" y2="78.86154074074074" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="482.8540540540541" y1="78.86154074074074" x2="487.38378378378377" y2="81.26524444444443" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="487.38378378378377" y1="81.26524444444443" x2="491.9135135135135" y2="76.89487407407407" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="491.9135135135135" y1="76.89487407407407" x2="496.4432432432432" y2="73.98114814814815" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="496.4432432432432" y1="73.98114814814815" x2="500.972972972973" y2="70.74401481481482" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="500.972972972973" y1="70.74401481481482" x2="505.50270270270266" y2="73.14771851851852" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="505.50270270270266" y1="73.14771851851852" x2="510.0324324324325" y2="70.96253333333334" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="510.0324324324325" y1="70.96253333333334" x2="514.5621621621622" y2="75.33290370370369" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="514.5621621621622" y1="75.33290370370369" x2="519.0918918918919" y2="77.73660740740742" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="519.0918918918919" y1="77.73660740740742" x2="523.6216216216217" y2="75.53262962962964" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="523.6216216216217" y1="75.53262962962964" x2="528.1513513513514" y2="79.903" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="528.1513513513514" y1="79.903" x2="532.6810810810811" y2="77.7178148148148" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="532.6810810810811" y1="77.7178148148148" x2="537.2108108108108" y2="79.903" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="537.2108108108108" y1="79.903" x2="541.7405405405405" y2="77.7178148148148" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="541.7405405405405" y1="77.7178148148148" x2="546.2702702702703" y2="75.30362222222223" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="546.2702702702703" y1="75.30362222222223" x2="550.8" y2="79.6739925925926" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="550.8" y1="79.6739925925926" x2="555.3297297297297" y2="82.0776962962963" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="555.3297297297297" y1="82.0776962962963" x2="559.8594594594595" y2="84.4814" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="559.8594594594595" y1="84.4814" x2="564.3891891891892" y2="82.27523703703704" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="564.3891891891892" y1="82.27523703703704" x2="568.9189189189188" y2="85.02857037037037" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="568.9189189189188" y1="85.02857037037037" x2="573.4486486486487" y2="82.84338518518518" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="573.4486486486487" y1="82.84338518518518" x2="577.9783783783784" y2="78.47301481481482" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="577.9783783783784" y1="78.47301481481482" x2="582.5081081081081" y2="75.41375555555555" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="582.5081081081081" y1="75.41375555555555" x2="587.0378378378379" y2="72.76487407407407" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="587.0378378378379" y1="72.76487407407407" x2="591.5675675675676" y2="75.29968888888888" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="591.5675675675676" y1="75.29968888888888" x2="596.0972972972972" y2="70.92931851851851" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="596.0972972972972" y1="70.92931851851851" x2="600.6270270270271" y2="66.55894814814815" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="600.6270270270271" y1="66.55894814814815" x2="605.1567567567567" y2="63.36901481481481" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="605.1567567567567" y1="63.36901481481481" x2="609.6864864864865" y2="67.95790370370369" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="609.6864864864865" y1="67.95790370370369" x2="614.2162162162163" y2="64.85494074074074" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="614.2162162162163" y1="64.85494074074074" x2="618.745945945946" y2="67.04012592592592" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="618.745945945946" y1="67.04012592592592" x2="623.2756756756756" y2="64.43975555555556" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="623.2756756756756" y1="64.43975555555556" x2="627.8054054054054" y2="62.23577777777778" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="627.8054054054054" y1="62.23577777777778" x2="632.3351351351351" y2="64.55207407407408" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="632.3351351351351" y1="64.55207407407408" x2="636.8648648648649" y2="62.345911111111114" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="636.8648648648649" y1="62.345911111111114" x2="641.3945945945945" y2="65.09924444444445" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="641.3945945945945" y1="65.09924444444445" x2="645.9243243243244" y2="67.28442962962963" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="645.9243243243244" y1="67.28442962962963" x2="650.454054054054" y2="69.4696148148148" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="650.454054054054" y1="69.4696148148148" x2="654.9837837837838" y2="67.28442962962963" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="654.9837837837838" y1="67.28442962962963" x2="659.5135135135135" y2="72.74739259259259" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="659.5135135135135" y1="72.74739259259259" x2="664.0432432432433" y2="68.37702222222222" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="664.0432432432433" y1="68.37702222222222" x2="668.5729729729729" y2="66.19183703703703" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="668.5729729729729" y1="66.19183703703703" x2="673.1027027027027" y2="61.821466666666666" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="673.1027027027027" y1="61.821466666666666" x2="677.6324324324324" y2="64.00665185185184" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="677.6324324324324" y1="64.00665185185184" x2="682.1621621621622" y2="66.19183703703703" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="682.1621621621622" y1="66.19183703703703" x2="686.6918918918918" y2="62.69554074074074" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="686.6918918918918" y1="62.69554074074074" x2="691.2216216216217" y2="60.51035555555557" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="691.2216216216217" y1="60.51035555555557" x2="695.7513513513513" y2="57.343585185185184" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="695.7513513513513" y1="57.343585185185184" x2="700.2810810810811" y2="52.97321481481482" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="700.2810810810811" y1="52.97321481481482" x2="704.8108108108108" y2="57.343585185185184" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="704.8108108108108" y1="57.343585185185184" x2="709.3405405405406" y2="63.89914074074074" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="709.3405405405406" y1="63.89914074074074" x2="713.8702702702702" y2="60.77738518518518" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="713.8702702702702" y1="60.77738518518518" x2="718.4000000000001" y2="58.59219999999999" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="718.4000000000001" y1="58.59219999999999" x2="722.9297297297297" y2="56.38953333333334" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="722.9297297297297" y1="56.38953333333334" x2="727.4594594594595" y2="58.88064444444445" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="727.4594594594595" y1="58.88064444444445" x2="731.9891891891892" y2="61.06582962962963" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="731.9891891891892" y1="61.06582962962963" x2="736.518918918919" y2="61.06582962962963" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="736.518918918919" y1="61.06582962962963" x2="741.0486486486486" y2="65.43619999999999" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="741.0486486486486" y1="65.43619999999999" x2="745.5783783783784" y2="67.62138518518518" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="745.5783783783784" y1="67.62138518518518" x2="750.1081081081081" y2="63.251014814814816" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="750.1081081081081" y1="63.251014814814816" x2="754.6378378378379" y2="59.383237037037034" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="754.6378378378379" y1="59.383237037037034" x2="759.1675675675675" y2="63.75360740740741" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="759.1675675675675" y1="63.75360740740741" x2="763.6972972972974" y2="65.93879259259259" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="763.6972972972974" y1="65.93879259259259" x2="768.227027027027" y2="70.30916296296296" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="768.227027027027" y1="70.30916296296296" x2="772.7567567567568" y2="65.93879259259259" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="772.7567567567568" y1="65.93879259259259" x2="777.2864864864865" y2="65.93879259259259" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="777.2864864864865" y1="65.93879259259259" x2="781.8162162162163" y2="70.30916296296296" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="781.8162162162163" y1="70.30916296296296" x2="786.3459459459459" y2="67.4894" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="786.3459459459459" y1="67.4894" x2="790.8756756756757" y2="69.67458518518518" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="790.8756756756757" y1="69.67458518518518" x2="795.4054054054054" y2="62.46347407407407" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="795.4054054054054" y1="62.46347407407407" x2="799.9351351351352" y2="64.64865925925926" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="799.9351351351352" y1="64.64865925925926" x2="804.4648648648648" y2="62.444681481481474" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="804.4648648648648" y1="62.444681481481474" x2="808.9945945945947" y2="62.444681481481474" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="808.9945945945947" y1="62.444681481481474" x2="813.5243243243243" y2="60.24070370370371" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="813.5243243243243" y1="60.24070370370371" x2="818.0540540540541" y2="64.61107407407408" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="818.0540540540541" y1="64.61107407407408" x2="822.5837837837838" y2="59.956629629629624" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="822.5837837837838" y1="59.956629629629624" x2="827.1135135135136" y2="58.208481481481485" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="827.1135135135136" y1="58.208481481481485" x2="831.6432432432432" y2="60.39366666666667" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="831.6432432432432" y1="60.39366666666667" x2="836.1729729729731" y2="58.25131111111111" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="836.1729729729731" y1="58.25131111111111" x2="840.7027027027027" y2="53.66242222222222" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="840.7027027027027" y1="53.66242222222222" x2="845.2324324324325" y2="53.66242222222222" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="845.2324324324325" y1="53.66242222222222" x2="849.7621621621622" y2="51.013540740740744" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="849.7621621621622" y1="51.013540740740744" x2="854.291891891892" y2="53.19872592592593" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="854.291891891892" y1="53.19872592592593" x2="858.8216216216216" y2="55.38391111111111" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="858.8216216216216" y1="55.38391111111111" x2="863.3513513513514" y2="57.5690962962963" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="863.3513513513514" y1="57.5690962962963" x2="867.8810810810811" y2="53.92726666666666" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="867.8810810810811" y1="53.92726666666666" x2="872.4108108108109" y2="50.69013333333333" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="872.4108108108109" y1="50.69013333333333" x2="876.9405405405405" y2="48.7898962962963" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><line x1="876.9405405405405" y1="48.7898962962963" x2="881.4702702702704" y2="50.97508148148148" stroke="#e05555" stroke-width="2" stroke-linecap="round"></line><line x1="881.4702702702704" y1="50.97508148148148" x2="886" y2="49.15394814814815" stroke="#4caf80" stroke-width="2" stroke-linecap="round"></line><circle cx="886" cy="49.15394814814815" r="4" fill="#c9a84c"></circle><text x="878" y="40.15394814814815" text-anchor="end" font-size="10" fill="#c9a84c" font-weight="bold" font-family="Georgia,serif">+17.96u</text><line x1="48" y1="14" x2="48" y2="132" stroke="#1a2f55" stroke-width="0.5" stroke-dasharray="3,3"></line><text x="48" y="154" text-anchor="middle" font-size="9" fill="#8fa3c0" font-family="Georgia,serif">Jan</text><line x1="188.42162162162163" y1="14" x2="188.42162162162163" y2="132" stroke="#1a2f55" stroke-width="0.5" stroke-dasharray="3,3"></line><text x="188.42162162162163" y="154" text-anchor="middle" font-size="9" fill="#8fa3c0" font-family="Georgia,serif">Feb</text><line x1="310.72432432432436" y1="14" x2="310.72432432432436" y2="132" stroke="#1a2f55" stroke-width="0.5" stroke-dasharray="3,3"></line><text x="310.72432432432436" y="154" text-anchor="middle" font-size="9" fill="#8fa3c0" font-family="Georgia,serif">Mar</text><line x1="500.972972972973" y1="14" x2="500.972972972973" y2="132" stroke="#1a2f55" stroke-width="0.5" stroke-dasharray="3,3"></line><text x="500.972972972973" y="154" text-anchor="middle" font-size="9" fill="#8fa3c0" font-family="Georgia,serif">Apr</text><line x1="654.9837837837838" y1="14" x2="654.9837837837838" y2="132" stroke="#1a2f55" stroke-width="0.5" stroke-dasharray="3,3"></line><text x="654.9837837837838" y="154" text-anchor="middle" font-size="9" fill="#8fa3c0" font-family="Georgia,serif">May</text><line x1="777.2864864864865" y1="14" x2="777.2864864864865" y2="132" stroke="#1a2f55" stroke-width="0.5" stroke-dasharray="3,3"></line><text x="777.2864864864865" y="154" text-anchor="middle" font-size="9" fill="#8fa3c0" font-family="Georgia,serif">Jun</text></svg>
+  </div>
 </div>
 
-<div class="section-label">Performance by Sport</div>
-<div class="sport-breakdown" id="sportBreakdown"></div>
-
-<div class="controls">
-  <span><label>Filter:</label></span>
-  <button class="filter-btn active" onclick="setFilter('ALL')">All</button>
-  <button class="filter-btn" onclick="setFilter('MLB')">MLB</button>
-  <button class="filter-btn" onclick="setFilter('CBB')">CBB</button>
-  <button class="filter-btn" onclick="setFilter('NFL')">NFL</button>
-  <button class="filter-btn" onclick="setFilter('NHL')">NHL</button>
-  <button class="filter-btn" onclick="setFilter('CFB')">CFB</button>
-  <button class="filter-btn" onclick="setFilter('NBA')">NBA</button>
-  <button class="filter-btn" onclick="setFilter('PGA')">PGA</button>
-  <button class="filter-btn" onclick="setFilter('W')">Wins Only</button>
-  <button class="filter-btn" onclick="setFilter('L')">Losses Only</button>
-  <span style="margin-left:auto;">
-    <input class="search-input" type="text" id="searchBox" placeholder="Search selection..." oninput="renderTable()">
-  </span>
+<div class="filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" data-filter="ALL">All</button>
+  <button class="filter-btn" data-filter="MLB">MLB</button>
+  <button class="filter-btn" data-filter="CBB">CBB</button>
+  <button class="filter-btn" data-filter="NFL">NFL</button>
+  <button class="filter-btn" data-filter="NHL">NHL</button>
+  <button class="filter-btn" data-filter="PGA">PGA</button>
+  <button class="filter-btn" data-filter="NBA">NBA</button>
+  <button class="filter-btn" data-filter="WC">World Cup</button>
 </div>
 
 <div class="table-section">
-  <table>
-    <thead>
-      <tr>
-        <th onclick="sortBy('date')">Date</th>
-        <th onclick="sortBy('selection')">Selection</th>
-        <th onclick="sortBy('sport')">Sport</th>
-        <th onclick="sortBy('odds')">Odds</th>
-        <th onclick="sortBy('units')">Units</th>
-        <th onclick="sortBy('wl')">Result</th>
-        <th onclick="sortBy('pnl')">P&amp;L</th>
-        <th onclick="sortBy('cum')">Cumulative</th>
-      </tr>
-    </thead>
-    <tbody id="tableBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults" style="display:none">No selections match your filter.</div>
+  <div class="table-wrap">
+    <table id="picksTable">
+      <thead>
+        <tr>
+          <th data-col="date" class="sorted">Date <span class="sort-arrow">▲</span></th>
+          <th data-col="selection">Selection</th>
+          <th data-col="sport">Sport <span class="sort-arrow"></span></th>
+          <th data-col="odds">Odds <span class="sort-arrow"></span></th>
+          <th data-col="wager">Units <span class="sort-arrow"></span></th>
+          <th data-col="wl">Result <span class="sort-arrow"></span></th>
+          <th data-col="cumulative">Running P&amp;L <span class="sort-arrow"></span></th>
+        </tr>
+      </thead>
+      <tbody id="picksBody"><tr>
+      <td class="td-date">06/17/2026</td>
+      <td class="td-selection">Under 8.5 runs Houston vs. Detroit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-120</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+17.96u</td>
+    </tr><tr>
+      <td class="td-date">06/16/2026</td>
+      <td class="td-selection">Washington One Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-135</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+17.60u</td>
+    </tr><tr>
+      <td class="td-date">06/16/2026</td>
+      <td class="td-selection">YRFI TEX vs. MIN</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-115</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+18.04u</td>
+    </tr><tr>
+      <td class="td-date">06/16/2026</td>
+      <td class="td-selection">NRFI NYY vs. CWS</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-115</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+17.54u</td>
+    </tr><tr>
+      <td class="td-date">06/14/2026</td>
+      <td class="td-selection">BOTH Japan and Netherlands to score -120</td>
+      <td class="td-sport"><span class="WC">WC</span></td>
+      <td class="td-odds">-120</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+16.86u</td>
+    </tr><tr>
+      <td class="td-date">06/13/2026</td>
+      <td class="td-selection">F5 Miami -103   Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-103</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+17.03u</td>
+    </tr><tr>
+      <td class="td-date">06/13/2026</td>
+      <td class="td-selection">2TP SWITZ/SCOT  -118 0.50u</td>
+      <td class="td-sport"><span class="WC">WC</span></td>
+      <td class="td-odds">-118</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+16.53u</td>
+    </tr><tr>
+      <td class="td-date">06/13/2026</td>
+      <td class="td-selection">3TPSwit/Scot/O2.5 Turkiye/Aus0.5u +265</td>
+      <td class="td-sport"><span class="WC">WC</span></td>
+      <td class="td-odds">+265</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+16.03u</td>
+    </tr><tr>
+      <td class="td-date">06/12/2026</td>
+      <td class="td-selection">F5 MIL -0.5 runs -165 One Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-165</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+17.53u</td>
+    </tr><tr>
+      <td class="td-date">06/11/2026</td>
+      <td class="td-selection">F5 BAL -102 Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-102</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+15.87u</td>
+    </tr><tr>
+      <td class="td-date">06/11/2026</td>
+      <td class="td-selection">BAL +105</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+105</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+16.92u</td>
+    </tr><tr>
+      <td class="td-date">06/11/2026</td>
+      <td class="td-selection">Over 6 goals CAR vs. VGK -115</td>
+      <td class="td-sport"><span class="NHL">NHL</span></td>
+      <td class="td-odds">-115</td>
+      <td class="td-wager">—</td>
+      <td class="td-result"><span class="badge badge-PUSH">PUSH</span></td>
+      <td class="td-pl pos">+16.92u</td>
+    </tr><tr>
+      <td class="td-date">06/09/2026</td>
+      <td class="td-selection">2TP NRFI TB-BOS/SD-CIN +213.33 0.5u</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+213</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+15.48u</td>
+    </tr><tr>
+      <td class="td-date">06/09/2026</td>
+      <td class="td-selection">TT ATH Over 6 runs -125 Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-125</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+15.88u</td>
+    </tr><tr>
+      <td class="td-date">06/09/2026</td>
+      <td class="td-selection">TT MIL Over 6.5 runs -115 Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-115</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+15.38u</td>
+    </tr><tr>
+      <td class="td-date">06/08/2026</td>
+      <td class="td-selection">SPLIT F5 HOU ML &amp; RL 0.5u each</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-106</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.42u</td>
+    </tr><tr>
+      <td class="td-date">06/06/2026</td>
+      <td class="td-selection">Boston Half Unit PPD</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+105</td>
+      <td class="td-wager">—</td>
+      <td class="td-result"><span class="badge badge-PPD">PPD</span></td>
+      <td class="td-pl pos">+14.92u</td>
+    </tr><tr>
+      <td class="td-date">06/06/2026</td>
+      <td class="td-selection">NRFI TOR vs. BAL Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-115</td>
+      <td class="td-wager">0.58u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+15.42u</td>
+    </tr><tr>
+      <td class="td-date">06/05/2026</td>
+      <td class="td-selection">NRFI LAD vs. LAA Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-115</td>
+      <td class="td-wager">0.58u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+14.92u</td>
+    </tr><tr>
+      <td class="td-date">06/04/2026</td>
+      <td class="td-selection">MIL -1.5 runs Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+100</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.41u</td>
+    </tr><tr>
+      <td class="td-date">06/03/2026</td>
+      <td class="td-selection">F5 PHI -0.5 runs One Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-155</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+13.76u</td>
+    </tr><tr>
+      <td class="td-date">06/03/2026</td>
+      <td class="td-selection">3TPALLF5M PHI/NYY/LAD 0.5u</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+283</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+13.26u</td>
+    </tr><tr>
+      <td class="td-date">06/03/2026</td>
+      <td class="td-selection">NBA Championship NYK</td>
+      <td class="td-sport"><span class="NBA">NBA</span></td>
+      <td class="td-odds">+165</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+14.91u</td>
+    </tr><tr>
+      <td class="td-date">06/02/2026</td>
+      <td class="td-selection">TT Over 4 runs CWS Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-115</td>
+      <td class="td-wager">—</td>
+      <td class="td-result"><span class="badge badge-PUSH">PUSH</span></td>
+      <td class="td-pl pos">+14.12u</td>
+    </tr><tr>
+      <td class="td-date">06/02/2026</td>
+      <td class="td-selection">TB  One Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-135</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+13.12u</td>
+    </tr><tr>
+      <td class="td-date">05/31/2026</td>
+      <td class="td-selection">TB -1.5 runs</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+100</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+14.12u</td>
+    </tr><tr>
+      <td class="td-date">05/30/2026</td>
+      <td class="td-selection">TB -1.5 runs</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+140</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+13.12u</td>
+    </tr><tr>
+      <td class="td-date">05/29/2026</td>
+      <td class="td-selection">PROP Katel Marte Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+125</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.12u</td>
+    </tr><tr>
+      <td class="td-date">05/28/2026</td>
+      <td class="td-selection">PGA Colonial Ludvig Aberg Top 10</td>
+      <td class="td-sport"><span class="PGA">PGA</span></td>
+      <td class="td-odds">+130</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.62u</td>
+    </tr><tr>
+      <td class="td-date">05/27/2026</td>
+      <td class="td-selection">2TP ARI/NYY Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+177</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+15.62u</td>
+    </tr><tr>
+      <td class="td-date">05/26/2026</td>
+      <td class="td-selection">ARI F5</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+14.73u</td>
+    </tr><tr>
+      <td class="td-date">05/25/2026</td>
+      <td class="td-selection">Over 9 runs LAD vs. COL Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+100</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+13.73u</td>
+    </tr><tr>
+      <td class="td-date">05/24/2026</td>
+      <td class="td-selection">BAL One Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-125</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.23u</td>
+    </tr><tr>
+      <td class="td-date">05/23/2026</td>
+      <td class="td-selection">F5 Under 4 runs LAA vs. TEX 0.5u</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-120</td>
+      <td class="td-wager">—</td>
+      <td class="td-result"><span class="badge badge-PUSH">PUSH</span></td>
+      <td class="td-pl pos">+15.23u</td>
+    </tr><tr>
+      <td class="td-date">05/22/2026</td>
+      <td class="td-selection">F5 TB</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+125</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+15.23u</td>
+    </tr><tr>
+      <td class="td-date">05/20/2026</td>
+      <td class="td-selection">STL Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-114</td>
+      <td class="td-wager">0.57u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+15.73u</td>
+    </tr><tr>
+      <td class="td-date">05/19/2026</td>
+      <td class="td-selection">F5 Boston Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-125</td>
+      <td class="td-wager">0.63u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+16.30u</td>
+    </tr><tr>
+      <td class="td-date">05/18/2026</td>
+      <td class="td-selection">F5 TB One Unit Flat</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-140</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+15.30u</td>
+    </tr><tr>
+      <td class="td-date">05/18/2026</td>
+      <td class="td-selection">F5  TB -0.5 runs</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+100</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+15.80u</td>
+    </tr><tr>
+      <td class="td-date">05/17/2026</td>
+      <td class="td-selection">PGA Championship Aggregate 1.5u</td>
+      <td class="td-sport"><span class="PGA">PGA</span></td>
+      <td class="td-odds">+900</td>
+      <td class="td-wager">1.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.58u</td>
+    </tr><tr>
+      <td class="td-date">05/16/2026</td>
+      <td class="td-selection">F5 Under 6 runs ARI vs. COL 0.5u</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+100</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+17.08u</td>
+    </tr><tr>
+      <td class="td-date">05/16/2026</td>
+      <td class="td-selection">TB One Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-134</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+16.08u</td>
+    </tr><tr>
+      <td class="td-date">05/15/2026</td>
+      <td class="td-selection">F5 ATL One Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-138</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+16.08u</td>
+    </tr><tr>
+      <td class="td-date">05/13/2026</td>
+      <td class="td-selection">NRFI MIL vs. SD Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-150</td>
+      <td class="td-wager">0.75u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+15.36u</td>
+    </tr><tr>
+      <td class="td-date">05/12/2026</td>
+      <td class="td-selection">PIT -1.5 runs One Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-125</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+14.86u</td>
+    </tr><tr>
+      <td class="td-date">05/06/2026</td>
+      <td class="td-selection">Atlanta   Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+120</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.06u</td>
+    </tr><tr>
+      <td class="td-date">05/04/2026</td>
+      <td class="td-selection">F5 Under 4.5 runs Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+14.06u</td>
+    </tr><tr>
+      <td class="td-date">05/04/2026</td>
+      <td class="td-selection">TB</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-120</td>
+      <td class="td-wager">1.20u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+15.06u</td>
+    </tr><tr>
+      <td class="td-date">05/04/2026</td>
+      <td class="td-selection">Atlanta   Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+135</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.56u</td>
+    </tr><tr>
+      <td class="td-date">05/03/2026</td>
+      <td class="td-selection">TB</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-118</td>
+      <td class="td-wager">1.18u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+13.56u</td>
+    </tr><tr>
+      <td class="td-date">05/02/2026</td>
+      <td class="td-selection">Over 3.5 runs STL</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-125</td>
+      <td class="td-wager">1.25u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+12.56u</td>
+    </tr><tr>
+      <td class="td-date">05/01/2026</td>
+      <td class="td-selection">PHI Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-116</td>
+      <td class="td-wager">0.58u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+13.81u</td>
+    </tr><tr>
+      <td class="td-date">04/30/2026</td>
+      <td class="td-selection">PHI -1.5 runs Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+155</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+13.31u</td>
+    </tr><tr>
+      <td class="td-date">04/29/2026</td>
+      <td class="td-selection">2TP TB+1.5/NYY Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+171</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+13.81u</td>
+    </tr><tr>
+      <td class="td-date">04/28/2026</td>
+      <td class="td-selection">F5 Over 4 runs  PHI vs. SF Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-125</td>
+      <td class="td-wager">0.63u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.31u</td>
+    </tr><tr>
+      <td class="td-date">04/27/2026</td>
+      <td class="td-selection">F5 NYY -0.5 run Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-105</td>
+      <td class="td-wager">0.53u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+14.94u</td>
+    </tr><tr>
+      <td class="td-date">04/26/2026</td>
+      <td class="td-selection">F5 U 8 runs ARI vs SD Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-115</td>
+      <td class="td-wager">0.58u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+14.96u</td>
+    </tr><tr>
+      <td class="td-date">04/26/2026</td>
+      <td class="td-selection">F5 KC Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-105</td>
+      <td class="td-wager">0.53u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.43u</td>
+    </tr><tr>
+      <td class="td-date">04/25/2026</td>
+      <td class="td-selection">F5 ATH</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+119</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+14.46u</td>
+    </tr><tr>
+      <td class="td-date">04/24/2026</td>
+      <td class="td-selection">ATL One Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-137</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+14.70u</td>
+    </tr><tr>
+      <td class="td-date">04/24/2026</td>
+      <td class="td-selection">NYM -1.5 runs</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+105</td>
+      <td class="td-wager">1.05u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+13.65u</td>
+    </tr><tr>
+      <td class="td-date">04/24/2026</td>
+      <td class="td-selection">CHC  Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+142</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+14.36u</td>
+    </tr><tr>
+      <td class="td-date">04/24/2026</td>
+      <td class="td-selection">MIL  Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+110</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+13.86u</td>
+    </tr><tr>
+      <td class="td-date">04/21/2026</td>
+      <td class="td-selection">CHC</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-116</td>
+      <td class="td-wager">1.16u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+13.97u</td>
+    </tr><tr>
+      <td class="td-date">04/19/2026</td>
+      <td class="td-selection">TT Over 4 runs NYY</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-115</td>
+      <td class="td-wager">1.15u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+12.97u</td>
+    </tr><tr>
+      <td class="td-date">04/18/2026</td>
+      <td class="td-selection">Over 9.5 LAA vs. SD  Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-115</td>
+      <td class="td-wager">0.58u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+11.97u</td>
+    </tr><tr>
+      <td class="td-date">04/17/2026</td>
+      <td class="td-selection">LAA F5 One Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-165</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+12.55u</td>
+    </tr><tr>
+      <td class="td-date">04/15/2026</td>
+      <td class="td-selection">PROP O3.5 Ks Kochanowicz +140 0.5u</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+140</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.95u</td>
+    </tr><tr>
+      <td class="td-date">04/13/2026</td>
+      <td class="td-selection">BUF to win in regulation only</td>
+      <td class="td-sport"><span class="NHL">NHL</span></td>
+      <td class="td-odds">-124</td>
+      <td class="td-wager">1.24u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.25u</td>
+    </tr><tr>
+      <td class="td-date">04/12/2026</td>
+      <td class="td-selection">F5 U 4.5 CIN vs LAA  Half Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-125</td>
+      <td class="td-wager">0.63u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+9.75u</td>
+    </tr><tr>
+      <td class="td-date">04/12/2026</td>
+      <td class="td-selection">F5 Under 3.5 TB vs NYY  Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+100</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+10.25u</td>
+    </tr><tr>
+      <td class="td-date">04/11/2026</td>
+      <td class="td-selection">NRFI KC vs. CWS Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+9.87u</td>
+    </tr><tr>
+      <td class="td-date">04/11/2026</td>
+      <td class="td-selection">Under 9 runs KC vs. CWS Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-105</td>
+      <td class="td-wager">0.53u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+10.38u</td>
+    </tr><tr>
+      <td class="td-date">04/10/2026</td>
+      <td class="td-selection">Under 9 runs Tor vs. Min Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.42u</td>
+    </tr><tr>
+      <td class="td-date">04/09/2026</td>
+      <td class="td-selection">Aggrehgate four 4 players 1.0u</td>
+      <td class="td-sport"><span class="PGA">PGA</span></td>
+      <td class="td-odds">+650</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.97u</td>
+    </tr><tr>
+      <td class="td-date">04/08/2026</td>
+      <td class="td-selection">F5 Under 4 runs TEX vs SEA Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-120</td>
+      <td class="td-wager">0.60u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.42u</td>
+    </tr><tr>
+      <td class="td-date">04/08/2026</td>
+      <td class="td-selection">Under 7.5 runs TEX vs. SEA Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-105</td>
+      <td class="td-wager">0.58u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.97u</td>
+    </tr><tr>
+      <td class="td-date">04/07/2026</td>
+      <td class="td-selection">F5 Under 3.5 runs Miami Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-120</td>
+      <td class="td-wager">0.60u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.42u</td>
+    </tr><tr>
+      <td class="td-date">04/07/2026</td>
+      <td class="td-selection">LAA  Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+120</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.92u</td>
+    </tr><tr>
+      <td class="td-date">04/06/2026</td>
+      <td class="td-selection">MIL -117 Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-117</td>
+      <td class="td-wager">0.59u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.92u</td>
+    </tr><tr>
+      <td class="td-date">04/06/2026</td>
+      <td class="td-selection">F5 Under 3.5 runs +105 LAA vs. ATL</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.92u</td>
+    </tr><tr>
+      <td class="td-date">04/05/2026</td>
+      <td class="td-selection">Over 7.5 runs CWS vs. TOR Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+11.42u</td>
+    </tr><tr>
+      <td class="td-date">04/04/2026</td>
+      <td class="td-selection">Over 10 runs ATH vs. HOU Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+12.97u</td>
+    </tr><tr>
+      <td class="td-date">04/04/2026</td>
+      <td class="td-selection">Illinois  One Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-125</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+11.97u</td>
+    </tr><tr>
+      <td class="td-date">04/03/2026</td>
+      <td class="td-selection">WAS -2.5 runs -Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+12.47u</td>
+    </tr><tr>
+      <td class="td-date">04/01/2026</td>
+      <td class="td-selection">F5 Miami  One Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-135</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+13.02u</td>
+    </tr><tr>
+      <td class="td-date">03/30/2026</td>
+      <td class="td-selection">KC F5 -0.5 runs</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-115</td>
+      <td class="td-wager">1.15u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.61u</td>
+    </tr><tr>
+      <td class="td-date">03/30/2026</td>
+      <td class="td-selection">KC  One Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-150</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+12.28u</td>
+    </tr><tr>
+      <td class="td-date">03/29/2026</td>
+      <td class="td-selection">Over 7.5 runs TB vs. STL Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+10.16u</td>
+    </tr><tr>
+      <td class="td-date">03/29/2026</td>
+      <td class="td-selection">BAY -3.5  (To be played 4/1)</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.16u</td>
+    </tr><tr>
+      <td class="td-date">03/29/2026</td>
+      <td class="td-selection">Under 146.5 MICH vs. TN Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.61u</td>
+    </tr><tr>
+      <td class="td-date">03/28/2026</td>
+      <td class="td-selection">F5 CHC -0.5 runs  One Unit FLAT</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-145</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+9.71u</td>
+    </tr><tr>
+      <td class="td-date">03/28/2026</td>
+      <td class="td-selection">CHC -1.5 runs    Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-120</td>
+      <td class="td-wager">0.60u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+10.21u</td>
+    </tr><tr>
+      <td class="td-date">03/28/2026</td>
+      <td class="td-selection">Over 138.5 Illinois vs. Iowa Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+9.66u</td>
+    </tr><tr>
+      <td class="td-date">03/27/2026</td>
+      <td class="td-selection">St. John's +7  Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+9.57u</td>
+    </tr><tr>
+      <td class="td-date">03/27/2026</td>
+      <td class="td-selection">Over 7 runs SEA vs. CLE Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+9.02u</td>
+    </tr><tr>
+      <td class="td-date">03/26/2026</td>
+      <td class="td-selection">Texas +7.5  Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+9.57u</td>
+    </tr><tr>
+      <td class="td-date">03/26/2026</td>
+      <td class="td-selection">2TP NRFI CIN/NRFI PHI Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+215</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+9.07u</td>
+    </tr><tr>
+      <td class="td-date">03/22/2026</td>
+      <td class="td-selection">2TP ML PUR/FLA One Unit FLAT</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-195</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+8.07u</td>
+    </tr><tr>
+      <td class="td-date">03/22/2026</td>
+      <td class="td-selection">2H Iowa State -3</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+9.07u</td>
+    </tr><tr>
+      <td class="td-date">03/21/2026</td>
+      <td class="td-selection">STL +12.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+9.07u</td>
+    </tr><tr>
+      <td class="td-date">03/20/2026</td>
+      <td class="td-selection">Akron +7.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.17u</td>
+    </tr><tr>
+      <td class="td-date">03/18/2026</td>
+      <td class="td-selection">Under 138.5 Nebraska</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.27u</td>
+    </tr><tr>
+      <td class="td-date">03/17/2026</td>
+      <td class="td-selection">Venezuela Half Unit</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">+225</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.37u</td>
+    </tr><tr>
+      <td class="td-date">03/17/2026</td>
+      <td class="td-selection">MD Bal County +1 Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.82u</td>
+    </tr><tr>
+      <td class="td-date">03/17/2026</td>
+      <td class="td-selection">Over 158.5 Texas Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.27u</td>
+    </tr><tr>
+      <td class="td-date">03/15/2026</td>
+      <td class="td-selection">Over 164.5 ARK vs. VAN Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+11.39u</td>
+    </tr><tr>
+      <td class="td-date">03/14/2026</td>
+      <td class="td-selection">St. Joseph's +7   Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+11.94u</td>
+    </tr><tr>
+      <td class="td-date">03/13/2026</td>
+      <td class="td-selection">1H Ohio State +7.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+12.49u</td>
+    </tr><tr>
+      <td class="td-date">03/12/2026</td>
+      <td class="td-selection">FSU +17</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.49u</td>
+    </tr><tr>
+      <td class="td-date">03/11/2026</td>
+      <td class="td-selection">PIT +9.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.49u</td>
+    </tr><tr>
+      <td class="td-date">03/10/2026</td>
+      <td class="td-selection">Over 162 OSU vs. COL</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.59u</td>
+    </tr><tr>
+      <td class="td-date">03/09/2026</td>
+      <td class="td-selection">3TP N. COL/Duke win ACC/FLA win SEC +185</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">+185</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.59u</td>
+    </tr><tr>
+      <td class="td-date">03/07/2026</td>
+      <td class="td-selection">Arkansas +4.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+12.79u</td>
+    </tr><tr>
+      <td class="td-date">03/07/2026</td>
+      <td class="td-selection">2H MO -2</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+11.69u</td>
+    </tr><tr>
+      <td class="td-date">03/07/2026</td>
+      <td class="td-selection">STL -6   Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+11.14u</td>
+    </tr><tr>
+      <td class="td-date">03/07/2026</td>
+      <td class="td-selection">New Mexico +7.5 Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.64u</td>
+    </tr><tr>
+      <td class="td-date">03/07/2026</td>
+      <td class="td-selection">Oklahoma +7.5 Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+12.14u</td>
+    </tr><tr>
+      <td class="td-date">03/07/2026</td>
+      <td class="td-selection">Mt. St. Mary's +3.5 Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+11.59u</td>
+    </tr><tr>
+      <td class="td-date">03/06/2026</td>
+      <td class="td-selection">TXST -118 Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+12.34u</td>
+    </tr><tr>
+      <td class="td-date">03/06/2026</td>
+      <td class="td-selection">S. Alabama -4.5  Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+11.79u</td>
+    </tr><tr>
+      <td class="td-date">03/05/2026</td>
+      <td class="td-selection">St. Thomas -5   Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+12.89u</td>
+    </tr><tr>
+      <td class="td-date">03/04/2026</td>
+      <td class="td-selection">Over 161.5 Wright St. vs. CLE St Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+11.89u</td>
+    </tr><tr>
+      <td class="td-date">03/04/2026</td>
+      <td class="td-selection">Wagner +5.5   Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+12.39u</td>
+    </tr><tr>
+      <td class="td-date">03/04/2026</td>
+      <td class="td-selection">USA to win World Baseball Classic -115</td>
+      <td class="td-sport"><span class="MLB">MLB</span></td>
+      <td class="td-odds">-115</td>
+      <td class="td-wager">1.15u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.24u</td>
+    </tr><tr>
+      <td class="td-date">03/02/2026</td>
+      <td class="td-selection">Duke -9.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.44u</td>
+    </tr><tr>
+      <td class="td-date">03/02/2026</td>
+      <td class="td-selection">Duke ML/DAL (NHL)/ -115</td>
+      <td class="td-sport"><span class="CBB">CBB/NHL</span></td>
+      <td class="td-odds">-115</td>
+      <td class="td-wager">1.15u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+12.44u</td>
+    </tr><tr>
+      <td class="td-date">03/01/2026</td>
+      <td class="td-selection">2TP ILL-CHI/UNC WIL</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">+123</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.44u</td>
+    </tr><tr>
+      <td class="td-date">02/28/2026</td>
+      <td class="td-selection">Over 149.5 Arizona</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+11.44u</td>
+    </tr><tr>
+      <td class="td-date">02/26/2026</td>
+      <td class="td-selection">Stetson +7.5   Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+10.79u</td>
+    </tr><tr>
+      <td class="td-date">02/26/2026</td>
+      <td class="td-selection">2TP ML Utah Tech/Cal Baptist</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">+125</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+12.04u</td>
+    </tr><tr>
+      <td class="td-date">02/26/2026</td>
+      <td class="td-selection">UC Riverside +11.5 Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+12.54u</td>
+    </tr><tr>
+      <td class="td-date">02/24/2026</td>
+      <td class="td-selection">STL -3.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.84u</td>
+    </tr><tr>
+      <td class="td-date">02/24/2026</td>
+      <td class="td-selection">2H STL -5.5 Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.29u</td>
+    </tr><tr>
+      <td class="td-date">02/22/2026</td>
+      <td class="td-selection">Wisconsin -160 One Unit FLAT</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.94u</td>
+    </tr><tr>
+      <td class="td-date">02/21/2026</td>
+      <td class="td-selection">UTRGV -3.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.04u</td>
+    </tr><tr>
+      <td class="td-date">02/20/2026</td>
+      <td class="td-selection">Green Bay +6.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+10.04u</td>
+    </tr><tr>
+      <td class="td-date">02/19/2026</td>
+      <td class="td-selection">Alabama State +5.5   Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.13u</td>
+    </tr><tr>
+      <td class="td-date">02/19/2026</td>
+      <td class="td-selection">Over 152 High Point    Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+9.59u</td>
+    </tr><tr>
+      <td class="td-date">02/19/2026</td>
+      <td class="td-selection">Montana -130 Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+9.04u</td>
+    </tr><tr>
+      <td class="td-date">02/18/2026</td>
+      <td class="td-selection">2TP Clem/St. John's -120 One Unit FLAT</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+10.19u</td>
+    </tr><tr>
+      <td class="td-date">02/18/2026</td>
+      <td class="td-selection">Under 145.5 Duq vs. La Salle Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+10.69u</td>
+    </tr><tr>
+      <td class="td-date">02/17/2026</td>
+      <td class="td-selection">Nebraska +2  Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+11.19u</td>
+    </tr><tr>
+      <td class="td-date">02/12/2026</td>
+      <td class="td-selection">Under 133.5 Drexel Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+11.73u</td>
+    </tr><tr>
+      <td class="td-date">02/09/2026</td>
+      <td class="td-selection">Under 143.5 Drake vs. Valparaiso -110</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+12.29u</td>
+    </tr><tr>
+      <td class="td-date">02/08/2026</td>
+      <td class="td-selection">2TP UVA/SEA (Super Bowl)</td>
+      <td class="td-sport"><span class="CBB">CBB/NFL</span></td>
+      <td class="td-odds">-130</td>
+      <td class="td-wager">1.30u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+14.48u</td>
+    </tr><tr>
+      <td class="td-date">02/08/2026</td>
+      <td class="td-selection">2TT NEP +11/Under 51.5</td>
+      <td class="td-sport"><span class="NFL">NFL</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+13.38u</td>
+    </tr><tr>
+      <td class="td-date">02/07/2026</td>
+      <td class="td-selection">Under 139.5 Drexel vs Elon Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.59u</td>
+    </tr><tr>
+      <td class="td-date">02/07/2026</td>
+      <td class="td-selection">Over 152.5 Stony Brook vs NE Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.04u</td>
+    </tr><tr>
+      <td class="td-date">02/07/2026</td>
+      <td class="td-selection">Delaware State -1.5 Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+13.48u</td>
+    </tr><tr>
+      <td class="td-date">02/06/2026</td>
+      <td class="td-selection">Murray State -125 Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+15.13u</td>
+    </tr><tr>
+      <td class="td-date">02/05/2026</td>
+      <td class="td-selection">Cal Santa Barbara -3</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-105</td>
+      <td class="td-wager">1.05u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.63u</td>
+    </tr><tr>
+      <td class="td-date">02/04/2026</td>
+      <td class="td-selection">Navy -3.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+15.69u</td>
+    </tr><tr>
+      <td class="td-date">02/03/2026</td>
+      <td class="td-selection">Under 142 SIUE vs. Linden  Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.69u</td>
+    </tr><tr>
+      <td class="td-date">02/01/2026</td>
+      <td class="td-selection">CLE State +9</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+15.23u</td>
+    </tr><tr>
+      <td class="td-date">01/30/2026</td>
+      <td class="td-selection">Over 156.5 Provf vs VILL Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+13.73u</td>
+    </tr><tr>
+      <td class="td-date">01/30/2026</td>
+      <td class="td-selection">Wright State -3 Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+14.23u</td>
+    </tr><tr>
+      <td class="td-date">01/29/2026</td>
+      <td class="td-selection">Longwood +2.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+13.23u</td>
+    </tr><tr>
+      <td class="td-date">01/27/2026</td>
+      <td class="td-selection">Over 154 UCON vs. Providence</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+14.88u</td>
+    </tr><tr>
+      <td class="td-date">01/27/2026</td>
+      <td class="td-selection">2H U 159 UCON vs. Prov Hedge 0.5u</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+14.34u</td>
+    </tr><tr>
+      <td class="td-date">01/25/2026</td>
+      <td class="td-selection">SEA -2</td>
+      <td class="td-sport"><span class="NFL">NFL</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+13.88u</td>
+    </tr><tr>
+      <td class="td-date">01/24/2026</td>
+      <td class="td-selection">Over 145 NIU vs. Murray State</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+11.88u</td>
+    </tr><tr>
+      <td class="td-date">01/24/2026</td>
+      <td class="td-selection">Kansas -4.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+12.88u</td>
+    </tr><tr>
+      <td class="td-date">01/22/2026</td>
+      <td class="td-selection">Wisconsin -5.5 Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+10.88u</td>
+    </tr><tr>
+      <td class="td-date">01/21/2026</td>
+      <td class="td-selection">Indiana State +9</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+10.38u</td>
+    </tr><tr>
+      <td class="td-date">01/19/2026</td>
+      <td class="td-selection">IND to WIN CFB Championship +130</td>
+      <td class="td-sport"><span class="CFB">CFB</span></td>
+      <td class="td-odds">+130</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+9.38u</td>
+    </tr><tr>
+      <td class="td-date">01/18/2026</td>
+      <td class="td-selection">Under 137 Tulane vs. UNT Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+8.09u</td>
+    </tr><tr>
+      <td class="td-date">01/17/2026</td>
+      <td class="td-selection">3TTBUF+7.5/SEA-1/U46.5 NE Half Unit</td>
+      <td class="td-sport"><span class="NFL">NFL</span></td>
+      <td class="td-odds">+160</td>
+      <td class="td-wager">0.50u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+7.58u</td>
+    </tr><tr>
+      <td class="td-date">01/15/2026</td>
+      <td class="td-selection">CBJ One Unit FLAT</td>
+      <td class="td-sport"><span class="NHL">NHL</span></td>
+      <td class="td-odds">-155</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+6.79u</td>
+    </tr><tr>
+      <td class="td-date">01/14/2026</td>
+      <td class="td-selection">Over 146 Rhode Isl. vs. VCU Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+6.14u</td>
+    </tr><tr>
+      <td class="td-date">01/13/2026</td>
+      <td class="td-selection">Texas A&amp;M +9.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+5.64u</td>
+    </tr><tr>
+      <td class="td-date">01/12/2026</td>
+      <td class="td-selection">MTL One Unit FLAT</td>
+      <td class="td-sport"><span class="NHL">NHL</span></td>
+      <td class="td-odds">-179</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+4.64u</td>
+    </tr><tr>
+      <td class="td-date">01/11/2026</td>
+      <td class="td-selection">1H JAX +0.5    Half Unit</td>
+      <td class="td-sport"><span class="NFL">NFL</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+4.08u</td>
+    </tr><tr>
+      <td class="td-date">01/10/2026</td>
+      <td class="td-selection">Under 140 Hofstra vs. Monmouth</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+5.13u</td>
+    </tr><tr>
+      <td class="td-date">01/10/2026</td>
+      <td class="td-selection">Oregon State +2.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+4.03u</td>
+    </tr><tr>
+      <td class="td-date">01/10/2026</td>
+      <td class="td-selection">TOR One Unit FLAT</td>
+      <td class="td-sport"><span class="NHL">NHL</span></td>
+      <td class="td-odds">-165</td>
+      <td class="td-wager">1.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+4.63u</td>
+    </tr><tr>
+      <td class="td-date">01/09/2026</td>
+      <td class="td-selection">IND -4</td>
+      <td class="td-sport"><span class="CFB">CFB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+4.75u</td>
+    </tr><tr>
+      <td class="td-date">01/09/2026</td>
+      <td class="td-selection">ORE +4  OFFSET of IND -4  Half Unit</td>
+      <td class="td-sport"><span class="CFB">CFB</span></td>
+      <td class="td-odds">-125</td>
+      <td class="td-wager">0.63u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+4.13u</td>
+    </tr><tr>
+      <td class="td-date">01/08/2026</td>
+      <td class="td-selection">DET Half Unit</td>
+      <td class="td-sport"><span class="NHL">NHL</span></td>
+      <td class="td-odds">-140</td>
+      <td class="td-wager">0.70u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+3.75u</td>
+    </tr><tr>
+      <td class="td-date">01/07/2026</td>
+      <td class="td-selection">Over 151.5 ARK vs. Ole Miss</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+3.25u</td>
+    </tr><tr>
+      <td class="td-date">01/05/2026</td>
+      <td class="td-selection">EMU +1.5</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">1.10u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+2.25u</td>
+    </tr><tr>
+      <td class="td-date">01/03/2026</td>
+      <td class="td-selection">2TT CAR +9/SF +8.5</td>
+      <td class="td-sport"><span class="NFL">NFL</span></td>
+      <td class="td-odds">-125</td>
+      <td class="td-wager">1.25u</td>
+      <td class="td-result"><span class="badge badge-L">L</span></td>
+      <td class="td-pl pos">+0.25u</td>
+    </tr><tr>
+      <td class="td-date">01/03/2026</td>
+      <td class="td-selection">HEDGE SEA -2.5 Half Unit</td>
+      <td class="td-sport"><span class="NFL">NFL</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+0.75u</td>
+    </tr><tr>
+      <td class="td-date">01/03/2026</td>
+      <td class="td-selection">Miss State +9.5 Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+1.25u</td>
+    </tr><tr>
+      <td class="td-date">01/02/2026</td>
+      <td class="td-selection">2TP ML TXST/NAVY -200</td>
+      <td class="td-sport"><span class="CFB">CFB</span></td>
+      <td class="td-odds">-200</td>
+      <td class="td-wager">2.00u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+1.00u</td>
+    </tr><tr>
+      <td class="td-date">01/02/2026</td>
+      <td class="td-selection">Le Moyne -5.5   Half Unit</td>
+      <td class="td-sport"><span class="CBB">CBB</span></td>
+      <td class="td-odds">-110</td>
+      <td class="td-wager">0.55u</td>
+      <td class="td-result"><span class="badge badge-W">W</span></td>
+      <td class="td-pl pos">+1.50u</td>
+    </tr></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="https://kenmurphysports.com/">kenmurphysports.com</a>
+  &nbsp;·&nbsp; All selections documented at time of play &nbsp;·&nbsp; Past results do not guarantee future performance
 </div>
 
 <script>
-const DATA = [{"date": "01/02/2026", "selection": "2TP ML TXST/NAVY -200", "odds": -200, "sport": "CFB", "wl": "W", "units": 2.0, "pnl": 2.0, "cum": 2.0}, {"date": "01/02/2026", "selection": "Le Moyne -5.5   Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 2.55}, {"date": "01/03/2026", "selection": "2TT CAR +9/SF +8.5", "odds": -125, "sport": "NFL", "wl": "L", "units": 1.25, "pnl": -1.25, "cum": 1.3}, {"date": "01/03/2026", "selection": "HEDGE SEA -2.5 Half Unit", "odds": -110, "sport": "NFL", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 1.85}, {"date": "01/03/2026", "selection": "Miss State +9.5 Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 2.4}, {"date": "01/05/2026", "selection": "EMU +1.5", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 3.5}, {"date": "01/07/2026", "selection": "Over 151.5 ARK vs. Ole Miss", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 4.6}, {"date": "01/08/2026", "selection": "DET Half Unit", "odds": -140, "sport": "NHL", "wl": "W", "units": 0.7, "pnl": 0.7, "cum": 5.3}, {"date": "01/09/2026", "selection": "IND -4", "odds": -110, "sport": "CFB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 6.4}, {"date": "01/09/2026", "selection": "ORE +4  OFFSET of IND -4  Half Unit", "odds": -125, "sport": "CFB", "wl": "L", "units": 0.62, "pnl": -0.62, "cum": 5.78}, {"date": "01/10/2026", "selection": "TOR One Unit FLAT", "odds": -165, "sport": "NHL", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 6.78}, {"date": "01/10/2026", "selection": "Under 140 Hofstra vs. Monmouth", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 7.88}, {"date": "01/10/2026", "selection": "Oregon State +2.5", "odds": -110, "sport": "CBB", "wl": "L", "units": 1.1, "pnl": -1.1, "cum": 6.78}, {"date": "01/11/2026", "selection": "1H JAX +0.5    Half Unit", "odds": -110, "sport": "NFL", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 6.23}, {"date": "01/12/2026", "selection": "MTL One Unit FLAT", "odds": -179, "sport": "NHL", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 7.23}, {"date": "01/13/2026", "selection": "Texas A&M +9.5", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 8.33}, {"date": "01/14/2026", "selection": "Over 146 Rhode Isl. vs. VCU Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 8.88}, {"date": "01/15/2026", "selection": "CBJ One Unit FLAT", "odds": -155, "sport": "NHL", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 9.88}, {"date": "01/17/2026", "selection": "3TTBUF+7.5/SEA-1/U46.5 NE Half Unit", "odds": 160, "sport": "NFL", "wl": "W", "units": 0.5, "pnl": 0.8, "cum": 10.68}, {"date": "01/18/2026", "selection": "Under 137 Tulane vs. UNT Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 11.23}, {"date": "01/19/2026", "selection": "IND to WIN CFB Championship +130", "odds": 130, "sport": "CFB", "wl": "W", "units": 1.0, "pnl": 1.3, "cum": 12.53}, {"date": "01/21/2026", "selection": "Indiana State +9", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 13.63}, {"date": "01/22/2026", "selection": "Wisconsin -5.5 Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 14.18}, {"date": "01/24/2026", "selection": "Over 145 NIU vs. Murray State", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 15.28}, {"date": "01/24/2026", "selection": "Kansas -4.5", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 16.38}, {"date": "01/25/2026", "selection": "SEA -2", "odds": -110, "sport": "NFL", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 17.48}, {"date": "01/27/2026", "selection": "Over 154 UCON vs. Providence", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 18.58}, {"date": "01/27/2026", "selection": "2H U 159 UCON vs. Prov Hedge 0.5u", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 18.03}, {"date": "01/29/2026", "selection": "Longwood +2.5", "odds": -110, "sport": "CBB", "wl": "L", "units": 1.1, "pnl": -1.1, "cum": 16.93}, {"date": "01/30/2026", "selection": "Over 156.5 Provf vs VILL Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 17.48}, {"date": "01/30/2026", "selection": "Wright State -3 Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 18.03}, {"date": "02/01/2026", "selection": "CLE State +9", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 19.13}, {"date": "02/03/2026", "selection": "Under 142 SIUE vs. Linden  Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 18.58}, {"date": "02/04/2026", "selection": "Navy -3.5", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 19.68}, {"date": "02/05/2026", "selection": "Cal Santa Barbara -3", "odds": -105, "sport": "CBB", "wl": "L", "units": 1.05, "pnl": -1.05, "cum": 18.63}, {"date": "02/06/2026", "selection": "Murray State -125 Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 19.18}, {"date": "02/07/2026", "selection": "Under 139.5 Drexel vs Elon Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 18.63}, {"date": "02/07/2026", "selection": "Over 152.5 Stony Brook vs NE Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 18.08}, {"date": "02/07/2026", "selection": "Delaware State -1.5 Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 17.53}, {"date": "02/08/2026", "selection": "2TP UVA/SEA (Super Bowl)", "odds": -130, "sport": "CBB/NFL", "wl": "W", "units": 1.3, "pnl": 1.3, "cum": 18.83}, {"date": "02/08/2026", "selection": "2TT NEP +11/Under 51.5", "odds": -110, "sport": "NFL", "wl": "L", "units": 1.1, "pnl": -1.1, "cum": 17.73}, {"date": "02/09/2026", "selection": "Under 143.5 Drake vs. Valparaiso -110", "odds": -110, "sport": "CBB", "wl": "L", "units": 1.1, "pnl": -1.1, "cum": 16.63}, {"date": "02/12/2026", "selection": "Under 133.5 Drexel Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 16.08}, {"date": "02/17/2026", "selection": "Nebraska +2  Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 15.53}, {"date": "02/18/2026", "selection": "Under 145.5 Duq vs. La Salle Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 16.08}, {"date": "02/18/2026", "selection": "2TP Clem/St. John's -120 One Unit FLAT", "odds": -110, "sport": "CBB", "wl": "L", "units": 1.0, "pnl": -1.0, "cum": 15.08}, {"date": "02/19/2026", "selection": "Alabama State +5.5   Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 14.53}, {"date": "02/19/2026", "selection": "Over 152 High Point    Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 13.98}, {"date": "02/19/2026", "selection": "Montana -130 Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 13.43}, {"date": "02/20/2026", "selection": "Green Bay +6.5", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 14.53}, {"date": "02/21/2026", "selection": "UTRGV -3.5", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 15.62}, {"date": "02/22/2026", "selection": "Wisconsin -160 One Unit FLAT", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 16.62}, {"date": "02/24/2026", "selection": "STL -3.5", "odds": -110, "sport": "CBB", "wl": "L", "units": 1.1, "pnl": -1.1, "cum": 15.53}, {"date": "02/24/2026", "selection": "2H STL -5.5 Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 14.97}, {"date": "02/26/2026", "selection": "2TP ML Utah Tech/Cal Baptist", "odds": 125, "sport": "CBB", "wl": "W", "units": 1.0, "pnl": 1.25, "cum": 16.23}, {"date": "02/26/2026", "selection": "Stetson +7.5   Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 16.78}, {"date": "02/26/2026", "selection": "UC Riverside +11.5 Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 17.33}, {"date": "02/28/2026", "selection": "Over 149.5 Arizona", "odds": -110, "sport": "CBB", "wl": "L", "units": 1.1, "pnl": -1.1, "cum": 16.23}, {"date": "03/01/2026", "selection": "2TP ILL-CHI/UNC WIL", "odds": 123, "sport": "CBB", "wl": "L", "units": 1.0, "pnl": -1.0, "cum": 15.23}, {"date": "03/02/2026", "selection": "Duke -9.5", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 16.33}, {"date": "03/02/2026", "selection": "Duke ML/DAL (NHL)/ -115", "odds": -115, "sport": "CBB/NHL", "wl": "W", "units": 1.15, "pnl": 1.15, "cum": 17.48}, {"date": "03/04/2026", "selection": "Over 161.5 Wright St. vs. CLE St Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 16.93}, {"date": "03/04/2026", "selection": "Wagner +5.5   Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 17.48}, {"date": "03/04/2026", "selection": "USA to win World Baseball Classic -115", "odds": -115, "sport": "MLB", "wl": "L", "units": 1.15, "pnl": -1.15, "cum": 16.33}, {"date": "03/05/2026", "selection": "St. Thomas -5   Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 16.88}, {"date": "03/06/2026", "selection": "TXST -118 Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 16.33}, {"date": "03/06/2026", "selection": "S. Alabama -4.5  Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 15.78}, {"date": "03/07/2026", "selection": "2H MO -2", "odds": -110, "sport": "CBB", "wl": "L", "units": 1.1, "pnl": -1.1, "cum": 14.68}, {"date": "03/07/2026", "selection": "Mt. St. Mary's +3.5 Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 14.13}, {"date": "03/07/2026", "selection": "Oklahoma +7.5 Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 14.68}, {"date": "03/07/2026", "selection": "Arkansas +4.5", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 15.78}, {"date": "03/07/2026", "selection": "STL -6   Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 15.23}, {"date": "03/07/2026", "selection": "New Mexico +7.5 Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 15.78}, {"date": "03/09/2026", "selection": "3TP N. COL/Duke win ACC/FLA win SEC +185", "odds": 185, "sport": "CBB", "wl": "L", "units": 1.0, "pnl": -1.0, "cum": 14.78}, {"date": "03/10/2026", "selection": "Over 162 OSU vs. COL", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 15.88}, {"date": "03/11/2026", "selection": "PIT +9.5", "odds": -110, "sport": "CBB", "wl": "L", "units": 1.1, "pnl": -1.1, "cum": 14.78}, {"date": "03/12/2026", "selection": "FSU +17", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 15.88}, {"date": "03/13/2026", "selection": "1H Ohio State +7.5", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 16.98}, {"date": "03/14/2026", "selection": "St. Joseph's +7   Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 16.43}, {"date": "03/15/2026", "selection": "Over 164.5 ARK vs. VAN Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 15.88}, {"date": "03/17/2026", "selection": "Venezuela Half Unit", "odds": 225, "sport": "MLB", "wl": "W", "units": 0.5, "pnl": 1.12, "cum": 17.0}, {"date": "03/17/2026", "selection": "MD Bal County +1 Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 16.45}, {"date": "03/17/2026", "selection": "Over 158.5 Texas Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 15.9}, {"date": "03/18/2026", "selection": "Under 138.5 Nebraska", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 17.0}, {"date": "03/20/2026", "selection": "Akron +7.5", "odds": -110, "sport": "CBB", "wl": "L", "units": 1.1, "pnl": -1.1, "cum": 15.9}, {"date": "03/21/2026", "selection": "STL +12.5", "odds": -110, "sport": "CBB", "wl": "L", "units": 1.1, "pnl": -1.1, "cum": 14.8}, {"date": "03/22/2026", "selection": "2TP ML PUR/FLA One Unit FLAT", "odds": -195, "sport": "CBB", "wl": "L", "units": 1.0, "pnl": -1.0, "cum": 13.8}, {"date": "03/22/2026", "selection": "2H Iowa State -3", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 14.9}, {"date": "03/26/2026", "selection": "2TP NRFI CIN/NRFI PHI Half Unit", "odds": 215, "sport": "MLB", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 14.4}, {"date": "03/26/2026", "selection": "Texas +7.5  Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 14.95}, {"date": "03/27/2026", "selection": "Over 7 runs SEA vs. CLE Half Unit", "odds": -110, "sport": "MLB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 14.4}, {"date": "03/27/2026", "selection": "St. John's +7  Half Unit", "odds": -110, "sport": "CBB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 14.95}, {"date": "03/28/2026", "selection": "F5 CHC -0.5 runs  One Unit FLAT", "odds": -145, "sport": "MLB", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 15.95}, {"date": "03/28/2026", "selection": "CHC -1.5 runs    Half Unit", "odds": -120, "sport": "MLB", "wl": "W", "units": 0.6, "pnl": 0.6, "cum": 16.55}, {"date": "03/28/2026", "selection": "Over 138.5 Illinois vs. Iowa Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 16.0}, {"date": "03/29/2026", "selection": "Over 7.5 runs TB vs. STL Half Unit", "odds": -110, "sport": "MLB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 16.55}, {"date": "03/29/2026", "selection": "BAY -3.5  (To be played 4/1)", "odds": -110, "sport": "CBB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 17.65}, {"date": "03/29/2026", "selection": "Under 146.5 MICH vs. TN Half Unit", "odds": -110, "sport": "CBB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 17.1}, {"date": "03/30/2026", "selection": "KC F5 -0.5 runs", "odds": -115, "sport": "MLB", "wl": "W", "units": 1.15, "pnl": 1.15, "cum": 18.25}, {"date": "03/30/2026", "selection": "KC  One Unit FLAT", "odds": -150, "sport": "MLB", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 19.25}, {"date": "04/01/2026", "selection": "F5 Miami  One Unit FLAT", "odds": -135, "sport": "MLB", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 20.25}, {"date": "04/03/2026", "selection": "WAS -2.5 runs -Half Unit", "odds": -110, "sport": "MLB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 19.7}, {"date": "04/04/2026", "selection": "Illinois  One Unit FLAT", "odds": -125, "sport": "MLB", "wl": "L", "units": 1.0, "pnl": -1.0, "cum": 18.7}, {"date": "04/04/2026", "selection": "Over 10 runs ATH vs. HOU Half Unit", "odds": -110, "sport": "MLB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 19.25}, {"date": "04/05/2026", "selection": "Over 7.5 runs CWS vs. TOR Half Unit", "odds": -110, "sport": "MLB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 18.7}, {"date": "04/06/2026", "selection": "MIL -117 Half Unit", "odds": -117, "sport": "MLB", "wl": "W", "units": 0.59, "pnl": 0.59, "cum": 19.29}, {"date": "04/06/2026", "selection": "F5 Under 3.5 runs +105 LAA vs. ATL", "odds": -110, "sport": "MLB", "wl": "L", "units": 1.0, "pnl": -1.0, "cum": 18.29}, {"date": "04/07/2026", "selection": "F5 Under 3.5 runs Miami Half Unit", "odds": -120, "sport": "MLB", "wl": "W", "units": 0.6, "pnl": 0.6, "cum": 18.89}, {"date": "04/07/2026", "selection": "LAA  Half Unit", "odds": 120, "sport": "MLB", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 18.39}, {"date": "04/08/2026", "selection": "F5 Under 4 runs TEX vs SEA Half Unit", "odds": -120, "sport": "MLB", "wl": "W", "units": 0.6, "pnl": 0.6, "cum": 18.99}, {"date": "04/08/2026", "selection": "Under 7.5 runs TEX vs. SEA Half Unit", "odds": -105, "sport": "MLB", "wl": "W", "units": 0.58, "pnl": 0.58, "cum": 19.57}, {"date": "04/09/2026", "selection": "Aggrehgate four 4 players 1.0u", "odds": 650, "sport": "PGA", "wl": "L", "units": 1.0, "pnl": -1.0, "cum": 18.57}, {"date": "04/10/2026", "selection": "Under 9 runs Tor vs. Min Half Unit", "odds": -110, "sport": "MLB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 18.02}, {"date": "04/11/2026", "selection": "Under 9 runs KC vs. CWS Half Unit", "odds": -105, "sport": "MLB", "wl": "W", "units": 0.53, "pnl": 0.53, "cum": 18.55}, {"date": "04/11/2026", "selection": "NRFI KC vs. CWS Half Unit", "odds": -110, "sport": "MLB", "wl": "L", "units": 0.55, "pnl": -0.55, "cum": 18.0}, {"date": "04/12/2026", "selection": "F5 U 4.5 CIN vs LAA  Half Unit FLAT", "odds": -125, "sport": "MLB", "wl": "L", "units": 0.63, "pnl": -0.63, "cum": 17.37}, {"date": "04/12/2026", "selection": "F5 Under 3.5 TB vs NYY  Half Unit", "odds": 100, "sport": "MLB", "wl": "W", "units": 0.5, "pnl": 0.5, "cum": 17.87}, {"date": "04/13/2026", "selection": "BUF to win in regulation only", "odds": -124, "sport": "NHL", "wl": "W", "units": 1.24, "pnl": 1.24, "cum": 19.11}, {"date": "04/15/2026", "selection": "PROP O3.5 Ks Kochanowicz +140 0.5u", "odds": 140, "sport": "MLB", "wl": "W", "units": 0.5, "pnl": 0.7, "cum": 19.81}, {"date": "04/17/2026", "selection": "LAA F5 One Unit FLAT", "odds": -165, "sport": "MLB", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 20.81}, {"date": "04/18/2026", "selection": "Over 9.5 LAA vs. SD  Half Unit", "odds": -115, "sport": "MLB", "wl": "L", "units": 0.58, "pnl": -0.58, "cum": 20.23}, {"date": "04/19/2026", "selection": "TT Over 4 runs NYY", "odds": -115, "sport": "MLB", "wl": "W", "units": 1.15, "pnl": 1.15, "cum": 21.38}, {"date": "04/21/2026", "selection": "CHC", "odds": -116, "sport": "MLB", "wl": "W", "units": 1.16, "pnl": 1.16, "cum": 22.54}, {"date": "04/24/2026", "selection": "MIL  Half Unit", "odds": 110, "sport": "MLB", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 22.04}, {"date": "04/24/2026", "selection": "CHC  Half Unit", "odds": 142, "sport": "MLB", "wl": "W", "units": 0.5, "pnl": 0.71, "cum": 22.75}, {"date": "04/24/2026", "selection": "ATL One Unit FLAT", "odds": -137, "sport": "MLB", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 23.75}, {"date": "04/24/2026", "selection": "NYM -1.5 runs", "odds": 105, "sport": "MLB", "wl": "L", "units": 1.05, "pnl": -1.05, "cum": 22.7}, {"date": "04/25/2026", "selection": "F5 ATH", "odds": 119, "sport": "MLB", "wl": "W", "units": 0.5, "pnl": 0.59, "cum": 23.29}, {"date": "04/26/2026", "selection": "F5 U 8 runs ARI vs SD Half Unit", "odds": -115, "sport": "MLB", "wl": "W", "units": 0.58, "pnl": 0.58, "cum": 23.87}, {"date": "04/26/2026", "selection": "F5 KC Half Unit", "odds": -105, "sport": "MLB", "wl": "L", "units": 0.53, "pnl": -0.53, "cum": 23.34}, {"date": "04/27/2026", "selection": "F5 NYY -0.5 run Half Unit", "odds": -105, "sport": "MLB", "wl": "W", "units": 0.53, "pnl": 0.53, "cum": 23.87}, {"date": "04/28/2026", "selection": "F5 Over 4 runs  PHI vs. SF Half Unit", "odds": -125, "sport": "MLB", "wl": "L", "units": 0.63, "pnl": -0.63, "cum": 23.24}, {"date": "04/29/2026", "selection": "2TP TB+1.5/NYY Half Unit", "odds": 171, "sport": "MLB", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 22.74}, {"date": "04/30/2026", "selection": "PHI -1.5 runs Half Unit", "odds": 155, "sport": "MLB", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 22.24}, {"date": "05/01/2026", "selection": "PHI Half Unit", "odds": -116, "sport": "MLB", "wl": "W", "units": 0.58, "pnl": 0.58, "cum": 22.82}, {"date": "05/02/2026", "selection": "Over 3.5 runs STL", "odds": -125, "sport": "MLB", "wl": "L", "units": 1.25, "pnl": -1.25, "cum": 21.57}, {"date": "05/03/2026", "selection": "TB", "odds": -118, "sport": "MLB", "wl": "W", "units": 1.18, "pnl": 1.18, "cum": 22.75}, {"date": "05/04/2026", "selection": "F5 Under 4.5 runs Half Unit", "odds": -110, "sport": "MLB", "wl": "W", "units": 0.55, "pnl": 0.55, "cum": 23.3}, {"date": "05/04/2026", "selection": "TB", "odds": -120, "sport": "MLB", "wl": "W", "units": 1.2, "pnl": 1.2, "cum": 24.5}, {"date": "05/04/2026", "selection": "Atlanta   Half Unit", "odds": 135, "sport": "MLB", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 24.0}, {"date": "05/06/2026", "selection": "Atlanta   Half Unit", "odds": 120, "sport": "MLB", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 23.5}, {"date": "05/12/2026", "selection": "PIT -1.5 runs One Unit FLAT", "odds": -125, "sport": "MLB", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 24.5}, {"date": "05/13/2026", "selection": "NRFI MIL vs. SD Half Unit", "odds": -150, "sport": "MLB", "wl": "W", "units": 0.75, "pnl": 0.75, "cum": 25.25}, {"date": "05/15/2026", "selection": "F5 ATL One Unit FLAT", "odds": -138, "sport": "MLB", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 26.25}, {"date": "05/16/2026", "selection": "F5 Under 6 runs ARI vs. COL 0.5u", "odds": 100, "sport": "MLB", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 27.25}, {"date": "05/16/2026", "selection": "TB One Unit FLAT", "odds": -134, "sport": "MLB", "wl": "L", "units": 1.0, "pnl": -1.0, "cum": 26.25}, {"date": "05/17/2026", "selection": "PGA Championship Aggregate 1.5u", "odds": 900, "sport": "PGA", "wl": "L", "units": 1.5, "pnl": -1.5, "cum": 24.75}, {"date": "05/18/2026", "selection": "F5  TB -0.5 runs", "odds": 100, "sport": "MLB", "wl": "W", "units": 0.5, "pnl": 0.5, "cum": 25.25}, {"date": "05/18/2026", "selection": "F5 TB One Unit Flat", "odds": -140, "sport": "MLB", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 26.25}, {"date": "05/19/2026", "selection": "F5 Boston Half Unit", "odds": -125, "sport": "MLB", "wl": "W", "units": 0.63, "pnl": 0.63, "cum": 26.88}, {"date": "05/20/2026", "selection": "STL Half Unit", "odds": -114, "sport": "MLB", "wl": "L", "units": 0.57, "pnl": -0.57, "cum": 26.31}, {"date": "05/22/2026", "selection": "F5 TB", "odds": 125, "sport": "MLB", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 25.81}, {"date": "05/23/2026", "selection": "F5 Under 4 runs LAA vs. TEX 0.5u", "odds": -120, "sport": "MLB", "wl": "Push", "units": 0.0, "pnl": 0.0, "cum": 25.81}, {"date": "05/24/2026", "selection": "BAL One Unit FLAT", "odds": -125, "sport": "MLB", "wl": "L", "units": 1.0, "pnl": -1.0, "cum": 24.81}, {"date": "05/25/2026", "selection": "Over 9 runs LAD vs. COL Half Unit", "odds": 100, "sport": "MLB", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 24.31}, {"date": "05/26/2026", "selection": "ARI F5", "odds": -110, "sport": "MLB", "wl": "W", "units": 1.1, "pnl": 1.1, "cum": 25.41}, {"date": "05/27/2026", "selection": "2TP ARI/NYY Half Unit", "odds": 177, "sport": "MLB", "wl": "W", "units": 0.5, "pnl": 0.89, "cum": 26.3}, {"date": "05/28/2026", "selection": "PGA Colonial Ludvig Aberg Top 10", "odds": 130, "sport": "PGA", "wl": "L", "units": 1.0, "pnl": -1.0, "cum": 25.3}, {"date": "05/29/2026", "selection": "PROP Katel Marte Half Unit", "odds": 125, "sport": "MLB", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 24.8}, {"date": "05/30/2026", "selection": "TB -1.5 runs", "odds": 140, "sport": "MLB", "wl": "L", "units": 1.0, "pnl": -1.0, "cum": 23.8}, {"date": "05/31/2026", "selection": "TB -1.5 runs", "odds": 100, "sport": "MLB", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 24.8}, {"date": "06/02/2026", "selection": "TT Over 4 runs CWS Half Unit", "odds": -115, "sport": "MLB", "wl": "Push", "units": 0.0, "pnl": 0.0, "cum": 24.8}, {"date": "06/02/2026", "selection": "TB  One Unit FLAT", "odds": -135, "sport": "MLB", "wl": "L", "units": 1.0, "pnl": -1.0, "cum": 23.8}, {"date": "06/03/2026", "selection": "F5 PHI -0.5 runs One Unit FLAT", "odds": -155, "sport": "MLB", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 24.8}, {"date": "06/03/2026", "selection": "3TPALLF5M PHI/NYY/LAD 0.5u", "odds": 283, "sport": "MLB", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 24.3}, {"date": "06/03/2026", "selection": "NBA Championship NYK", "odds": 165, "sport": "NBA", "wl": "W", "units": 1.0, "pnl": 1.65, "cum": 25.95}, {"date": "06/04/2026", "selection": "MIL -1.5 runs Half Unit", "odds": 100, "sport": "MLB", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 25.45}, {"date": "06/05/2026", "selection": "NRFI LAD vs. LAA Half Unit", "odds": -115, "sport": "MLB", "wl": "W", "units": 0.58, "pnl": 0.58, "cum": 26.03}, {"date": "06/06/2026", "selection": "Boston Half Unit PPD", "odds": 105, "sport": "MLB", "wl": "PPD", "units": 0.0, "pnl": 0.0, "cum": 26.03}, {"date": "06/06/2026", "selection": "NRFI TOR vs. BAL Half Unit", "odds": -115, "sport": "MLB", "wl": "W", "units": 0.58, "pnl": 0.58, "cum": 26.61}, {"date": "06/08/2026", "selection": "SPLIT F5 HOU ML & RL 0.5u each", "odds": -106, "sport": "MLB", "wl": "L", "units": 1.0, "pnl": -1.0, "cum": 25.61}, {"date": "06/09/2026", "selection": "2TP NRFI TB-BOS/SD-CIN +213.33 0.5u", "odds": 213, "sport": "MLB", "wl": "W", "units": 0.5, "pnl": 1.06, "cum": 26.67}, {"date": "06/09/2026", "selection": "TT ATH Over 6 runs -125 Half Unit", "odds": -125, "sport": "MLB", "wl": "W", "units": 0.5, "pnl": 0.5, "cum": 27.17}, {"date": "06/09/2026", "selection": "TT MIL Over 6.5 runs -115 Half Unit", "odds": -115, "sport": "MLB", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 26.67}, {"date": "06/11/2026", "selection": "F5 BAL -102 Half Unit", "odds": -102, "sport": "MLB", "wl": "W", "units": 0.5, "pnl": 0.5, "cum": 27.17}, {"date": "06/11/2026", "selection": "BAL +105", "odds": 105, "sport": "MLB", "wl": "W", "units": 1.0, "pnl": 1.05, "cum": 28.22}, {"date": "06/11/2026", "selection": "Over 6 goals CAR vs. VGK -115", "odds": -115, "sport": "NHL", "wl": "Push", "units": 0.0, "pnl": 0.0, "cum": 28.22}, {"date": "06/12/2026", "selection": "F5 MIL -0.5 runs -165 One Unit FLAT", "odds": -165, "sport": "MLB", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 29.22}, {"date": "06/13/2026", "selection": "F5 Miami -103   Half Unit", "odds": -103, "sport": "MLB", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 28.72}, {"date": "06/13/2026", "selection": "2TP SWITZ/SCOT  -118 0.50u", "odds": -118, "sport": "WC", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 28.22}, {"date": "06/13/2026", "selection": "3TPSwit/Scot/O2.5 Turkiye/Aus0.5u +265", "odds": 265, "sport": "WC", "wl": "L", "units": 0.5, "pnl": -0.5, "cum": 27.72}, {"date": "06/14/2026", "selection": "BOTH Japan and Netherlands to score -120", "odds": -120, "sport": "WC", "wl": "W", "units": 1.0, "pnl": 1.0, "cum": 28.72}];
+const RAW = [{"date":"01/02/2026","selection":"2TP ML TXST/NAVY -200","odds":-200,"sport":"CFB","wl":"W","wager":2.0,"cumulative":1.0},{"date":"01/02/2026","selection":"Le Moyne -5.5   Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":1.5},{"date":"01/03/2026","selection":"2TT CAR +9/SF +8.5","odds":-125,"sport":"NFL","wl":"L","wager":1.25,"cumulative":0.25},{"date":"01/03/2026","selection":"HEDGE SEA -2.5 Half Unit","odds":-110,"sport":"NFL","wl":"W","wager":0.55,"cumulative":0.75},{"date":"01/03/2026","selection":"Miss State +9.5 Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":1.25},{"date":"01/05/2026","selection":"EMU +1.5","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":2.25},{"date":"01/07/2026","selection":"Over 151.5 ARK vs. Ole Miss","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":3.25},{"date":"01/08/2026","selection":"DET Half Unit","odds":-140,"sport":"NHL","wl":"W","wager":0.7,"cumulative":3.75},{"date":"01/09/2026","selection":"IND -4","odds":-110,"sport":"CFB","wl":"W","wager":1.1,"cumulative":4.75},{"date":"01/09/2026","selection":"ORE +4  OFFSET of IND -4  Half Unit","odds":-125,"sport":"CFB","wl":"L","wager":0.625,"cumulative":4.125},{"date":"01/10/2026","selection":"Under 140 Hofstra vs. Monmouth","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":5.125},{"date":"01/10/2026","selection":"Oregon State +2.5","odds":-110,"sport":"CBB","wl":"L","wager":1.1,"cumulative":4.025},{"date":"01/10/2026","selection":"TOR One Unit FLAT","odds":-165,"sport":"NHL","wl":"W","wager":1.0,"cumulative":4.6311},{"date":"01/11/2026","selection":"1H JAX +0.5    Half Unit","odds":-110,"sport":"NFL","wl":"L","wager":0.55,"cumulative":4.0811},{"date":"01/12/2026","selection":"MTL One Unit FLAT","odds":-179,"sport":"NHL","wl":"W","wager":1.0,"cumulative":4.6398},{"date":"01/13/2026","selection":"Texas A&M +9.5","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":5.6398},{"date":"01/14/2026","selection":"Over 146 Rhode Isl. vs. VCU Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":6.1398},{"date":"01/15/2026","selection":"CBJ One Unit FLAT","odds":-155,"sport":"NHL","wl":"W","wager":1.0,"cumulative":6.785},{"date":"01/17/2026","selection":"3TTBUF+7.5/SEA-1/U46.5 NE Half Unit","odds":160,"sport":"NFL","wl":"W","wager":0.5,"cumulative":7.585},{"date":"01/18/2026","selection":"Under 137 Tulane vs. UNT Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":8.085},{"date":"01/19/2026","selection":"IND to WIN CFB Championship +130","odds":130,"sport":"CFB","wl":"W","wager":1.0,"cumulative":9.385},{"date":"01/21/2026","selection":"Indiana State +9","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":10.385},{"date":"01/22/2026","selection":"Wisconsin -5.5 Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":10.885},{"date":"01/24/2026","selection":"Over 145 NIU vs. Murray State","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":11.885},{"date":"01/24/2026","selection":"Kansas -4.5","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":12.885},{"date":"01/25/2026","selection":"SEA -2","odds":-110,"sport":"NFL","wl":"W","wager":1.1,"cumulative":13.885},{"date":"01/27/2026","selection":"Over 154 UCON vs. Providence","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":14.885},{"date":"01/27/2026","selection":"2H U 159 UCON vs. Prov Hedge 0.5u","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":14.335},{"date":"01/29/2026","selection":"Longwood +2.5","odds":-110,"sport":"CBB","wl":"L","wager":1.1,"cumulative":13.235},{"date":"01/30/2026","selection":"Over 156.5 Provf vs VILL Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":13.735},{"date":"01/30/2026","selection":"Wright State -3 Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":14.235},{"date":"02/01/2026","selection":"CLE State +9","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":15.235},{"date":"02/03/2026","selection":"Under 142 SIUE vs. Linden  Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":14.685},{"date":"02/04/2026","selection":"Navy -3.5","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":15.685},{"date":"02/05/2026","selection":"Cal Santa Barbara -3","odds":-105,"sport":"CBB","wl":"L","wager":1.05,"cumulative":14.635},{"date":"02/06/2026","selection":"Murray State -125 Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":15.135},{"date":"02/07/2026","selection":"Under 139.5 Drexel vs Elon Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":14.585},{"date":"02/07/2026","selection":"Over 152.5 Stony Brook vs NE Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":14.035},{"date":"02/07/2026","selection":"Delaware State -1.5 Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":13.485},{"date":"02/08/2026","selection":"2TP UVA/SEA (Super Bowl)","odds":-130,"sport":"CBB/NFL","wl":"W","wager":1.3,"cumulative":14.485},{"date":"02/08/2026","selection":"2TT NEP +11/Under 51.5","odds":-110,"sport":"NFL","wl":"L","wager":1.1,"cumulative":13.385},{"date":"02/09/2026","selection":"Under 143.5 Drake vs. Valparaiso -110","odds":-110,"sport":"CBB","wl":"L","wager":1.1,"cumulative":12.285},{"date":"02/12/2026","selection":"Under 133.5 Drexel Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":11.735},{"date":"02/17/2026","selection":"Nebraska +2  Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":11.185},{"date":"02/18/2026","selection":"2TP Clem/St. John's -120 One Unit FLAT","odds":-110,"sport":"CBB","wl":"L","wager":1.0,"cumulative":10.185},{"date":"02/18/2026","selection":"Under 145.5 Duq vs. La Salle Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":10.685},{"date":"02/19/2026","selection":"Alabama State +5.5   Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":10.135},{"date":"02/19/2026","selection":"Over 152 High Point    Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":9.585},{"date":"02/19/2026","selection":"Montana -130 Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":9.035},{"date":"02/20/2026","selection":"Green Bay +6.5","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":10.035},{"date":"02/21/2026","selection":"UTRGV -3.5","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":11.035},{"date":"02/22/2026","selection":"Wisconsin -160 One Unit FLAT","odds":-110,"sport":"CBB","wl":"W","wager":1.0,"cumulative":11.9441},{"date":"02/24/2026","selection":"STL -3.5","odds":-110,"sport":"CBB","wl":"L","wager":1.1,"cumulative":10.8441},{"date":"02/24/2026","selection":"2H STL -5.5 Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":10.2941},{"date":"02/26/2026","selection":"Stetson +7.5   Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":10.7941},{"date":"02/26/2026","selection":"2TP ML Utah Tech/Cal Baptist","odds":125,"sport":"CBB","wl":"W","wager":1.0,"cumulative":12.0441},{"date":"02/26/2026","selection":"UC Riverside +11.5 Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":12.5441},{"date":"02/28/2026","selection":"Over 149.5 Arizona","odds":-110,"sport":"CBB","wl":"L","wager":1.1,"cumulative":11.4441},{"date":"03/01/2026","selection":"2TP ILL-CHI/UNC WIL","odds":123,"sport":"CBB","wl":"L","wager":1.0,"cumulative":10.4441},{"date":"03/02/2026","selection":"Duke -9.5","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":11.4441},{"date":"03/02/2026","selection":"Duke ML/DAL (NHL)/ -115","odds":-115,"sport":"CBB/NHL","wl":"W","wager":1.15,"cumulative":12.4441},{"date":"03/04/2026","selection":"Over 161.5 Wright St. vs. CLE St Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":11.8941},{"date":"03/04/2026","selection":"Wagner +5.5   Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":12.3941},{"date":"03/05/2026","selection":"St. Thomas -5   Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":12.8941},{"date":"03/06/2026","selection":"TXST -118 Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":12.3441},{"date":"03/06/2026","selection":"S. Alabama -4.5  Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":11.7941},{"date":"03/07/2026","selection":"Arkansas +4.5","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":12.7941},{"date":"03/07/2026","selection":"2H MO -2","odds":-110,"sport":"CBB","wl":"L","wager":1.1,"cumulative":11.6941},{"date":"03/07/2026","selection":"STL -6   Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":11.1441},{"date":"03/07/2026","selection":"New Mexico +7.5 Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":11.6441},{"date":"03/07/2026","selection":"Oklahoma +7.5 Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":12.1441},{"date":"03/07/2026","selection":"Mt. St. Mary's +3.5 Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":11.5941},{"date":"03/09/2026","selection":"3TP N. COL/Duke win ACC/FLA win SEC +185","odds":185,"sport":"CBB","wl":"L","wager":1.0,"cumulative":10.5941},{"date":"03/10/2026","selection":"Over 162 OSU vs. COL","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":11.5941},{"date":"03/11/2026","selection":"PIT +9.5","odds":-110,"sport":"CBB","wl":"L","wager":1.1,"cumulative":10.4941},{"date":"03/12/2026","selection":"FSU +17","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":11.4941},{"date":"03/13/2026","selection":"1H Ohio State +7.5","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":12.4941},{"date":"03/14/2026","selection":"St. Joseph's +7   Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":11.9441},{"date":"03/15/2026","selection":"Over 164.5 ARK vs. VAN Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":11.3941},{"date":"03/04/2026","selection":"USA to win World Baseball Classic -115","odds":-115,"sport":"MLB","wl":"L","wager":1.15,"cumulative":10.2441},{"date":"03/17/2026","selection":"Venezuela Half Unit","odds":225,"sport":"MLB","wl":"W","wager":0.5,"cumulative":11.3691},{"date":"03/17/2026","selection":"MD Bal County +1 Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":10.8191},{"date":"03/17/2026","selection":"Over 158.5 Texas Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":10.2691},{"date":"03/18/2026","selection":"Under 138.5 Nebraska","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":11.2691},{"date":"03/20/2026","selection":"Akron +7.5","odds":-110,"sport":"CBB","wl":"L","wager":1.1,"cumulative":10.1691},{"date":"03/21/2026","selection":"STL +12.5","odds":-110,"sport":"CBB","wl":"L","wager":1.1,"cumulative":9.0691},{"date":"03/22/2026","selection":"2TP ML PUR/FLA One Unit FLAT","odds":-195,"sport":"CBB","wl":"L","wager":1.0,"cumulative":8.0691},{"date":"03/22/2026","selection":"2H Iowa State -3","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":9.0691},{"date":"03/26/2026","selection":"Texas +7.5  Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":9.5691},{"date":"03/26/2026","selection":"2TP NRFI CIN/NRFI PHI Half Unit","odds":215,"sport":"MLB","wl":"L","wager":0.5,"cumulative":9.0691},{"date":"03/27/2026","selection":"St. John's +7  Half Unit","odds":-110,"sport":"CBB","wl":"W","wager":0.55,"cumulative":9.5691},{"date":"03/27/2026","selection":"Over 7 runs SEA vs. CLE Half Unit","odds":-110,"sport":"MLB","wl":"L","wager":0.55,"cumulative":9.0191},{"date":"03/28/2026","selection":"F5 CHC -0.5 runs  One Unit FLAT","odds":-145,"sport":"MLB","wl":"W","wager":1.0,"cumulative":9.7088},{"date":"03/28/2026","selection":"CHC -1.5 runs    Half Unit","odds":-120,"sport":"MLB","wl":"W","wager":0.6,"cumulative":10.2088},{"date":"03/28/2026","selection":"Over 138.5 Illinois vs. Iowa Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":9.6588},{"date":"03/29/2026","selection":"Over 7.5 runs TB vs. STL Half Unit","odds":-110,"sport":"MLB","wl":"W","wager":0.55,"cumulative":10.1588},{"date":"03/29/2026","selection":"BAY -3.5  (To be played 4/1)","odds":-110,"sport":"CBB","wl":"W","wager":1.1,"cumulative":11.1588},{"date":"03/29/2026","selection":"Under 146.5 MICH vs. TN Half Unit","odds":-110,"sport":"CBB","wl":"L","wager":0.55,"cumulative":10.6088},{"date":"03/30/2026","selection":"KC F5 -0.5 runs","odds":-115,"sport":"MLB","wl":"W","wager":1.15,"cumulative":11.6088},{"date":"03/30/2026","selection":"KC  One Unit FLAT","odds":-150,"sport":"MLB","wl":"W","wager":1.0,"cumulative":12.2755},{"date":"04/01/2026","selection":"F5 Miami  One Unit FLAT","odds":-135,"sport":"MLB","wl":"W","wager":1.0,"cumulative":13.0162},{"date":"04/03/2026","selection":"WAS -2.5 runs -Half Unit","odds":-110,"sport":"MLB","wl":"L","wager":0.55,"cumulative":12.4662},{"date":"04/04/2026","selection":"Over 10 runs ATH vs. HOU Half Unit","odds":-110,"sport":"MLB","wl":"W","wager":0.55,"cumulative":12.9662},{"date":"04/04/2026","selection":"Illinois  One Unit FLAT","odds":-125,"sport":"MLB","wl":"L","wager":1.0,"cumulative":11.9662},{"date":"04/05/2026","selection":"Over 7.5 runs CWS vs. TOR Half Unit","odds":-110,"sport":"MLB","wl":"L","wager":0.55,"cumulative":11.4162},{"date":"04/06/2026","selection":"MIL -117 Half Unit","odds":-117,"sport":"MLB","wl":"W","wager":0.59,"cumulative":11.9205},{"date":"04/06/2026","selection":"F5 Under 3.5 runs +105 LAA vs. ATL","odds":-110,"sport":"MLB","wl":"L","wager":1.0,"cumulative":10.9205},{"date":"04/07/2026","selection":"F5 Under 3.5 runs Miami Half Unit","odds":-120,"sport":"MLB","wl":"W","wager":0.6,"cumulative":11.4205},{"date":"04/07/2026","selection":"LAA  Half Unit","odds":120,"sport":"MLB","wl":"L","wager":0.5,"cumulative":10.9205},{"date":"04/08/2026","selection":"F5 Under 4 runs TEX vs SEA Half Unit","odds":-120,"sport":"MLB","wl":"W","wager":0.6,"cumulative":11.4205},{"date":"04/08/2026","selection":"Under 7.5 runs TEX vs. SEA Half Unit","odds":-105,"sport":"MLB","wl":"W","wager":0.58,"cumulative":11.9729},{"date":"04/09/2026","selection":"Aggrehgate four 4 players 1.0u","odds":650,"sport":"PGA","wl":"L","wager":1.0,"cumulative":10.9729},{"date":"04/10/2026","selection":"Under 9 runs Tor vs. Min Half Unit","odds":-110,"sport":"MLB","wl":"L","wager":0.55,"cumulative":10.4229},{"date":"04/11/2026","selection":"NRFI KC vs. CWS Half Unit","odds":-110,"sport":"MLB","wl":"L","wager":0.55,"cumulative":9.8729},{"date":"04/11/2026","selection":"Under 9 runs KC vs. CWS Half Unit","odds":-105,"sport":"MLB","wl":"W","wager":0.53,"cumulative":10.3777},{"date":"04/12/2026","selection":"F5 U 4.5 CIN vs LAA  Half Unit FLAT","odds":-125,"sport":"MLB","wl":"L","wager":0.63,"cumulative":9.7477},{"date":"04/12/2026","selection":"F5 Under 3.5 TB vs NYY  Half Unit","odds":100,"sport":"MLB","wl":"W","wager":0.5,"cumulative":10.2477},{"date":"04/13/2026","selection":"BUF to win in regulation only","odds":-124,"sport":"NHL","wl":"W","wager":1.24,"cumulative":11.2477},{"date":"04/15/2026","selection":"PROP O3.5 Ks Kochanowicz +140 0.5u","odds":140,"sport":"MLB","wl":"W","wager":0.5,"cumulative":11.9477},{"date":"04/17/2026","selection":"LAA F5 One Unit FLAT","odds":-165,"sport":"MLB","wl":"W","wager":1.0,"cumulative":12.5538},{"date":"04/18/2026","selection":"Over 9.5 LAA vs. SD  Half Unit","odds":-115,"sport":"MLB","wl":"L","wager":0.58,"cumulative":11.9738},{"date":"04/19/2026","selection":"TT Over 4 runs NYY","odds":-115,"sport":"MLB","wl":"W","wager":1.15,"cumulative":12.9738},{"date":"04/21/2026","selection":"CHC","odds":-116,"sport":"MLB","wl":"W","wager":1.16,"cumulative":13.9738},{"date":"04/24/2026","selection":"ATL One Unit FLAT","odds":-137,"sport":"MLB","wl":"W","wager":1.0,"cumulative":14.7037},{"date":"04/24/2026","selection":"NYM -1.5 runs","odds":105,"sport":"MLB","wl":"L","wager":1.05,"cumulative":13.6537},{"date":"04/24/2026","selection":"CHC  Half Unit","odds":142,"sport":"MLB","wl":"W","wager":0.5,"cumulative":14.3637},{"date":"04/24/2026","selection":"MIL  Half Unit","odds":110,"sport":"MLB","wl":"L","wager":0.5,"cumulative":13.8637},{"date":"04/25/2026","selection":"F5 ATH","odds":119,"sport":"MLB","wl":"W","wager":0.5,"cumulative":14.4587},{"date":"04/26/2026","selection":"F5 U 8 runs ARI vs SD Half Unit","odds":-115,"sport":"MLB","wl":"W","wager":0.58,"cumulative":14.963},{"date":"04/26/2026","selection":"F5 KC Half Unit","odds":-105,"sport":"MLB","wl":"L","wager":0.53,"cumulative":14.433},{"date":"04/27/2026","selection":"F5 NYY -0.5 run Half Unit","odds":-105,"sport":"MLB","wl":"W","wager":0.53,"cumulative":14.9378},{"date":"04/28/2026","selection":"F5 Over 4 runs  PHI vs. SF Half Unit","odds":-125,"sport":"MLB","wl":"L","wager":0.63,"cumulative":14.3078},{"date":"04/29/2026","selection":"2TP TB+1.5/NYY Half Unit","odds":171,"sport":"MLB","wl":"L","wager":0.5,"cumulative":13.8078},{"date":"04/30/2026","selection":"PHI -1.5 runs Half Unit","odds":155,"sport":"MLB","wl":"L","wager":0.5,"cumulative":13.3078},{"date":"05/01/2026","selection":"PHI Half Unit","odds":-116,"sport":"MLB","wl":"W","wager":0.58,"cumulative":13.8078},{"date":"05/02/2026","selection":"Over 3.5 runs STL","odds":-125,"sport":"MLB","wl":"L","wager":1.25,"cumulative":12.5578},{"date":"05/03/2026","selection":"TB","odds":-118,"sport":"MLB","wl":"W","wager":1.18,"cumulative":13.5578},{"date":"05/04/2026","selection":"F5 Under 4.5 runs Half Unit","odds":-110,"sport":"MLB","wl":"W","wager":0.55,"cumulative":14.0578},{"date":"05/04/2026","selection":"TB","odds":-120,"sport":"MLB","wl":"W","wager":1.2,"cumulative":15.0578},{"date":"05/04/2026","selection":"Atlanta   Half Unit","odds":135,"sport":"MLB","wl":"L","wager":0.5,"cumulative":14.5578},{"date":"05/06/2026","selection":"Atlanta   Half Unit","odds":120,"sport":"MLB","wl":"L","wager":0.5,"cumulative":14.0578},{"date":"05/12/2026","selection":"PIT -1.5 runs One Unit FLAT","odds":-125,"sport":"MLB","wl":"W","wager":1.0,"cumulative":14.8578},{"date":"05/13/2026","selection":"NRFI MIL vs. SD Half Unit","odds":-150,"sport":"MLB","wl":"W","wager":0.75,"cumulative":15.3578},{"date":"05/15/2026","selection":"F5 ATL One Unit FLAT","odds":-138,"sport":"MLB","wl":"W","wager":1.0,"cumulative":16.0824},{"date":"05/16/2026","selection":"F5 Under 6 runs ARI vs. COL 0.5u","odds":100,"sport":"MLB","wl":"W","wager":1.0,"cumulative":17.0824},{"date":"05/16/2026","selection":"TB One Unit FLAT","odds":-134,"sport":"MLB","wl":"L","wager":1.0,"cumulative":16.0824},{"date":"05/17/2026","selection":"PGA Championship Aggregate 1.5u","odds":900,"sport":"PGA","wl":"L","wager":1.5,"cumulative":14.5824},{"date":"05/18/2026","selection":"F5 TB One Unit Flat","odds":-140,"sport":"MLB","wl":"W","wager":1.0,"cumulative":15.2967},{"date":"05/18/2026","selection":"F5  TB -0.5 runs","odds":100,"sport":"MLB","wl":"W","wager":0.5,"cumulative":15.7967},{"date":"05/19/2026","selection":"F5 Boston Half Unit","odds":-125,"sport":"MLB","wl":"W","wager":0.63,"cumulative":16.3007},{"date":"05/20/2026","selection":"STL Half Unit","odds":-114,"sport":"MLB","wl":"L","wager":0.57,"cumulative":15.7307},{"date":"05/22/2026","selection":"F5 TB","odds":125,"sport":"MLB","wl":"L","wager":0.5,"cumulative":15.2307},{"date":"05/23/2026","selection":"F5 Under 4 runs LAA vs. TEX 0.5u","odds":-120,"sport":"MLB","wl":"PUSH","wager":0.0,"cumulative":15.2307},{"date":"05/24/2026","selection":"BAL One Unit FLAT","odds":-125,"sport":"MLB","wl":"L","wager":1.0,"cumulative":14.2307},{"date":"05/25/2026","selection":"Over 9 runs LAD vs. COL Half Unit","odds":100,"sport":"MLB","wl":"L","wager":0.5,"cumulative":13.7307},{"date":"05/26/2026","selection":"ARI F5","odds":-110,"sport":"MLB","wl":"W","wager":1.1,"cumulative":14.7307},{"date":"05/27/2026","selection":"2TP ARI/NYY Half Unit","odds":177,"sport":"MLB","wl":"W","wager":0.5,"cumulative":15.6157},{"date":"05/28/2026","selection":"PGA Colonial Ludvig Aberg Top 10","odds":130,"sport":"PGA","wl":"L","wager":1.0,"cumulative":14.6157},{"date":"05/29/2026","selection":"PROP Katel Marte Half Unit","odds":125,"sport":"MLB","wl":"L","wager":0.5,"cumulative":14.1157},{"date":"05/30/2026","selection":"TB -1.5 runs","odds":140,"sport":"MLB","wl":"L","wager":1.0,"cumulative":13.1157},{"date":"05/31/2026","selection":"TB -1.5 runs","odds":100,"sport":"MLB","wl":"W","wager":1.0,"cumulative":14.1157},{"date":"06/02/2026","selection":"TT Over 4 runs CWS Half Unit","odds":-115,"sport":"MLB","wl":"PUSH","wager":0.0,"cumulative":14.1157},{"date":"06/02/2026","selection":"TB  One Unit FLAT","odds":-135,"sport":"MLB","wl":"L","wager":1.0,"cumulative":13.1157},{"date":"06/03/2026","selection":"F5 PHI -0.5 runs One Unit FLAT","odds":-155,"sport":"MLB","wl":"W","wager":1.0,"cumulative":13.7609},{"date":"06/03/2026","selection":"3TPALLF5M PHI/NYY/LAD 0.5u","odds":283,"sport":"MLB","wl":"L","wager":0.5,"cumulative":13.2609},{"date":"06/03/2026","selection":"NBA Championship NYK","odds":165,"sport":"NBA","wl":"W","wager":1.0,"cumulative":14.9109},{"date":"06/04/2026","selection":"MIL -1.5 runs Half Unit","odds":100,"sport":"MLB","wl":"L","wager":0.5,"cumulative":14.4109},{"date":"06/05/2026","selection":"NRFI LAD vs. LAA Half Unit","odds":-115,"sport":"MLB","wl":"W","wager":0.58,"cumulative":14.9152},{"date":"06/06/2026","selection":"Boston Half Unit PPD","odds":105,"sport":"MLB","wl":"PPD","wager":0.0,"cumulative":14.9152},{"date":"06/06/2026","selection":"NRFI TOR vs. BAL Half Unit","odds":-115,"sport":"MLB","wl":"W","wager":0.58,"cumulative":15.4195},{"date":"06/08/2026","selection":"SPLIT F5 HOU ML & RL 0.5u each","odds":-106,"sport":"MLB","wl":"L","wager":1.0,"cumulative":14.4195},{"date":"06/09/2026","selection":"2TP NRFI TB-BOS/SD-CIN +213.33 0.5u","odds":213,"sport":"MLB","wl":"W","wager":0.5,"cumulative":15.4845},{"date":"06/09/2026","selection":"TT ATH Over 6 runs -125 Half Unit","odds":-125,"sport":"MLB","wl":"W","wager":0.5,"cumulative":15.8845},{"date":"06/09/2026","selection":"TT MIL Over 6.5 runs -115 Half Unit","odds":-115,"sport":"MLB","wl":"L","wager":0.5,"cumulative":15.3845},{"date":"06/11/2026","selection":"F5 BAL -102 Half Unit","odds":-102,"sport":"MLB","wl":"W","wager":0.5,"cumulative":15.8747},{"date":"06/11/2026","selection":"BAL +105","odds":105,"sport":"MLB","wl":"W","wager":1.0,"cumulative":16.9247},{"date":"06/11/2026","selection":"Over 6 goals CAR vs. VGK -115","odds":-115,"sport":"NHL","wl":"PUSH","wager":0.0,"cumulative":16.9247},{"date":"06/12/2026","selection":"F5 MIL -0.5 runs -165 One Unit FLAT","odds":-165,"sport":"MLB","wl":"W","wager":1.0,"cumulative":17.5308},{"date":"06/13/2026","selection":"F5 Miami -103   Half Unit","odds":-103,"sport":"MLB","wl":"L","wager":0.5,"cumulative":17.0308},{"date":"06/13/2026","selection":"2TP SWITZ/SCOT  -118 0.50u","odds":-118,"sport":"WC","wl":"L","wager":0.5,"cumulative":16.5308},{"date":"06/13/2026","selection":"3TPSwit/Scot/O2.5 Turkiye/Aus0.5u +265","odds":265,"sport":"WC","wl":"L","wager":0.5,"cumulative":16.0308},{"date":"06/14/2026","selection":"BOTH Japan and Netherlands to score -120","odds":-120,"sport":"WC","wl":"W","wager":1.0,"cumulative":16.8641},{"date":"06/16/2026","selection":"Washington One Unit FLAT","odds":-135,"sport":"MLB","wl":"W","wager":1.0,"cumulative":17.6048},{"date":"06/16/2026","selection":"YRFI TEX vs. MIN","odds":-115,"sport":"MLB","wl":"W","wager":0.5,"cumulative":18.0396},{"date":"06/16/2026","selection":"NRFI NYY vs. CWS","odds":-115,"sport":"MLB","wl":"L","wager":0.5,"cumulative":17.5396},{"date":"06/17/2026","selection":"Under 8.5 runs Houston vs. Detroit","odds":-120,"sport":"MLB","wl":"W","wager":0.5,"cumulative":17.9563}];
 
+// Parse dates for sorting
+RAW.forEach(r => {
+  const [m,d,y] = r.date.split('/');
+  r._ts = new Date(+y, +m-1, +d).getTime();
+});
+
+// State
 let currentFilter = 'ALL';
-let sortKey = 'date';
-let sortDir = 1;
+let sortCol = 'date';
+let sortDir = -1; // -1 = desc (newest first)
+let displayData = [...RAW];
 
-function setFilter(f) {
-  currentFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b => {
-    b.classList.toggle('active', b.textContent.trim() === f || (f === 'ALL' && b.textContent.trim() === 'All'));
-  });
-  renderTable();
-}
-
-function sortBy(key) {
-  if (sortKey === key) sortDir *= -1;
-  else { sortKey = key; sortDir = 1; }
-  renderTable();
-}
-
-function getFiltered() {
-  const search = document.getElementById('searchBox').value.toLowerCase();
-  return DATA.filter(r => {
-    if (currentFilter === 'W' || currentFilter === 'L') {
-      if (r.wl !== currentFilter) return false;
-    } else if (currentFilter !== 'ALL') {
-      if (!r.sport.includes(currentFilter)) return false;
-    }
-    if (search && !r.selection.toLowerCase().includes(search)) return false;
-    return true;
-  });
-}
-
-function renderTable() {
-  const filtered = getFiltered();
-  filtered.sort((a,b) => {
-    let av = a[sortKey], bv = b[sortKey];
-    if (typeof av === 'string') av = av.toLowerCase(), bv = bv.toLowerCase();
-    return (av < bv ? -1 : av > bv ? 1 : 0) * sortDir;
-  });
-
-  const tbody = document.getElementById('tableBody');
-  if (filtered.length === 0) {
-    tbody.innerHTML = '';
-    document.getElementById('noResults').style.display = 'block';
-    return;
+// ---- STATS ----
+function calcStats(data) {
+  const d = data.filter(r => r.wl !== 'PPD');
+  const wins = d.filter(r => r.wl === 'W').length;
+  const losses = d.filter(r => r.wl === 'L').length;
+  const pushes = d.filter(r => r.wl === 'PUSH').length;
+  const total = wins + losses;
+  const pct = total > 0 ? (wins / total * 100).toFixed(1) : '—';
+  // Use last cumulative if filtering all, else compute filtered P&L
+  let pl;
+  if (currentFilter === 'ALL') {
+    pl = RAW[RAW.length - 1].cumulative;
+  } else {
+    pl = 0;
+    d.forEach(r => {
+      if (r.wl === 'W') {
+        pl += r.odds > 0 ? r.wager * r.odds / 100 : r.wager * 100 / Math.abs(r.odds);
+      } else if (r.wl === 'L') {
+        pl -= r.wager;
+      }
+    });
+    pl = Math.round(pl * 10000) / 10000;
   }
-  document.getElementById('noResults').style.display = 'none';
+  return { wins, losses, pushes, total, pct, pl };
+}
 
-  tbody.innerHTML = filtered.map(r => {
-    const wlClass = r.wl === 'W' ? 'win' : r.wl === 'L' ? 'loss' : r.wl === 'Push' ? 'push' : 'ppd';
-    const pnlClass = r.pnl > 0 ? 'pnl-pos' : r.pnl < 0 ? 'pnl-neg' : 'pnl-zero';
-    const cumClass = r.cum > 0 ? 'pnl-pos' : r.cum < 0 ? 'pnl-neg' : 'pnl-zero';
-    const sportKey = r.sport.replace('/','').replace(' ','');
-    const sportClass = ['MLB','CBB','NFL','NHL','CFB','PGA','NBA','WC'].includes(r.sport) ? 'sport-'+r.sport.replace('/','') : 'sport-other';
-    const pnlStr = r.pnl === 0 ? '—' : (r.pnl > 0 ? '+' : '') + r.pnl.toFixed(2) + 'u';
-    const cumStr = (r.cum >= 0 ? '+' : '') + r.cum.toFixed(2) + 'u';
-    const oddsStr = r.odds > 0 ? '+' + r.odds : r.odds;
+function renderStats(data) {
+  const s = calcStats(data);
+  document.getElementById('statsGrid').innerHTML = `
+    <div class="stat-card"><div class="label">Record</div><div class="value record">${s.wins}–${s.losses}–${s.pushes}</div></div>
+    <div class="stat-card"><div class="label">Win Rate</div><div class="value">${s.pct}%</div></div>
+    <div class="stat-card"><div class="label">Total Plays</div><div class="value">${s.wins + s.losses + s.pushes}</div></div>
+    <div class="stat-card"><div class="label">Units P&L</div><div class="value ${s.pl >= 0 ? 'green' : ''}">${s.pl >= 0 ? '+' : ''}${s.pl.toFixed(2)}</div></div>
+  `;
+}
+
+// ---- CHART ----
+function renderChart() {
+  const svg = document.getElementById('plSvg');
+  const W = svg.parentElement.clientWidth - 32;
+  const H = 160;
+  const PAD = { top: 14, right: 20, bottom: 28, left: 48 };
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.setAttribute('width', W);
+
+  const data = RAW;
+  const vals = data.map(r => r.cumulative);
+  const minV = Math.min(0, ...vals) - 1;
+  const maxV = Math.max(25, ...vals) + 1;
+  const range = maxV - minV;
+
+  const xScale = i => PAD.left + (i / (data.length - 1)) * (W - PAD.left - PAD.right);
+  const yScale = v => PAD.top + (1 - (v - minV) / range) * (H - PAD.top - PAD.bottom);
+
+  let html = '';
+
+  // Grid lines and Y labels
+  const ticks = [0, 5, 10, 15, 20, 25];
+  ticks.forEach(v => {
+    if (v < minV || v > maxV) return;
+    const y = yScale(v);
+    html += `<line x1="${PAD.left}" y1="${y}" x2="${W - PAD.right}" y2="${y}" stroke="${v === 0 ? '#2a4070' : '#1a2f55'}" stroke-width="${v === 0 ? 1.5 : 0.5}"/>`;
+    html += `<text x="${PAD.left - 6}" y="${y + 4}" text-anchor="end" font-size="9" fill="#8fa3c0" font-family="Georgia,serif">${(v >= 0 ? '+' : '') + v}u</text>`;
+  });
+
+  // Colored line segments
+  for (let i = 1; i < data.length; i++) {
+    const x1 = xScale(i - 1), y1 = yScale(data[i-1].cumulative);
+    const x2 = xScale(i),     y2 = yScale(data[i].cumulative);
+    const color = data[i].cumulative >= data[i-1].cumulative ? '#4caf80' : '#e05555';
+    html += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="2" stroke-linecap="round"/>`;
+  }
+
+  // End dot and label
+  const ex = xScale(data.length - 1);
+  const ey = yScale(vals[vals.length - 1]);
+  html += `<circle cx="${ex}" cy="${ey}" r="4" fill="#c9a84c"/>`;
+  html += `<text x="${ex - 8}" y="${ey - 9}" text-anchor="end" font-size="10" fill="#c9a84c" font-weight="bold" font-family="Georgia,serif">+${vals[vals.length-1].toFixed(2)}u</text>`;
+
+  // Month labels on X axis — placed at first selection of each month
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let lastMonth = -1;
+  data.forEach((r, i) => {
+    const m = parseInt(r.date.split('/')[0]) - 1;
+    if (m !== lastMonth) {
+      lastMonth = m;
+      const x = xScale(i);
+      html += `<line x1="${x}" y1="${PAD.top}" x2="${x}" y2="${H - PAD.bottom}" stroke="#1a2f55" stroke-width="0.5" stroke-dasharray="3,3"/>`;
+      html += `<text x="${x}" y="${H - 6}" text-anchor="middle" font-size="9" fill="#8fa3c0" font-family="Georgia,serif">${months[m]}</text>`;
+    }
+  });
+
+  svg.innerHTML = html;
+}
+
+// ---- TABLE ----
+function fmtOdds(o) { return o > 0 ? '+' + o : '' + o; }
+
+function renderTable(data) {
+  const tbody = document.getElementById('picksBody');
+  if (!data.length) { tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:24px;color:var(--text-muted)">No results</td></tr>'; return; }
+  tbody.innerHTML = data.map(r => {
+    const plVal = r.cumulative;
+    const plClass = plVal >= 0 ? 'pos' : 'neg';
+    const plStr = (plVal >= 0 ? '+' : '') + plVal.toFixed(2) + 'u';
+    const sportKey = r.sport.split('/')[0];
     return `<tr>
-      <td style="white-space:nowrap">${r.date}</td>
-      <td>${r.selection}</td>
-      <td><span class="sport-badge ${sportClass}">${r.sport}</span></td>
-      <td>${oddsStr}</td>
-      <td>${r.units === 0 ? '—' : r.units + 'u'}</td>
-      <td class="${wlClass}">${r.wl}</td>
-      <td class="${pnlClass}">${pnlStr}</td>
-      <td class="${cumClass}">${cumStr}</td>
+      <td class="td-date">${r.date}</td>
+      <td class="td-selection">${r.selection}</td>
+      <td class="td-sport"><span class="${sportKey}">${r.sport}</span></td>
+      <td class="td-odds">${fmtOdds(r.odds)}</td>
+      <td class="td-wager">${r.wager > 0 ? r.wager.toFixed(2) + 'u' : '—'}</td>
+      <td class="td-result"><span class="badge badge-${r.wl}">${r.wl}</span></td>
+      <td class="td-pl ${plClass}">${plStr}</td>
     </tr>`;
   }).join('');
 }
 
-function buildStats() {
-  const wins = DATA.filter(r => r.wl === 'W').length;
-  const losses = DATA.filter(r => r.wl === 'L').length;
-  const pushes = DATA.filter(r => r.wl === 'Push' || r.wl === 'PPD').length;
-  const totalDecided = wins + losses;
-  const winPct = totalDecided > 0 ? (wins/totalDecided*100).toFixed(1) : '0.0';
-  const totalPnl = DATA[DATA.length - 1].cum;
-  const pnlStr = (totalPnl >= 0 ? '+' : '') + totalPnl.toFixed(2);
-
-  document.getElementById('statsBar').innerHTML = `
-    <div class="stat-card"><div class="label">Record</div><div class="value record">${wins}–${losses}–${pushes}</div></div>
-    <div class="stat-card"><div class="label">Win Rate</div><div class="value">${winPct}%</div></div>
-    <div class="stat-card"><div class="label">Unit P&amp;L</div><div class="value green">${pnlStr}u</div></div>
-    <div class="stat-card"><div class="label">Selections</div><div class="value record">${DATA.length}</div></div>
-  `;
+// ---- SORT ----
+function sortData(data) {
+  return [...data].sort((a, b) => {
+    let av, bv;
+    switch(sortCol) {
+      case 'date': av = a._ts; bv = b._ts; break;
+      case 'odds': av = a.odds; bv = b.odds; break;
+      case 'wager': av = a.wager; bv = b.wager; break;
+      case 'cumulative': av = a.cumulative; bv = b.cumulative; break;
+      case 'wl': av = a.wl; bv = b.wl; break;
+      case 'sport': av = a.sport; bv = b.sport; break;
+      case 'selection': av = a.selection; bv = b.selection; break;
+      default: av = a._ts; bv = b._ts;
+    }
+    if (av > bv) return sortDir;
+    if (av < bv) return -sortDir;
+    return 0;
+  });
 }
 
-function buildSportBreakdown() {
-  const sports = {};
-  DATA.forEach(r => {
-    const s = r.sport;
-    if (!sports[s]) sports[s] = {w:0, l:0, pnl:0};
-    if (r.wl === 'W') sports[s].w++;
-    else if (r.wl === 'L') sports[s].l++;
-    sports[s].pnl += r.pnl;
-  });
-
-  const order = ['MLB','CBB','NFL','NHL','CFB','NBA','PGA','WC','CBB/NFL','CBB/NHL'];
-  const sorted = Object.keys(sports).sort((a,b) => {
-    const ai = order.indexOf(a); const bi = order.indexOf(b);
-    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
-  });
-
-  document.getElementById('sportBreakdown').innerHTML = sorted.map(s => {
-    const d = sports[s];
-    const pnlStr = (d.pnl >= 0 ? '+' : '') + d.pnl.toFixed(2) + 'u';
-    const pnlClass = d.pnl >= 0 ? 'pnl-pos' : 'pnl-neg';
-    return `<div class="sport-card">
-      <div class="sname">${s}</div>
-      <div class="swl">${d.w}–${d.l}</div>
-      <div class="spnl ${pnlClass}">${pnlStr}</div>
-    </div>`;
-  }).join('');
-}
-
-function buildChart() {
-  const ctx = document.getElementById('pnlChart').getContext('2d');
-  const labels = DATA.map(r => r.date);
-  const values = DATA.map(r => r.cum);
-  const colors = values.map((v, i) => v >= 0 ? 'rgba(76,175,130,0.9)' : 'rgba(224,92,92,0.9)');
-
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [{
-        label: 'Cumulative Units',
-        data: values,
-        borderColor: '#c9a84c',
-        borderWidth: 2,
-        pointRadius: 0,
-        pointHoverRadius: 4,
-        pointHoverBackgroundColor: '#c9a84c',
-        fill: true,
-        backgroundColor: (ctx) => {
-          const gradient = ctx.chart.ctx.createLinearGradient(0, 0, 0, 200);
-          gradient.addColorStop(0, 'rgba(201,168,76,0.18)');
-          gradient.addColorStop(1, 'rgba(201,168,76,0.01)');
-          return gradient;
-        },
-        tension: 0.3
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#132233',
-          borderColor: '#c9a84c',
-          borderWidth: 1,
-          titleColor: '#8a9bb0',
-          bodyColor: '#f0ece4',
-          callbacks: {
-            label: ctx => (ctx.raw >= 0 ? '+' : '') + ctx.raw.toFixed(2) + ' units'
-          }
-        }
-      },
-      scales: {
-        x: {
-          ticks: { color: '#4a5a6a', maxTicksLimit: 12, font: { size: 10 } },
-          grid: { color: '#1a2a3a' }
-        },
-        y: {
-          ticks: { color: '#4a5a6a', font: { size: 10 }, callback: v => (v >= 0 ? '+' : '') + v + 'u' },
-          grid: { color: '#1a2a3a' },
-          beginAtZero: false
-        }
-      }
+function updateHeaders() {
+  document.querySelectorAll('thead th').forEach(th => {
+    const col = th.dataset.col;
+    const arrow = th.querySelector('.sort-arrow');
+    if (!arrow) return;
+    th.classList.remove('sorted');
+    if (col === sortCol) {
+      th.classList.add('sorted');
+      arrow.textContent = sortDir === 1 ? '▼' : '▲';
+    } else {
+      arrow.textContent = '';
     }
   });
 }
 
-buildStats();
-buildSportBreakdown();
-buildChart();
-renderTable();
+function refresh() {
+  let data = currentFilter === 'ALL' ? [...RAW] : RAW.filter(r => r.sport.includes(currentFilter));
+  renderStats(data);
+  const sorted = sortData(data);
+  renderTable(sorted);
+  updateHeaders();
+}
+
+// ---- EVENTS ----
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    refresh();
+  });
+});
+
+document.querySelectorAll('thead th[data-col]').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.col;
+    if (sortCol === col) { sortDir = -sortDir; }
+    else { sortCol = col; sortDir = col === 'date' ? -1 : 1; }
+    refresh();
+  });
+});
+
+// ---- INIT ----
+window.addEventListener('load', renderChart);
+
+// Default: newest first
+sortCol = 'date';
+sortDir = -1;
+refresh();
 </script>
-</body>
-</html>
+
+
+</body></html>
