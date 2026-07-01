@@ -2,144 +2,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>2026 Selections — Ken Murphy Sports</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ken Murphy Sports — Track Record</title>
 <style>
-  :root {
-    --navy: #0d1b2a; --navy-mid: #162233; --navy-light: #1e2f42;
-    --gold: #c9a84c; --gold-light: #e0be72; --off-white: #f0ece4;
-    --muted: #7a8a9a; --win: #4caf7d; --loss: #e05c5c; --push: #8899aa;
+  :root{
+    --navy:#0d1b2a;
+    --navy2:#132638;
+    --gold:#c9a84c;
+    --off:#f0ece4;
+    --muted:#7a8a9a;
+    --win:#4caf7d;
+    --loss:#c9564f;
+    --push:#7a8a9a;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--navy); color: var(--off-white);
-    font-family: 'IBM Plex Sans','Segoe UI',sans-serif; font-size: 15px; line-height: 1.5; }
-  header { background: var(--navy); border-bottom: 2px solid var(--gold);
-    padding: 20px 28px 16px; display: flex; align-items: center;
-    justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-  .logo-block { display: flex; flex-direction: column; }
-  .logo-name { font-family: 'Playfair Display',Georgia,serif; font-size: 1.5rem;
-    color: var(--gold); letter-spacing: .04em; line-height: 1.1; }
-  .logo-tagline { font-size: .75rem; color: var(--muted); letter-spacing: .12em;
-    text-transform: uppercase; margin-top: 3px; }
-  .header-links { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-  .header-links a { color: var(--gold); text-decoration: none; font-size: .82rem;
-    letter-spacing: .06em; text-transform: uppercase; padding: 6px 14px;
-    border: 1px solid var(--gold); border-radius: 3px; transition: background .15s, color .15s; }
-  .header-links a:hover, .header-links a.cta { background: var(--gold); color: var(--navy); }
-  .page-title { text-align: center; padding: 32px 20px 8px; }
-  .page-title h1 { font-family: 'Playfair Display',Georgia,serif; font-size: 1.9rem;
-    color: var(--gold); letter-spacing: .03em; }
-  .page-title p { color: var(--muted); font-size: .85rem; margin-top: 6px; letter-spacing: .04em; }
-  .stats-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px;
-    padding: 28px 24px 10px; max-width: 900px; margin: 0 auto; }
-  .stat-card { background: var(--navy-mid); border: 1px solid #2a3d52; border-radius: 6px;
-    padding: 16px 24px; text-align: center; min-width: 130px; flex: 1; max-width: 170px; }
-  .stat-card .label { font-size: .72rem; color: var(--muted); text-transform: uppercase;
-    letter-spacing: .1em; margin-bottom: 6px; }
-  .stat-card .value { font-family: 'Playfair Display',Georgia,serif; font-size: 1.65rem;
-    font-weight: 700; color: var(--gold); line-height: 1; }
-  .stat-card.pnl .value { color: var(--win); }
-  .chart-section { max-width: 900px; margin: 24px auto 0; padding: 0 24px; }
-  .chart-section h2 { font-family: 'Playfair Display',Georgia,serif; font-size: 1.1rem;
-    color: var(--gold); margin-bottom: 14px; letter-spacing: .03em; }
-  .chart-wrapper { background: var(--navy-mid); border: 1px solid #2a3d52;
-    border-radius: 6px; padding: 16px; overflow-x: auto; }
-  svg.perf-chart { display: block; width: 100%; height: auto; }
-  .table-section { max-width: 1050px; margin: 28px auto 48px; padding: 0 24px; }
-  .table-section h2 { font-family: 'Playfair Display',Georgia,serif; font-size: 1.1rem;
-    color: var(--gold); margin-bottom: 14px; letter-spacing: .03em; }
-  .filter-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
-  .filter-row select { background: var(--navy-mid); color: var(--off-white);
-    border: 1px solid #2a3d52; border-radius: 4px; padding: 6px 12px;
-    font-size: .82rem; cursor: pointer; }
-  .filter-row label { color: var(--muted); font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; }
-  table { width: 100%; border-collapse: collapse; font-size: .84rem; }
-  thead th { background: var(--navy-light); color: var(--gold); text-align: left;
-    padding: 9px 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
-    font-size: .74rem; border-bottom: 2px solid var(--gold); white-space: nowrap; }
-  tbody tr { border-bottom: 1px solid #1e2f42; transition: background .1s; }
-  tbody tr:hover { background: var(--navy-light); }
-  tbody td { padding: 8px 12px; color: var(--off-white); vertical-align: middle; }
-  .badge { display: inline-block; padding: 2px 8px; border-radius: 3px;
-    font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
-  .badge-W { background: rgba(76,175,125,.18); color: var(--win); }
-  .badge-L { background: rgba(224,92,92,.15); color: var(--loss); }
-  .badge-P { background: rgba(136,153,170,.15); color: var(--push); }
-  .pnl-pos { color: var(--win); font-weight: 600; }
-  .pnl-neg { color: var(--loss); font-weight: 600; }
-  .pnl-zero { color: var(--muted); }
-  footer { border-top: 1px solid #1e2f42; padding: 20px 28px; text-align: center;
-    color: var(--muted); font-size: .78rem; letter-spacing: .04em; }
-  footer a { color: var(--gold); text-decoration: none; }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--navy);
+    color:var(--off);
+    font-family:'Georgia','Times New Roman',serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--gold);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+
+  /* NAV */
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 24px;
+    background:var(--navy2);
+    border-bottom:1px solid rgba(201,168,76,0.25);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .nav-left a{
+    color:var(--off);
+    font-size:14px;
+    letter-spacing:0.02em;
+    font-weight:bold;
+  }
+  .nav-left a:hover{color:var(--gold);text-decoration:none;}
+  .nav-right a{
+    background:var(--gold);
+    color:var(--navy);
+    padding:9px 20px;
+    border-radius:3px;
+    font-weight:bold;
+    font-size:13px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+  }
+  .nav-right a:hover{
+    background:#dabf6c;
+    text-decoration:none;
+  }
+
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+  header.hero{
+    text-align:center;
+    padding:48px 24px 32px;
+  }
+  header.hero h1{
+    font-size:34px;
+    letter-spacing:0.03em;
+    margin:0 0 8px;
+    color:var(--off);
+  }
+  header.hero .tag{
+    color:var(--gold);
+    font-size:14px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    margin:0 0 6px;
+  }
+  header.hero .sub{
+    color:var(--muted);
+    font-size:15px;
+    margin:0;
+  }
+
+  /* STAT CARDS */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin:32px 0;
+  }
+  .stat-card{
+    background:var(--navy2);
+    border:1px solid rgba(201,168,76,0.2);
+    border-radius:6px;
+    padding:20px;
+    text-align:center;
+  }
+  .stat-card .label{
+    color:var(--muted);
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .stat-card .value{
+    font-size:26px;
+    font-weight:bold;
+    color:var(--gold);
+  }
+  .stat-card .value.pos{color:var(--win);}
+  .stat-card .value.neg{color:var(--loss);}
+
+  /* CHART */
+  .chart-section{
+    background:var(--navy2);
+    border:1px solid rgba(201,168,76,0.2);
+    border-radius:6px;
+    padding:20px;
+    margin-bottom:32px;
+  }
+  .chart-section h2{
+    font-size:15px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin:0 0 16px;
+    font-weight:normal;
+  }
+  #chartSvg{width:100%;height:auto;display:block;}
+
+  /* FILTERS */
+  .filters{
+    display:flex;
+    gap:12px;
+    margin-bottom:16px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .filters select, .filters input{
+    background:var(--navy2);
+    border:1px solid rgba(201,168,76,0.3);
+    color:var(--off);
+    padding:8px 12px;
+    border-radius:4px;
+    font-family:inherit;
+    font-size:13px;
+  }
+  .filters .count{
+    color:var(--muted);
+    font-size:13px;
+    margin-left:auto;
+  }
+
+  /* TABLE */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--navy2);
+    border-radius:6px;
+    overflow:hidden;
+    font-size:13.5px;
+  }
+  thead th{
+    background:rgba(201,168,76,0.12);
+    color:var(--gold);
+    text-align:left;
+    padding:10px 12px;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    border-bottom:1px solid rgba(201,168,76,0.25);
+  }
+  tbody td{
+    padding:9px 12px;
+    border-bottom:1px solid rgba(122,138,154,0.15);
+    vertical-align:top;
+  }
+  tbody tr:hover{background:rgba(201,168,76,0.05);}
+  .res-W{color:var(--win);font-weight:bold;}
+  .res-L{color:var(--loss);font-weight:bold;}
+  .res-Push{color:var(--push);font-weight:bold;}
+  .pnl-pos{color:var(--win);}
+  .pnl-neg{color:var(--loss);}
+  .pnl-zero{color:var(--muted);}
+  .flat-tag{
+    color:var(--muted);
+    font-size:11px;
+    letter-spacing:0.06em;
+  }
+
+  footer{
+    text-align:center;
+    padding:40px 24px 50px;
+    color:var(--muted);
+    font-size:13px;
+  }
+  footer a{margin:0 10px;}
+
+  @media (max-width:700px){
+    .stats{grid-template-columns:repeat(2,1fr);}
+    header.hero h1{font-size:26px;}
+    table{font-size:12px;}
+    thead th, tbody td{padding:7px 8px;}
+  }
 </style>
 </head>
 <body>
-<header>
-  <div class="logo-block">
-    <div class="logo-name">KEN MURPHY SPORTS</div>
-    <div class="logo-tagline">Measured. Selective. Accountable.</div>
-  </div>
-  <div class="header-links">
-    <a href="https://kenmurphysports.com">Return to Site</a>
-    <a href="https://kenmurphysports.com/subscribe" class="cta">Subscribe</a>
-  </div>
-</header>
 
-<div class="page-title">
-  <h1>2026 Selections — Documented Track Record</h1>
-  <p>All plays logged in real time &nbsp;·&nbsp; Updated through June 20, 2026</p>
-</div>
+<nav class="nav">
+  <div class="nav-left"><a href="https://kenmurphysports.com">&larr; Ken Murphy Sports</a></div>
+  <div class="nav-right"><a href="https://kenmurphysports.com/#/portal/signup">Subscribe Now</a></div>
+</nav>
 
-<div class="stats-grid">
-  <div class="stat-card">
-    <div class="label">Record</div>
-    <div class="value">106-80-4</div>
-  </div>
-  <div class="stat-card">
-    <div class="label">Win Rate</div>
-    <div class="value">57.0%</div>
-  </div>
-  <div class="stat-card pnl">
-    <div class="label">Net Units</div>
-    <div class="value">+21.51</div>
-  </div>
-  <div class="stat-card">
-    <div class="label">Total Plays</div>
-    <div class="value">190</div>
-  </div>
-</div>
+<div class="wrap">
+  <header class="hero">
+    <p class="tag">Measured. Selective. Accountable.</p>
+    <h1>2026 Track Record</h1>
+    <p class="sub">All Selections Updated Daily — Through <span id="lastDate">—</span></p>
+  </header>
 
-<div class="chart-section">
-  <h2>Cumulative Unit P&amp;L — 2026</h2>
-  <div class="chart-wrapper">
-    <svg class="perf-chart" viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg" id="chart-svg"></svg>
+  <div class="stats">
+    <div class="stat-card">
+      <div class="label">Record</div>
+      <div class="value" id="statRecord">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Win Rate</div>
+      <div class="value" id="statWinRate">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Net Units</div>
+      <div class="value" id="statNetUnits">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Selections</div>
+      <div class="value" id="statTotal">—</div>
+    </div>
   </div>
-</div>
 
-<div class="table-section">
-  <h2>All Selections</h2>
-  <div class="filter-row">
-    <label>Sport:</label>
-    <select id="sportFilter" onchange="renderTable()">
-      <option value="">All Sports</option>
-      <option value="MLB">MLB</option>
-      <option value="CBB">CBB</option>
-      <option value="CFB">CFB</option>
-      <option value="NFL">NFL</option>
-      <option value="NHL">NHL</option>
-      <option value="NBA">NBA</option>
-      <option value="PGA">PGA</option>
-      <option value="WC">World Cup</option>
-    </select>
-    <label style="margin-left:12px">Result:</label>
-    <select id="resultFilter" onchange="renderTable()">
-      <option value="">All Results</option>
+  <div class="chart-section">
+    <h2>Cumulative Unit P&amp;L</h2>
+    <svg id="chartSvg" viewBox="0 0 1000 340" xmlns="http://www.w3.org/2000/svg"></svg>
+  </div>
+
+  <div class="filters">
+    <select id="sportFilter"><option value="ALL">All Sports</option></select>
+    <select id="resultFilter">
+      <option value="ALL">All Results</option>
       <option value="W">Wins</option>
       <option value="L">Losses</option>
       <option value="Push">Pushes</option>
     </select>
+    <span class="count" id="rowCount"></span>
   </div>
+
   <table>
     <thead>
       <tr>
@@ -147,100 +265,149 @@
         <th>Selection</th>
         <th>Odds</th>
         <th>Sport</th>
-        <th>Wager</th>
         <th>Result</th>
+        <th>Units</th>
         <th>P&amp;L</th>
       </tr>
     </thead>
     <tbody id="tableBody"></tbody>
   </table>
+
+  <footer>
+    <a href="https://kenmurphysports.com">kenmurphysports.com</a> ·
+    <a href="https://kenmurphysports.com/#/portal/signup">Subscribe</a>
+  </footer>
 </div>
 
-<footer>
-  <p>
-    <a href="https://kenmurphysports.com">kenmurphysports.com</a>
-    &nbsp;·&nbsp;
-    <a href="https://kenmurphysports.com/subscribe">Subscribe</a>
-    &nbsp;·&nbsp;
-    All results independently documented. Past performance does not guarantee future results.
-  </p>
-</footer>
-
 <script>
-const DATA = [{"date": "2026-06-20", "selection": "F5 Miami", "odds": -108, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-06-20", "selection": "Miami", "odds": -136, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-06-19", "selection": "F5 U 4 runs ATL vs. MIL", "odds": -120, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-06-19", "selection": "ATL TT Under 3 runs", "odds": -110, "sport": "MLB", "result": "Push", "wager": 0, "flat": false, "pnl": 0.0}, {"date": "2026-06-19", "selection": "F5 LAA +123", "odds": 123, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.615}, {"date": "2026-06-17", "selection": "Under 8.5 runs Houston vs. Detroit", "odds": -120, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-06-16", "selection": "Washington One Unit FLAT", "odds": -135, "sport": "MLB", "result": "W", "wager": 1, "flat": true, "pnl": 0.7407}, {"date": "2026-06-16", "selection": "YRFI TEX vs. MIN", "odds": -115, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-06-16", "selection": "NRFI NYY vs. CWS", "odds": -115, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.575}, {"date": "2026-06-14", "selection": "BOTH Japan and Netherlands to score", "odds": -120, "sport": "WC", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-06-13", "selection": "F5 Miami", "odds": -103, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.515}, {"date": "2026-06-13", "selection": "2TP Switzerland/Scotland", "odds": -118, "sport": "WC", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.59}, {"date": "2026-06-13", "selection": "3TP Switzerland/Scotland/O2.5 Turkiye/Australia", "odds": 265, "sport": "WC", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.5}, {"date": "2026-06-12", "selection": "F5 MIL -0.5 runs One Unit FLAT", "odds": -165, "sport": "MLB", "result": "W", "wager": 1, "flat": true, "pnl": 0.6061}, {"date": "2026-06-11", "selection": "F5 BAL", "odds": -102, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-06-11", "selection": "BAL", "odds": 105, "sport": "MLB", "result": "W", "wager": 1, "flat": false, "pnl": 1.05}, {"date": "2026-06-11", "selection": "Over 6 goals CAR vs. VGK", "odds": -115, "sport": "NHL", "result": "Push", "wager": 0, "flat": false, "pnl": 0.0}, {"date": "2026-06-09", "selection": "2TP NRFI TB-BOS/SD-CIN", "odds": 213, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 1.065}, {"date": "2026-06-09", "selection": "TT ATH Over 6 runs", "odds": -125, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-06-09", "selection": "TT MIL Over 6.5 runs", "odds": -115, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.575}, {"date": "2026-06-08", "selection": "SPLIT F5 HOU ML & RL", "odds": -106, "sport": "MLB", "result": "L", "wager": 1, "flat": false, "pnl": -1.06}, {"date": "2026-06-06", "selection": "NRFI TOR vs. BAL", "odds": -115, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-06-05", "selection": "NRFI LAD vs. LAA", "odds": -115, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-06-04", "selection": "MIL -1.5 runs", "odds": 100, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.5}, {"date": "2026-06-03", "selection": "F5 PHI One Unit FLAT", "odds": -155, "sport": "MLB", "result": "W", "wager": 1, "flat": true, "pnl": 0.6452}, {"date": "2026-06-03", "selection": "3TP ALL F5 ML PHI/NYY/LAD", "odds": 283, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.5}, {"date": "2026-06-03", "selection": "NBA Championship NYK", "odds": 165, "sport": "NBA", "result": "W", "wager": 1, "flat": false, "pnl": 1.65}, {"date": "2026-06-02", "selection": "TT Over 4 runs CWS", "odds": -115, "sport": "MLB", "result": "Push", "wager": 0, "flat": false, "pnl": 0.0}, {"date": "2026-06-02", "selection": "TB One Unit FLAT", "odds": -135, "sport": "MLB", "result": "L", "wager": 1, "flat": true, "pnl": -1}, {"date": "2026-05-31", "selection": "TB -1.5 runs", "odds": 100, "sport": "MLB", "result": "W", "wager": 1, "flat": false, "pnl": 1.0}, {"date": "2026-05-30", "selection": "TB -1.5 runs", "odds": 140, "sport": "MLB", "result": "L", "wager": 1, "flat": false, "pnl": -1}, {"date": "2026-05-29", "selection": "PROP Ketel Marte", "odds": 125, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.5}, {"date": "2026-05-28", "selection": "Colonial Ludvig Aberg Top 10", "odds": 130, "sport": "PGA", "result": "L", "wager": 1, "flat": false, "pnl": -1}, {"date": "2026-05-27", "selection": "2TP ARI/NYY", "odds": 177, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.885}, {"date": "2026-05-26", "selection": "ARI F5", "odds": -110, "sport": "MLB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-05-25", "selection": "Over 9 runs LAD vs. COL", "odds": 100, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.5}, {"date": "2026-05-24", "selection": "BAL One Unit FLAT", "odds": -125, "sport": "MLB", "result": "L", "wager": 1, "flat": true, "pnl": -1}, {"date": "2026-05-23", "selection": "F5 Under 4 runs LAA vs. TEX", "odds": -120, "sport": "MLB", "result": "Push", "wager": 0, "flat": false, "pnl": 0.0}, {"date": "2026-05-22", "selection": "F5 TB", "odds": 125, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.5}, {"date": "2026-05-20", "selection": "STL", "odds": -114, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.57}, {"date": "2026-05-19", "selection": "F5 Boston", "odds": -125, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-05-18", "selection": "F5 TB One Unit FLAT", "odds": -140, "sport": "MLB", "result": "W", "wager": 1, "flat": true, "pnl": 0.7143}, {"date": "2026-05-18", "selection": "F5 TB -0.5 runs", "odds": 100, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-05-17", "selection": "PGA Championship Aggregate 1.5u", "odds": 900, "sport": "PGA", "result": "L", "wager": 1.5, "flat": false, "pnl": -1.5}, {"date": "2026-05-16", "selection": "F5 Under 6 runs ARI vs. COL", "odds": 100, "sport": "MLB", "result": "W", "wager": 1, "flat": false, "pnl": 1.0}, {"date": "2026-05-16", "selection": "TB One Unit FLAT", "odds": -134, "sport": "MLB", "result": "L", "wager": 1, "flat": true, "pnl": -1}, {"date": "2026-05-15", "selection": "F5 ATL One Unit FLAT", "odds": -138, "sport": "MLB", "result": "W", "wager": 1, "flat": true, "pnl": 0.7246}, {"date": "2026-05-13", "selection": "NRFI MIL vs. SD", "odds": -150, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-05-12", "selection": "PIT -1.5 runs One Unit FLAT", "odds": -125, "sport": "MLB", "result": "W", "wager": 1, "flat": true, "pnl": 0.8}, {"date": "2026-05-06", "selection": "Atlanta", "odds": 120, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.5}, {"date": "2026-05-04", "selection": "F5 Under 4.5 runs", "odds": -110, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-05-04", "selection": "TB", "odds": -120, "sport": "MLB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-05-04", "selection": "Atlanta", "odds": 135, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.5}, {"date": "2026-05-03", "selection": "TB", "odds": -118, "sport": "MLB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-05-02", "selection": "Over 3.5 runs STL", "odds": -125, "sport": "MLB", "result": "L", "wager": 1, "flat": false, "pnl": -1.25}, {"date": "2026-05-01", "selection": "PHI", "odds": -116, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-04-30", "selection": "PHI -1.5 runs", "odds": 155, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.5}, {"date": "2026-04-29", "selection": "2TP TB+1.5/NYY", "odds": 171, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.5}, {"date": "2026-04-28", "selection": "F5 Over 4 runs PHI vs. SF", "odds": -125, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.625}, {"date": "2026-04-27", "selection": "F5 NYY -0.5 run", "odds": -105, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-04-26", "selection": "F5 U 8 runs ARI vs SD", "odds": -115, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-04-26", "selection": "F5 KC", "odds": -105, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.525}, {"date": "2026-04-25", "selection": "F5 ATH", "odds": 119, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.595}, {"date": "2026-04-24", "selection": "ATL One Unit FLAT", "odds": -137, "sport": "MLB", "result": "W", "wager": 1, "flat": true, "pnl": 0.7299}, {"date": "2026-04-24", "selection": "NYM -1.5 runs", "odds": 105, "sport": "MLB", "result": "L", "wager": 1, "flat": false, "pnl": -1}, {"date": "2026-04-24", "selection": "CHC", "odds": 142, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.71}, {"date": "2026-04-24", "selection": "MIL", "odds": 110, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.5}, {"date": "2026-04-21", "selection": "CHC", "odds": -116, "sport": "MLB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-04-19", "selection": "TT Over 4 runs NYY", "odds": -115, "sport": "MLB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-04-18", "selection": "Over 9.5 LAA vs. SD", "odds": -115, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.575}, {"date": "2026-04-17", "selection": "LAA F5 One Unit FLAT", "odds": -165, "sport": "MLB", "result": "W", "wager": 1, "flat": true, "pnl": 0.6061}, {"date": "2026-04-15", "selection": "PROP O3.5 Ks Kochanowicz +140", "odds": 140, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.7}, {"date": "2026-04-13", "selection": "BUF to win in regulation only", "odds": -124, "sport": "NHL", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-04-12", "selection": "F5 U 4.5 CIN vs LAA FLAT", "odds": -125, "sport": "MLB", "result": "L", "wager": 0.5, "flat": true, "pnl": -0.5}, {"date": "2026-04-12", "selection": "F5 Under 3.5 TB vs NYY", "odds": 100, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-04-11", "selection": "NRFI KC vs. CWS", "odds": -110, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-04-11", "selection": "Under 9 runs KC vs. CWS", "odds": -105, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-04-10", "selection": "Under 9 runs TOR vs. MIN", "odds": -110, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-04-09", "selection": "Masters Aggregate split among 4 players", "odds": 650, "sport": "PGA", "result": "L", "wager": 1, "flat": false, "pnl": -1}, {"date": "2026-04-08", "selection": "F5 Under 4 runs TEX vs SEA", "odds": -120, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-04-08", "selection": "Under 7.5 runs TEX vs. SEA", "odds": -105, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-04-07", "selection": "F5 Under 3.5 runs Miami", "odds": -120, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-04-07", "selection": "LAA", "odds": 120, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.5}, {"date": "2026-04-06", "selection": "MIL -117", "odds": -117, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-04-06", "selection": "F5 Under 3.5 runs LAA vs. ATL", "odds": 105, "sport": "MLB", "result": "L", "wager": 1, "flat": false, "pnl": -1}, {"date": "2026-04-05", "selection": "Over 7.5 runs CWS vs. TOR", "odds": -110, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-04-04", "selection": "Over 10 runs ATH vs. HOU", "odds": -110, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-04-04", "selection": "Illinois One Unit FLAT", "odds": -125, "sport": "MLB", "result": "L", "wager": 1, "flat": true, "pnl": -1}, {"date": "2026-04-03", "selection": "WAS -2.5 runs", "odds": -110, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-04-01", "selection": "F5 Miami One Unit FLAT", "odds": -135, "sport": "MLB", "result": "W", "wager": 1, "flat": true, "pnl": 0.7407}, {"date": "2026-03-30", "selection": "KC F5 -0.5 runs", "odds": -115, "sport": "MLB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-03-30", "selection": "KC One Unit FLAT", "odds": -150, "sport": "MLB", "result": "W", "wager": 1, "flat": true, "pnl": 0.6667}, {"date": "2026-03-29", "selection": "Over 7.5 runs TB vs. STL", "odds": -110, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-03-29", "selection": "BAY -3.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-03-29", "selection": "Under 146.5 MICH vs. TN", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-03-28", "selection": "F5 CHC -0.5 runs One Unit FLAT", "odds": -145, "sport": "MLB", "result": "W", "wager": 1, "flat": true, "pnl": 0.6897}, {"date": "2026-03-28", "selection": "CHC -1.5 runs", "odds": -120, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-03-28", "selection": "Over 138.5 Illinois vs. Iowa", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-03-27", "selection": "St. John's +7", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-03-27", "selection": "Over 7 runs SEA vs. CLE", "odds": -110, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-03-26", "selection": "Texas +7.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-03-26", "selection": "2TP NRFI CIN/NRFI PHI", "odds": 215, "sport": "MLB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.5}, {"date": "2026-03-22", "selection": "2TP ML PUR/FLA One Unit FLAT", "odds": -195, "sport": "CBB", "result": "L", "wager": 1, "flat": true, "pnl": -1}, {"date": "2026-03-22", "selection": "2H Iowa State -3", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-03-21", "selection": "STL +12.5", "odds": -110, "sport": "CBB", "result": "L", "wager": 1, "flat": false, "pnl": -1.1}, {"date": "2026-03-20", "selection": "Akron +7.5", "odds": -110, "sport": "CBB", "result": "L", "wager": 1, "flat": false, "pnl": -1.1}, {"date": "2026-03-18", "selection": "Under 138.5 Nebraska", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-03-17", "selection": "Venezuela Offset", "odds": 225, "sport": "MLB", "result": "W", "wager": 0.5, "flat": false, "pnl": 1.125}, {"date": "2026-03-17", "selection": "MD Bal County +1", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-03-17", "selection": "Over 158.5 Texas", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-03-15", "selection": "Over 164.5 ARK vs. VAN", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-03-14", "selection": "St. Joseph's +7", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-03-13", "selection": "1H Ohio State +7.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-03-12", "selection": "FSU +17", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-03-11", "selection": "PIT +9.5", "odds": -110, "sport": "CBB", "result": "L", "wager": 1, "flat": false, "pnl": -1.1}, {"date": "2026-03-10", "selection": "Over 162 OSU vs. COL", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-03-09", "selection": "3TP N.COL/Duke win ACC/FLA win SEC", "odds": 185, "sport": "CBB", "result": "L", "wager": 1, "flat": false, "pnl": -1}, {"date": "2026-03-07", "selection": "Arkansas +4.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-03-07", "selection": "2H MO -2", "odds": -110, "sport": "CBB", "result": "L", "wager": 1, "flat": false, "pnl": -1.1}, {"date": "2026-03-07", "selection": "STL -6", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-03-07", "selection": "New Mexico +7.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-03-07", "selection": "Oklahoma +7.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-03-07", "selection": "Mt. St. Mary's +3.5", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-03-06", "selection": "TXST -118", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-03-06", "selection": "S. Alabama -4.5", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-03-05", "selection": "St. Thomas -5", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-03-04", "selection": "Over 161.5 Wright St. vs. CLE St", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-03-04", "selection": "Wagner +5.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-03-04", "selection": "USA to win World Baseball Classic", "odds": -115, "sport": "MLB", "result": "L", "wager": 1, "flat": false, "pnl": -1.15}, {"date": "2026-03-02", "selection": "Duke -9.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-03-02", "selection": "Duke ML/DAL (NHL)", "odds": -115, "sport": "CBB/NHL", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-03-01", "selection": "2TP ILL-CHI/UNC WIL", "odds": 123, "sport": "CBB", "result": "L", "wager": 1, "flat": false, "pnl": -1}, {"date": "2026-02-28", "selection": "Over 149.5 Arizona", "odds": -110, "sport": "CBB", "result": "L", "wager": 1, "flat": false, "pnl": -1.1}, {"date": "2026-02-26", "selection": "Stetson +7.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-02-26", "selection": "2TP ML Utah Tech/Cal Baptist", "odds": 125, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1.25}, {"date": "2026-02-26", "selection": "UC Riverside +11.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-02-24", "selection": "STL -3.5", "odds": -110, "sport": "CBB", "result": "L", "wager": 1, "flat": false, "pnl": -1.1}, {"date": "2026-02-24", "selection": "2H STL -5.5", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-02-22", "selection": "Wisconsin One Unit FLAT", "odds": -160, "sport": "CBB", "result": "W", "wager": 1, "flat": true, "pnl": 0.625}, {"date": "2026-02-21", "selection": "UTRGV -3.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-02-20", "selection": "Green Bay +6.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-02-19", "selection": "Alabama State +5.5", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-02-19", "selection": "Over 152 High Point", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-02-19", "selection": "Montana", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-02-18", "selection": "2TP Clem/St. John's One Unit FLAT", "odds": -120, "sport": "CBB", "result": "L", "wager": 1, "flat": true, "pnl": -1}, {"date": "2026-02-18", "selection": "Under 145.5 Duq vs. La Salle", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-02-17", "selection": "Nebraska +2", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-02-12", "selection": "Under 133.5 Drexel", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-02-09", "selection": "Under 143.5 Drake vs. Valparaiso", "odds": -110, "sport": "CBB", "result": "L", "wager": 1, "flat": false, "pnl": -1.1}, {"date": "2026-02-08", "selection": "2TP UVA/SEA (Super Bowl)", "odds": -130, "sport": "CBB/NFL", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-02-08", "selection": "2TT NEP +11/Under 51.5", "odds": -110, "sport": "NFL", "result": "L", "wager": 1, "flat": false, "pnl": -1.1}, {"date": "2026-02-07", "selection": "Under 139.5 Drexel vs Elon", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-02-07", "selection": "Over 152.5 Stony Brook vs NE", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-02-07", "selection": "Delaware State -1.5", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-02-06", "selection": "Murray State -125", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-02-05", "selection": "Cal Santa Barbara -3", "odds": -105, "sport": "CBB", "result": "L", "wager": 1, "flat": false, "pnl": -1.05}, {"date": "2026-02-04", "selection": "Navy -3.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-02-03", "selection": "Under 142 SIUE vs. Linden", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-02-01", "selection": "CLE State +9", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-01-30", "selection": "Over 156.5 Prov vs VILL", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-01-30", "selection": "Wright State -3", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-01-29", "selection": "Longwood +2.5", "odds": -110, "sport": "CBB", "result": "L", "wager": 1, "flat": false, "pnl": -1.1}, {"date": "2026-01-27", "selection": "Over 154 UCON vs. Providence", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-01-27", "selection": "2H U 159 UCON vs. Prov Hedge", "odds": -110, "sport": "CBB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-01-25", "selection": "SEA -2", "odds": -110, "sport": "NFL", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-01-24", "selection": "Over 145 NIU vs. Murray State", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-01-24", "selection": "Kansas -4.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-01-22", "selection": "Wisconsin -5.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-01-21", "selection": "Indiana State +9", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-01-19", "selection": "IND to WIN CFB Championship", "odds": 130, "sport": "CFB", "result": "W", "wager": 1, "flat": false, "pnl": 1.3}, {"date": "2026-01-18", "selection": "Under 137 Tulane vs. UNT", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-01-17", "selection": "3TT BUF+7.5/SEA-1/U46.5 NE", "odds": 160, "sport": "NFL", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.8}, {"date": "2026-01-15", "selection": "CBJ One Unit FLAT", "odds": -155, "sport": "NHL", "result": "W", "wager": 1, "flat": true, "pnl": 0.6452}, {"date": "2026-01-14", "selection": "Over 146 Rhode Isl. vs. VCU", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-01-13", "selection": "Texas A&M +9.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-01-12", "selection": "MTL", "odds": -179, "sport": "NHL", "result": "W", "wager": 1, "flat": true, "pnl": 0.5587}, {"date": "2026-01-11", "selection": "1H JAX +0.5", "odds": -110, "sport": "NFL", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.55}, {"date": "2026-01-10", "selection": "Under 140 Hofstra vs. Monmouth", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-01-10", "selection": "Oregon State +2.5", "odds": -110, "sport": "CBB", "result": "L", "wager": 1, "flat": false, "pnl": -1.1}, {"date": "2026-01-10", "selection": "TOR One Unit", "odds": -165, "sport": "NHL", "result": "W", "wager": 1, "flat": true, "pnl": 0.6061}, {"date": "2026-01-09", "selection": "IND -4", "odds": -110, "sport": "CFB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-01-09", "selection": "ORE +4 OFFSET", "odds": -125, "sport": "CFB", "result": "L", "wager": 0.5, "flat": false, "pnl": -0.625}, {"date": "2026-01-08", "selection": "DET", "odds": -140, "sport": "NHL", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-01-07", "selection": "Over 151.5 ARK vs. Ole Miss", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-01-05", "selection": "EMU +1.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 1, "flat": false, "pnl": 1}, {"date": "2026-01-03", "selection": "2TT CAR +9/SF +8.5", "odds": -125, "sport": "NFL", "result": "L", "wager": 1, "flat": false, "pnl": -1.25}, {"date": "2026-01-03", "selection": "HEDGE SEA -2.5", "odds": -110, "sport": "NFL", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-01-03", "selection": "Miss State +9.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}, {"date": "2026-01-02", "selection": "2TP ML TXST/NAVY", "odds": -200, "sport": "CFB", "result": "W", "wager": 2, "flat": false, "pnl": 2}, {"date": "2026-01-02", "selection": "Le Moyne -5.5", "odds": -110, "sport": "CBB", "result": "W", "wager": 0.5, "flat": false, "pnl": 0.5}];
-const CHART_LABELS = ["2026-01-02", "2026-01-02", "2026-01-03", "2026-01-03", "2026-01-03", "2026-01-05", "2026-01-07", "2026-01-08", "2026-01-09", "2026-01-09", "2026-01-10", "2026-01-10", "2026-01-10", "2026-01-11", "2026-01-12", "2026-01-13", "2026-01-14", "2026-01-15", "2026-01-17", "2026-01-18", "2026-01-19", "2026-01-21", "2026-01-22", "2026-01-24", "2026-01-24", "2026-01-25", "2026-01-27", "2026-01-27", "2026-01-29", "2026-01-30", "2026-01-30", "2026-02-01", "2026-02-03", "2026-02-04", "2026-02-05", "2026-02-06", "2026-02-07", "2026-02-07", "2026-02-07", "2026-02-08", "2026-02-08", "2026-02-09", "2026-02-12", "2026-02-17", "2026-02-18", "2026-02-18", "2026-02-19", "2026-02-19", "2026-02-19", "2026-02-20", "2026-02-21", "2026-02-22", "2026-02-24", "2026-02-24", "2026-02-26", "2026-02-26", "2026-02-26", "2026-02-28", "2026-03-01", "2026-03-02", "2026-03-02", "2026-03-04", "2026-03-04", "2026-03-04", "2026-03-05", "2026-03-06", "2026-03-06", "2026-03-07", "2026-03-07", "2026-03-07", "2026-03-07", "2026-03-07", "2026-03-07", "2026-03-09", "2026-03-10", "2026-03-11", "2026-03-12", "2026-03-13", "2026-03-14", "2026-03-15", "2026-03-17", "2026-03-17", "2026-03-17", "2026-03-18", "2026-03-20", "2026-03-21", "2026-03-22", "2026-03-22", "2026-03-26", "2026-03-26", "2026-03-27", "2026-03-27", "2026-03-28", "2026-03-28", "2026-03-28", "2026-03-29", "2026-03-29", "2026-03-29", "2026-03-30", "2026-03-30", "2026-04-01", "2026-04-03", "2026-04-04", "2026-04-04", "2026-04-05", "2026-04-06", "2026-04-06", "2026-04-07", "2026-04-07", "2026-04-08", "2026-04-08", "2026-04-09", "2026-04-10", "2026-04-11", "2026-04-11", "2026-04-12", "2026-04-12", "2026-04-13", "2026-04-15", "2026-04-17", "2026-04-18", "2026-04-19", "2026-04-21", "2026-04-24", "2026-04-24", "2026-04-24", "2026-04-24", "2026-04-25", "2026-04-26", "2026-04-26", "2026-04-27", "2026-04-28", "2026-04-29", "2026-04-30", "2026-05-01", "2026-05-02", "2026-05-03", "2026-05-04", "2026-05-04", "2026-05-04", "2026-05-06", "2026-05-12", "2026-05-13", "2026-05-15", "2026-05-16", "2026-05-16", "2026-05-17", "2026-05-18", "2026-05-18", "2026-05-19", "2026-05-20", "2026-05-22", "2026-05-23", "2026-05-24", "2026-05-25", "2026-05-26", "2026-05-27", "2026-05-28", "2026-05-29", "2026-05-30", "2026-05-31", "2026-06-02", "2026-06-02", "2026-06-03", "2026-06-03", "2026-06-03", "2026-06-04", "2026-06-05", "2026-06-06", "2026-06-08", "2026-06-09", "2026-06-09", "2026-06-09", "2026-06-11", "2026-06-11", "2026-06-11", "2026-06-12", "2026-06-13", "2026-06-13", "2026-06-13", "2026-06-14", "2026-06-16", "2026-06-16", "2026-06-16", "2026-06-17", "2026-06-19", "2026-06-19", "2026-06-19", "2026-06-20", "2026-06-20"];
-const CHART_VALUES = [2.0, 2.5, 1.25, 1.75, 2.25, 3.25, 4.25, 5.25, 6.25, 5.625, 6.625, 5.525, 6.1311, 5.5811, 6.1398, 7.1398, 7.6398, 8.285, 9.085, 9.585, 10.885, 11.885, 12.385, 13.385, 14.385, 15.385, 16.385, 15.835, 14.735, 15.235, 15.735, 16.735, 16.185, 17.185, 16.135, 16.635, 16.085, 15.535, 14.985, 15.985, 14.885, 13.785, 13.235, 12.685, 11.685, 12.185, 11.635, 11.085, 10.535, 11.535, 12.535, 13.16, 12.06, 11.51, 12.01, 13.26, 13.76, 12.66, 11.66, 12.66, 13.66, 13.11, 13.61, 12.46, 12.96, 12.41, 11.86, 12.86, 11.76, 11.21, 11.71, 12.21, 11.66, 10.66, 11.66, 10.56, 11.56, 12.56, 12.01, 11.46, 12.585, 12.035, 11.485, 12.485, 11.385, 10.285, 9.285, 10.285, 10.785, 10.285, 10.785, 10.235, 10.9247, 11.4247, 10.8747, 11.3747, 12.3747, 11.8247, 12.8247, 13.4914, 14.2321, 13.6821, 14.1821, 13.1821, 12.6321, 13.1321, 12.1321, 12.6321, 12.1321, 12.6321, 13.1321, 12.1321, 11.5821, 11.0321, 11.5321, 11.0321, 11.5321, 12.5321, 13.2321, 13.8382, 13.2632, 14.2632, 15.2632, 15.9931, 14.9931, 15.7031, 15.2031, 15.7981, 16.2981, 15.7731, 16.2731, 15.6481, 15.1481, 14.6481, 15.1481, 13.8981, 14.8981, 15.3981, 16.3981, 15.8981, 15.3981, 16.1981, 16.6981, 17.4227, 18.4227, 17.4227, 15.9227, 16.637, 17.137, 17.637, 17.067, 16.567, 16.567, 15.567, 15.067, 16.067, 16.952, 15.952, 15.452, 14.452, 15.452, 15.452, 14.452, 15.0972, 14.5972, 16.2472, 15.7472, 16.2472, 16.7472, 15.6872, 16.7522, 17.2522, 16.6772, 17.1772, 18.2272, 18.2272, 18.8333, 18.3183, 17.7283, 17.2283, 18.2283, 18.969, 19.469, 18.894, 19.394, 19.894, 19.894, 20.509, 21.009, 21.509];
+const RAW = [{"date": "2026-01-02", "sel": "2TP ML TXST/NAVY", "odds": -200.0, "sport": "CFB", "wl": "W", "units": 2.0, "flat": false, "pnl": 2.0, "cum": 2.0}, {"date": "2026-01-02", "sel": "Le Moyne -5.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 2.5}, {"date": "2026-01-03", "sel": "2TT CAR +9/SF +8.5", "odds": -125.0, "sport": "NFL", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.25, "cum": 1.25}, {"date": "2026-01-03", "sel": "HEDGE SEA -2.5", "odds": -110.0, "sport": "NFL", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 1.75}, {"date": "2026-01-03", "sel": "Miss State +9.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 2.25}, {"date": "2026-01-05", "sel": "EMU +1.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 3.25}, {"date": "2026-01-07", "sel": "Over 151.5 ARK vs. Ole Miss", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 4.25}, {"date": "2026-01-08", "sel": "DET", "odds": -140.0, "sport": "NHL", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 5.25}, {"date": "2026-01-09", "sel": "IND -4", "odds": -110.0, "sport": "CFB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 6.25}, {"date": "2026-01-09", "sel": "ORE +4  OFFSET of IND -4", "odds": -125.0, "sport": "CFB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.625, "cum": 5.625}, {"date": "2026-01-10", "sel": "Under 140 Hofstra vs. Monmouth", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 6.625}, {"date": "2026-01-10", "sel": "Oregon State +2.5", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.1, "cum": 5.525}, {"date": "2026-01-10", "sel": "TOR One Unit", "odds": -165.0, "sport": "NHL", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.6061, "cum": 6.1311}, {"date": "2026-01-11", "sel": "1H JAX +0.5", "odds": -110.0, "sport": "NFL", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 5.5811}, {"date": "2026-01-12", "sel": "MTL", "odds": -179.0, "sport": "NHL", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.5587, "cum": 6.1397}, {"date": "2026-01-13", "sel": "Texas A&M +9.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 7.1397}, {"date": "2026-01-14", "sel": "Over 146 Rhode Isl. vs. VCU", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 7.6397}, {"date": "2026-01-15", "sel": "CBJ One Unit FLAT", "odds": -155.0, "sport": "NHL", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.6452, "cum": 8.2849}, {"date": "2026-01-17", "sel": "3TT BUF+7.5/SEA-1/U46.5 NE", "odds": 160.0, "sport": "NFL", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.8, "cum": 9.0849}, {"date": "2026-01-18", "sel": "Under 137 Tulane vs. UNT", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 9.5849}, {"date": "2026-01-19", "sel": "IND to WIN CFB Championship", "odds": 130.0, "sport": "CFB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.3, "cum": 10.8849}, {"date": "2026-01-21", "sel": "Indiana State +9", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 11.8849}, {"date": "2026-01-22", "sel": "Wisconsin -5.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 12.3849}, {"date": "2026-01-24", "sel": "Over 145 NIU vs. Murray State", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 13.3849}, {"date": "2026-01-24", "sel": "Kansas -4.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 14.3849}, {"date": "2026-01-25", "sel": "SEA -2", "odds": -110.0, "sport": "NFL", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 15.3849}, {"date": "2026-01-27", "sel": "Over 154 UCON vs. Providence", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 16.3849}, {"date": "2026-01-27", "sel": "2H U 159 UCON vs. Prov Hedge", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 15.8349}, {"date": "2026-01-29", "sel": "Longwood +2.5", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.1, "cum": 14.7349}, {"date": "2026-01-30", "sel": "Over 156.5 Provf vs VILL", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 15.2349}, {"date": "2026-01-30", "sel": "Wright State -3 Half Unit", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 15.7349}, {"date": "2026-02-01", "sel": "CLE State +9", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 16.7349}, {"date": "2026-02-03", "sel": "Under 142 SIUE vs. Linden  Half Unit", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 16.1849}, {"date": "2026-02-04", "sel": "Navy -3.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 17.1849}, {"date": "2026-02-05", "sel": "Cal Santa Barbara -3", "odds": -105.0, "sport": "CBB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.05, "cum": 16.1349}, {"date": "2026-02-06", "sel": "Murray State -125", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 16.6349}, {"date": "2026-02-07", "sel": "Under 139.5 Drexel vs Elon", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 16.0849}, {"date": "2026-02-07", "sel": "Over 152.5 Stony Brook vs NE", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 15.5349}, {"date": "2026-02-07", "sel": "Delaware State -1.5", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 14.9849}, {"date": "2026-02-08", "sel": "2TP UVA/SEA (Super Bowl)", "odds": -130.0, "sport": "CBB/NFL", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 15.9849}, {"date": "2026-02-08", "sel": "2TT NEP +11/Under 51.5", "odds": -110.0, "sport": "NFL", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.1, "cum": 14.8849}, {"date": "2026-02-09", "sel": "Under 143.5 Drake vs. Valparaiso", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.1, "cum": 13.7849}, {"date": "2026-02-12", "sel": "Under 133.5 Drexel", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 13.2349}, {"date": "2026-02-17", "sel": "Nebraska +2", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 12.6849}, {"date": "2026-02-18", "sel": "2TP Clem/St. John's One Unit FLAT", "odds": -120.0, "sport": "CBB", "wl": "L", "units": 1.0, "flat": true, "pnl": -1.0, "cum": 11.6849}, {"date": "2026-02-18", "sel": "Under 145.5 Duq vs. La Salle", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 12.1849}, {"date": "2026-02-19", "sel": "Alabama State +5.5", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 11.6349}, {"date": "2026-02-19", "sel": "Over 152 High Point", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 11.0849}, {"date": "2026-02-19", "sel": "Montana", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 10.5349}, {"date": "2026-02-20", "sel": "Green Bay +6.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 11.5349}, {"date": "2026-02-21", "sel": "UTRGV -3.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 12.5349}, {"date": "2026-02-22", "sel": "Wisconsin One Unit FLAT", "odds": -160.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.625, "cum": 13.1599}, {"date": "2026-02-24", "sel": "STL -3.5", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.1, "cum": 12.0599}, {"date": "2026-02-24", "sel": "2H STL -5.5", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 11.5099}, {"date": "2026-02-26", "sel": "Stetson +7.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 12.0099}, {"date": "2026-02-26", "sel": "2TP ML Utah Tech/Cal Baptist", "odds": 125.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.25, "cum": 13.2599}, {"date": "2026-02-26", "sel": "UC Riverside +11.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 13.7599}, {"date": "2026-02-28", "sel": "Over 149.5 Arizona", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.1, "cum": 12.6599}, {"date": "2026-03-01", "sel": "2TP ILL-CHI/UNC WIL", "odds": 123.0, "sport": "CBB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.0, "cum": 11.6599}, {"date": "2026-03-02", "sel": "Duke -9.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 12.6599}, {"date": "2026-03-02", "sel": "Duke ML/DAL (NHL)/ -115", "odds": -115.0, "sport": "CBB/NHL", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 13.6599}, {"date": "2026-03-04", "sel": "Over 161.5 Wright St. vs. CLE St", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 13.1099}, {"date": "2026-03-04", "sel": "Wagner +5.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 13.6099}, {"date": "2026-03-04", "sel": "USA to win World Baseball Classic", "odds": -115.0, "sport": "MLB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.15, "cum": 12.4599}, {"date": "2026-03-05", "sel": "St. Thomas -5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 12.9599}, {"date": "2026-03-06", "sel": "TXST -118", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 12.4099}, {"date": "2026-03-06", "sel": "S. Alabama -4.5", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 11.8599}, {"date": "2026-03-07", "sel": "Arkansas +4.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 12.8599}, {"date": "2026-03-07", "sel": "2H MO -2", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.1, "cum": 11.7599}, {"date": "2026-03-07", "sel": "STL -6", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 11.2099}, {"date": "2026-03-07", "sel": "New Mexico +7.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 11.7099}, {"date": "2026-03-07", "sel": "Oklahoma +7.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 12.2099}, {"date": "2026-03-07", "sel": "Mt. St. Mary's +3.5", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 11.6599}, {"date": "2026-03-09", "sel": "3TP N. COL/Duke win ACC/FLA win SEC +185", "odds": 185.0, "sport": "CBB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.0, "cum": 10.6599}, {"date": "2026-03-10", "sel": "Over 162 OSU vs. COL", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 11.6599}, {"date": "2026-03-11", "sel": "PIT +9.5", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.1, "cum": 10.5599}, {"date": "2026-03-12", "sel": "FSU +17", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 11.5599}, {"date": "2026-03-13", "sel": "1H Ohio State +7.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 12.5599}, {"date": "2026-03-14", "sel": "St. Joseph's +7", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 12.0099}, {"date": "2026-03-15", "sel": "Over 164.5 ARK vs. VAN", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 11.4599}, {"date": "2026-03-17", "sel": "Venezuela Offset", "odds": 225.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 1.125, "cum": 12.5849}, {"date": "2026-03-17", "sel": "MD Bal County +1", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 12.0349}, {"date": "2026-03-17", "sel": "Over 158.5 Texas", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 11.4849}, {"date": "2026-03-18", "sel": "Under 138.5 Nebraska", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 12.4849}, {"date": "2026-03-20", "sel": "Akron +7.5", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.1, "cum": 11.3849}, {"date": "2026-03-21", "sel": "STL +12.5", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.1, "cum": 10.2849}, {"date": "2026-03-22", "sel": "2TP ML PUR/FLA One Unit FLAT", "odds": -195.0, "sport": "CBB", "wl": "L", "units": 1.0, "flat": true, "pnl": -1.0, "cum": 9.2849}, {"date": "2026-03-22", "sel": "2H Iowa State -3", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 10.2849}, {"date": "2026-03-26", "sel": "Texas +7.5", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 10.7849}, {"date": "2026-03-26", "sel": "2TP NRFI CIN/NRFI PHI", "odds": 215.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 10.2849}, {"date": "2026-03-27", "sel": "St. John's +7", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 10.7849}, {"date": "2026-03-27", "sel": "Over 7 runs SEA vs. CLE", "odds": -110.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 10.2349}, {"date": "2026-03-28", "sel": "F5 CHC -0.5 runs  One Unit FLAT", "odds": -145.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.6897, "cum": 10.9245}, {"date": "2026-03-28", "sel": "CHC -1.5 runs", "odds": -120.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 11.4245}, {"date": "2026-03-28", "sel": "Over 138.5 Illinois vs. Iowa", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 10.8745}, {"date": "2026-03-29", "sel": "Over 7.5 runs TB vs. STL", "odds": -110.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 11.3745}, {"date": "2026-03-29", "sel": "BAY -3.5  (To be played 4/1)", "odds": -110.0, "sport": "CBB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 12.3745}, {"date": "2026-03-29", "sel": "Under 146.5 MICH vs. TN", "odds": -110.0, "sport": "CBB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 11.8245}, {"date": "2026-03-30", "sel": "KC F5 -0.5 runs", "odds": -115.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 12.8245}, {"date": "2026-03-30", "sel": "KC  One Unit FLAT", "odds": -150.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.6667, "cum": 13.4912}, {"date": "2026-04-01", "sel": "F5 Miami  One Unit FLAT", "odds": -135.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.7407, "cum": 14.2319}, {"date": "2026-04-03", "sel": "WAS -2.5 runs", "odds": -110.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 13.6819}, {"date": "2026-04-04", "sel": "Over 10 runs ATH vs. HOU", "odds": -110.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 14.1819}, {"date": "2026-04-04", "sel": "Illinois  One Unit FLAT", "odds": -125.0, "sport": "MLB", "wl": "L", "units": 1.0, "flat": true, "pnl": -1.0, "cum": 13.1819}, {"date": "2026-04-05", "sel": "Over 7.5 runs CWS vs. TOR", "odds": -110.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 12.6319}, {"date": "2026-04-06", "sel": "MIL -117", "odds": -117.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 13.1319}, {"date": "2026-04-06", "sel": "F5 Under 3.5 runs LAA vs. ATL", "odds": 105.0, "sport": "MLB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.0, "cum": 12.1319}, {"date": "2026-04-07", "sel": "F5 Under 3.5 runs Miami", "odds": -120.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 12.6319}, {"date": "2026-04-07", "sel": "LAA", "odds": 120.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 12.1319}, {"date": "2026-04-08", "sel": "F5 Under 4 runs TEX vs SEA", "odds": -120.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 12.6319}, {"date": "2026-04-08", "sel": "Under 7.5 runs TEX vs. SEA", "odds": -105.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 13.1319}, {"date": "2026-04-09", "sel": "Masters Aggregate split among 4 players", "odds": 650.0, "sport": "PGA", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.0, "cum": 12.1319}, {"date": "2026-04-10", "sel": "Under 9 runs Tor vs. Min", "odds": -110.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 11.5819}, {"date": "2026-04-11", "sel": "NRFI KC vs. CWS", "odds": -110.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.55, "cum": 11.0319}, {"date": "2026-04-11", "sel": "Under 9 runs KC vs.", "odds": -105.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 11.5319}, {"date": "2026-04-12", "sel": "F5 U 4.5 CIN vs LAA  Half Unit FLAT", "odds": -125.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": true, "pnl": -0.5, "cum": 11.0319}, {"date": "2026-04-12", "sel": "F5 Under 3.5 TB vs NYY", "odds": 100.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 11.5319}, {"date": "2026-04-13", "sel": "BUF to win in regulation only", "odds": -124.0, "sport": "NHL", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 12.5319}, {"date": "2026-04-15", "sel": "PROP O3.5 Ks Kochanowicz +140", "odds": 140.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.7, "cum": 13.2319}, {"date": "2026-04-17", "sel": "LAA F5 One Unit FLAT", "odds": -165.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.6061, "cum": 13.838}, {"date": "2026-04-18", "sel": "Over 9.5 LAA vs. SD", "odds": -115.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.575, "cum": 13.263}, {"date": "2026-04-19", "sel": "TT Over 4 runs NYY", "odds": -115.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 14.263}, {"date": "2026-04-21", "sel": "CHC", "odds": -116.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 15.263}, {"date": "2026-04-24", "sel": "ATL One Unit FLAT", "odds": -137.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.7299, "cum": 15.9929}, {"date": "2026-04-24", "sel": "NYM -1.5 runs", "odds": 105.0, "sport": "MLB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.0, "cum": 14.9929}, {"date": "2026-04-24", "sel": "CHC", "odds": 142.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.71, "cum": 15.7029}, {"date": "2026-04-24", "sel": "MIL", "odds": 110.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 15.2029}, {"date": "2026-04-25", "sel": "F5 ATH", "odds": 119.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.595, "cum": 15.7979}, {"date": "2026-04-26", "sel": "F5 U 8 runs ARI vs SD", "odds": -115.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 16.2979}, {"date": "2026-04-26", "sel": "F5 KC", "odds": -105.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.525, "cum": 15.7729}, {"date": "2026-04-27", "sel": "F5 NYY -0.5 run", "odds": -105.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 16.2729}, {"date": "2026-04-28", "sel": "F5 Over 4 runs  PHI vs. SF", "odds": -125.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.625, "cum": 15.6479}, {"date": "2026-04-29", "sel": "2TP TB+1.5/NYY", "odds": 171.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 15.1479}, {"date": "2026-04-30", "sel": "PHI -1.5 runs", "odds": 155.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 14.6479}, {"date": "2026-05-01", "sel": "PHI", "odds": -116.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 15.1479}, {"date": "2026-05-02", "sel": "Over 3.5 runs STL", "odds": -125.0, "sport": "MLB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.25, "cum": 13.8979}, {"date": "2026-05-03", "sel": "TB", "odds": -118.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 14.8979}, {"date": "2026-05-04", "sel": "F5 Under 4.5 runs", "odds": -110.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 15.3979}, {"date": "2026-05-04", "sel": "TB", "odds": -120.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 16.3979}, {"date": "2026-05-04", "sel": "Atlanta   Half Unit", "odds": 135.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 15.8979}, {"date": "2026-05-06", "sel": "Atlanta   Half Unit", "odds": 120.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 15.3979}, {"date": "2026-05-12", "sel": "PIT -1.5 runs One Unit FLAT", "odds": -125.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.8, "cum": 16.1979}, {"date": "2026-05-13", "sel": "NRFI MIL vs. SD", "odds": -150.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 16.6979}, {"date": "2026-05-15", "sel": "F5 ATL One Unit FLAT", "odds": -138.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.7246, "cum": 17.4226}, {"date": "2026-05-16", "sel": "F5 Under 6 runs ARI vs. COL", "odds": 100.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 18.4226}, {"date": "2026-05-16", "sel": "TB One Unit FLAT", "odds": -134.0, "sport": "MLB", "wl": "L", "units": 1.0, "flat": true, "pnl": -1.0, "cum": 17.4226}, {"date": "2026-05-17", "sel": "PGA Championship Aggregate 1.5u", "odds": 900.0, "sport": "PGA", "wl": "L", "units": 1.5, "flat": false, "pnl": -1.5, "cum": 15.9226}, {"date": "2026-05-18", "sel": "F5 TB One Unit Flat", "odds": -140.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.7143, "cum": 16.6369}, {"date": "2026-05-18", "sel": "F5  TB -0.5 runs", "odds": 100.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 17.1369}, {"date": "2026-05-19", "sel": "F5 Boston", "odds": -125.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 17.6369}, {"date": "2026-05-20", "sel": "STL", "odds": -114.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.57, "cum": 17.0669}, {"date": "2026-05-22", "sel": "F5 TB", "odds": 125.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 16.5669}, {"date": "2026-05-23", "sel": "F5 Under 4 runs LAA vs. TEX", "odds": -120.0, "sport": "MLB", "wl": "Push", "units": 0.0, "flat": false, "pnl": 0.0, "cum": 16.5669}, {"date": "2026-05-24", "sel": "BAL One Unit FLAT", "odds": -125.0, "sport": "MLB", "wl": "L", "units": 1.0, "flat": true, "pnl": -1.0, "cum": 15.5669}, {"date": "2026-05-25", "sel": "Over 9 runs LAD vs. COL", "odds": 100.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 15.0669}, {"date": "2026-05-26", "sel": "ARI F5", "odds": -110.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 16.0669}, {"date": "2026-05-27", "sel": "2TP ARI/NYY", "odds": 177.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.885, "cum": 16.9519}, {"date": "2026-05-28", "sel": "Colonial Ludvig Aberg Top 10", "odds": 130.0, "sport": "PGA", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.0, "cum": 15.9519}, {"date": "2026-05-29", "sel": "PROP Katel Marte", "odds": 125.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 15.4519}, {"date": "2026-05-30", "sel": "TB -1.5 runs", "odds": 140.0, "sport": "MLB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.0, "cum": 14.4519}, {"date": "2026-05-31", "sel": "TB -1.5 runs", "odds": 100.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 15.4519}, {"date": "2026-06-02", "sel": "TT Over 4 runs CWS", "odds": -115.0, "sport": "MLB", "wl": "Push", "units": 0.0, "flat": false, "pnl": 0.0, "cum": 15.4519}, {"date": "2026-06-02", "sel": "TB  One Unit FLAT", "odds": -135.0, "sport": "MLB", "wl": "L", "units": 1.0, "flat": true, "pnl": -1.0, "cum": 14.4519}, {"date": "2026-06-03", "sel": "F5 PHI One Unit FLAT", "odds": -155.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.6452, "cum": 15.097}, {"date": "2026-06-03", "sel": "3TP ALL F5 Money Line PHI/NYY/LAD", "odds": 283.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 14.597}, {"date": "2026-06-03", "sel": "NBA Championship NYK", "odds": 165.0, "sport": "NBA", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.65, "cum": 16.247}, {"date": "2026-06-04", "sel": "MIL -1.5 runs", "odds": 100.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 15.747}, {"date": "2026-06-05", "sel": "NRFI LAD vs. LAA", "odds": -115.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 16.247}, {"date": "2026-06-06", "sel": "NRFI TOR vs. BAL", "odds": -115.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 16.747}, {"date": "2026-06-08", "sel": "SPLIT F5 HOU ML & RL", "odds": -106.0, "sport": "MLB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.06, "cum": 15.687}, {"date": "2026-06-09", "sel": "2TP NRFI TB-BOS/SD-CIN", "odds": 213.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 1.065, "cum": 16.752}, {"date": "2026-06-09", "sel": "TT ATH Over 6 runs", "odds": -125.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 17.252}, {"date": "2026-06-09", "sel": "TT MIL Over 6.5 runs", "odds": -115.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.575, "cum": 16.677}, {"date": "2026-06-11", "sel": "F5 BAL", "odds": -102.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 17.177}, {"date": "2026-06-11", "sel": "BAL", "odds": 105.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.05, "cum": 18.227}, {"date": "2026-06-11", "sel": "Over 6 goals CAR vs. VGK", "odds": -115.0, "sport": "NHL", "wl": "Push", "units": 0.0, "flat": false, "pnl": 0.0, "cum": 18.227}, {"date": "2026-06-12", "sel": "F5 MIL -0.5 runs One Unit FLAT", "odds": -165.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.6061, "cum": 18.8331}, {"date": "2026-06-13", "sel": "F5 Miami", "odds": -103.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.515, "cum": 18.3181}, {"date": "2026-06-13", "sel": "2TP Switzerland/Scotland", "odds": -118.0, "sport": "WC", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.59, "cum": 17.7281}, {"date": "2026-06-13", "sel": "3TP Switzerland/Scotland/O2.5 Turkiye/Australia", "odds": 265.0, "sport": "WC", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 17.2281}, {"date": "2026-06-14", "sel": "BOTH Japan and Netherlands to score", "odds": -120.0, "sport": "WC", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 18.2281}, {"date": "2026-06-16", "sel": "Washington One Unit FLAT", "odds": -135.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.7407, "cum": 18.9688}, {"date": "2026-06-16", "sel": "YRFI TEX vs. MIN", "odds": -115.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 19.4688}, {"date": "2026-06-16", "sel": "NRFI NYY vs. CWS", "odds": -115.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.575, "cum": 18.8938}, {"date": "2026-06-17", "sel": "Under 8.5 runs Houston vs. Detroit", "odds": -120.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 19.3938}, {"date": "2026-06-18", "sel": "Scottie Scheffler to WIN U.S. Open", "odds": 540.0, "sport": "PGA", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.0, "cum": 18.3938}, {"date": "2026-06-19", "sel": "F5 U 4 runs ATL vs. MIL", "odds": -120.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 18.8938}, {"date": "2026-06-19", "sel": "ATL TT Under 3 runs", "odds": -110.0, "sport": "MLB", "wl": "Push", "units": 0.0, "flat": false, "pnl": 0.0, "cum": 18.8938}, {"date": "2026-06-19", "sel": "F5 LAA", "odds": 123.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.615, "cum": 19.5088}, {"date": "2026-06-20", "sel": "F5 Miami", "odds": -108.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 20.0088}, {"date": "2026-06-20", "sel": "Miami", "odds": -136.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 20.5088}, {"date": "2026-06-22", "sel": "F5 TB -0.5 runs One unit FLAT", "odds": -129.0, "sport": "MLB", "wl": "L", "units": 1.0, "flat": true, "pnl": -1.0, "cum": 19.5088}, {"date": "2026-06-23", "sel": "O2.5 Goals COL vs. Congo", "odds": 120.0, "sport": "WC", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 19.0088}, {"date": "2026-06-23", "sel": "BOTH COL and Congo to score", "odds": 125.0, "sport": "WC", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 18.5088}, {"date": "2026-06-24", "sel": "NRFI PIT vs SEA One Unit FLAT", "odds": -130.0, "sport": "MLB", "wl": "L", "units": 1.0, "flat": true, "pnl": -1.0, "cum": 17.5088}, {"date": "2026-06-24", "sel": "ATH", "odds": -112.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.56, "cum": 16.9488}, {"date": "2026-06-25", "sel": "NYY F5 -0.5 runs", "odds": 103.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 16.4488}, {"date": "2026-06-25", "sel": "NYY  One unit FLAT", "odds": -143.0, "sport": "MLB", "wl": "L", "units": 1.0, "flat": true, "pnl": -1.0, "cum": 15.4488}, {"date": "2026-06-26", "sel": "BOTH Norway vs. France to score", "odds": -170.0, "sport": "WC", "wl": "W", "units": 1.0, "flat": false, "pnl": 1.0, "cum": 16.4488}, {"date": "2026-06-26", "sel": "NYY", "odds": -103.0, "sport": "MLB", "wl": "L", "units": 1.0, "flat": false, "pnl": -1.03, "cum": 15.4188}, {"date": "2026-06-26", "sel": "COL", "odds": 152.0, "sport": "MLB", "wl": "L", "units": 0.5, "flat": false, "pnl": -0.5, "cum": 14.9188}, {"date": "2026-06-27", "sel": "NRFI CWS vs. KC", "odds": -125.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 15.4188}, {"date": "2026-06-27", "sel": "CWS", "odds": -120.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.5, "cum": 15.9188}, {"date": "2026-06-28", "sel": "NRFI SF vs. ATL One Unit FLAT", "odds": -130.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.7692, "cum": 16.688}, {"date": "2026-06-29", "sel": "NRFI  CLE vs. TEX One Unit FLAT", "odds": -130.0, "sport": "MLB", "wl": "W", "units": 1.0, "flat": true, "pnl": 0.7692, "cum": 17.4573}, {"date": "2026-06-30", "sel": "2TP France/Mexico", "odds": 174.0, "sport": "WC", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.87, "cum": 18.3273}, {"date": "2026-06-30", "sel": "2TP LAD/SEA", "odds": 148.0, "sport": "MLB", "wl": "W", "units": 0.5, "flat": false, "pnl": 0.74, "cum": 19.0673}];
 
-function fmtOdds(o) { return o > 0 ? '+' + o : '' + o; }
+RAW.forEach(r => { r._ts = new Date(r.date + 'T00:00:00').getTime(); });
 
-function renderTable() {
-  const sport = document.getElementById('sportFilter').value;
-  const result = document.getElementById('resultFilter').value;
-  const tbody = document.getElementById('tableBody');
-  let rows = DATA.filter(r => {
-    if (sport && !r.sport.includes(sport)) return false;
-    if (result) {
-      if (result === 'Push' && r.result !== 'Push') return false;
-      if (result !== 'Push' && r.result !== result) return false;
-    }
-    return true;
-  });
-  tbody.innerHTML = rows.map(r => {
-    const bc = r.result === 'W' ? 'badge-W' : r.result === 'L' ? 'badge-L' : 'badge-P';
-    const pc = r.pnl > 0 ? 'pnl-pos' : r.pnl < 0 ? 'pnl-neg' : 'pnl-zero';
-    const ps = r.pnl > 0 ? '+' + r.pnl.toFixed(2) : r.pnl.toFixed(2);
-    const flatBadge = r.flat ? ' <span style="font-size:.68rem;color:var(--muted);margin-left:4px">FLAT</span>' : '';
-    return `<tr>
-      <td>${r.date}</td>
-      <td>${r.selection}${flatBadge}</td>
-      <td>${fmtOdds(r.odds)}</td>
-      <td>${r.sport}</td>
-      <td>${r.wager.toFixed(2)}u</td>
-      <td><span class="badge ${bc}">${r.result}</span></td>
-      <td class="${pc}">${ps}u</td>
-    </tr>`;
-  }).join('');
+// ---------- Summary stats ----------
+const wins = RAW.filter(r => r.wl === 'W').length;
+const losses = RAW.filter(r => r.wl === 'L').length;
+const pushes = RAW.filter(r => r.wl === 'Push').length;
+const total = RAW.length;
+const winRate = (wins / (wins + losses) * 100);
+const netUnits = RAW.reduce((s, r) => s + r.pnl, 0);
+const lastDate = RAW.reduce((a, r) => r._ts > a ? r._ts : a, 0);
+
+document.getElementById('statRecord').textContent = `${wins}-${losses}-${pushes}`;
+document.getElementById('statWinRate').textContent = winRate.toFixed(1) + '%';
+const netEl = document.getElementById('statNetUnits');
+netEl.textContent = (netUnits >= 0 ? '+' : '') + netUnits.toFixed(2) + 'u';
+netEl.className = 'value ' + (netUnits >= 0 ? 'pos' : 'neg');
+document.getElementById('statTotal').textContent = total;
+document.getElementById('lastDate').textContent = new Date(lastDate).toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+
+// ---------- Sport filter options ----------
+const sports = [...new Set(RAW.map(r => r.sport))].sort();
+const sportSel = document.getElementById('sportFilter');
+sports.forEach(s => {
+  const opt = document.createElement('option');
+  opt.value = s; opt.textContent = s;
+  sportSel.appendChild(opt);
+});
+
+// ---------- Table rendering ----------
+function fmtOdds(o){
+  return (o > 0 ? '+' : '') + o.toFixed(0);
+}
+function fmtUnits(u){
+  return u.toFixed(2).replace(/\.?0+$/,'') || '0';
+}
+function fmtPnl(p){
+  if (Math.abs(p) < 0.001) return { txt: '0.00u', cls: 'pnl-zero' };
+  return { txt: (p >= 0 ? '+' : '') + p.toFixed(2) + 'u', cls: p >= 0 ? 'pnl-pos' : 'pnl-neg' };
 }
 
-function buildChart() {
-  const svg = document.getElementById('chart-svg');
-  const W = 860, H = 260, PL = 52, PR = 16, PT = 18, PB = 36;
-  const cW = W - PL - PR, cH = H - PT - PB;
-  const vals = CHART_VALUES;
+function renderTable(){
+  const sportF = sportSel.value;
+  const resultF = document.getElementById('resultFilter').value;
+  let rows = RAW.filter(r => (sportF === 'ALL' || r.sport === sportF) && (resultF === 'ALL' || r.wl === resultF));
+  rows = rows.slice().sort((a,b) => b._ts - a._ts || 0);
+
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+  rows.forEach(r => {
+    const tr = document.createElement('tr');
+    const p = fmtPnl(r.pnl);
+    const dateStr = new Date(r._ts).toLocaleDateString('en-US', {month:'2-digit', day:'2-digit', year:'numeric'});
+    const flatTag = r.flat ? ' <span class="flat-tag">FLAT</span>' : '';
+    tr.innerHTML = `
+      <td>${dateStr}</td>
+      <td>${r.sel}${flatTag}</td>
+      <td>${fmtOdds(r.odds)}</td>
+      <td>${r.sport}</td>
+      <td class="res-${r.wl}">${r.wl}</td>
+      <td>${fmtUnits(r.units)}</td>
+      <td class="${p.cls}">${p.txt}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('rowCount').textContent = `${rows.length} selections`;
+}
+
+sportSel.addEventListener('change', renderTable);
+document.getElementById('resultFilter').addEventListener('change', renderTable);
+
+// ---------- Chart ----------
+function buildChart(){
+  const svg = document.getElementById('chartSvg');
+  const chronological = RAW.slice().sort((a,b) => a._ts - b._ts);
+  const vals = [];
+  let cum = 0;
+  chronological.forEach(r => { cum += r.pnl; vals.push(cum); });
+
+  const W = 1000, H = 340, PL = 46, PR = 20, PT = 20, PB = 34;
   const n = vals.length;
-  const maxV = Math.max(25, ...vals);
-  const minV = Math.min(-5, ...vals);
-  const range = maxV - minV;
+  const minV = Math.min(0, ...vals);
+  const maxV = Math.max(0, ...vals) + 3;
+  const range = maxV - minV || 1;
 
-  function xPos(i) { return PL + (i / (n - 1)) * cW; }
-  function yPos(v) { return PT + cH - ((v - minV) / range) * cH; }
-
+  const xPos = i => PL + (i / (n - 1)) * (W - PL - PR);
+  const yPos = v => PT + (1 - (v - minV) / range) * (H - PT - PB);
   const zy = yPos(0);
-  let s = `<line x1="${PL}" y1="${zy}" x2="${W-PR}" y2="${zy}" stroke="#2a3d52" stroke-width="1.5"/>`;
 
-  for (let v = Math.ceil(minV/5)*5; v <= maxV; v += 5) {
-    const y = yPos(v);
-    s += `<text x="${PL-6}" y="${y+4}" text-anchor="end" fill="#7a8a9a" font-size="10">${v>0?'+'+v:v}</text>`;
-    s += `<line x1="${PL}" y1="${y}" x2="${W-PR}" y2="${y}" stroke="#1e2f42" stroke-width="0.5"/>`;
+  let s = '';
+
+  // horizontal gridlines
+  const gridStep = range > 30 ? 10 : range > 15 ? 5 : 2;
+  for (let g = Math.ceil(minV / gridStep) * gridStep; g <= maxV; g += gridStep) {
+    const y = yPos(g);
+    s += `<line x1="${PL}" y1="${y}" x2="${W-PR}" y2="${y}" stroke="#1e2f42" stroke-width="1"/>`;
+    s += `<text x="${PL-8}" y="${y+4}" text-anchor="end" fill="#7a8a9a" font-size="10">${g > 0 ? '+' + g : g}</text>`;
   }
 
-  const step = Math.ceil(n / 12);
+  // zero line emphasis
+  s += `<line x1="${PL}" y1="${zy}" x2="${W-PR}" y2="${zy}" stroke="#3a4d5e" stroke-width="1.2"/>`;
+
+  // x-axis date labels (about 10 labels)
+  const step = Math.max(1, Math.ceil(n / 10));
   for (let i = 0; i < n; i += step) {
-    s += `<text x="${xPos(i)}" y="${H-8}" text-anchor="middle" fill="#7a8a9a" font-size="9">${CHART_LABELS[i].slice(5)}</text>`;
+    const x = xPos(i);
+    const d = new Date(chronological[i]._ts);
+    const lbl = (d.getMonth()+1).toString().padStart(2,'0') + '/' + d.getDate().toString().padStart(2,'0');
+    s += `<text x="${x}" y="${H-10}" text-anchor="middle" fill="#7a8a9a" font-size="10">${lbl}</text>`;
   }
 
-  let fill = `M ${xPos(0)} ${zy}`;
-  vals.forEach((v,i) => { fill += ` L ${xPos(i)} ${yPos(v)}`; });
-  fill += ` L ${xPos(n-1)} ${zy} Z`;
-  s += `<path d="${fill}" fill="rgba(201,168,76,0.12)"/>`;
+  // fill area
+  let fillPath = `M ${xPos(0)} ${zy}`;
+  vals.forEach((v,i) => { fillPath += ` L ${xPos(i)} ${yPos(v)}`; });
+  fillPath += ` L ${xPos(n-1)} ${zy} Z`;
+  s += `<path d="${fillPath}" fill="rgba(201,168,76,0.14)"/>`;
 
-  let line = `M ${xPos(0)} ${yPos(vals[0])}`;
-  vals.forEach((v,i) => { if(i>0) line += ` L ${xPos(i)} ${yPos(v)}`; });
-  s += `<path d="${line}" fill="none" stroke="#c9a84c" stroke-width="2"/>`;
+  // line
+  let linePath = `M ${xPos(0)} ${yPos(vals[0])}`;
+  vals.forEach((v,i) => { if (i>0) linePath += ` L ${xPos(i)} ${yPos(v)}`; });
+  s += `<path d="${linePath}" fill="none" stroke="#c9a84c" stroke-width="2.2"/>`;
 
+  // final dot + label
   const lx = xPos(n-1), ly = yPos(vals[n-1]);
-  s += `<circle cx="${lx}" cy="${ly}" r="4" fill="#c9a84c"/>`;
-  s += `<text x="${lx-6}" y="${ly-8}" text-anchor="end" fill="#c9a84c" font-size="11" font-weight="bold">+${vals[n-1].toFixed(2)}u</text>`;
+  s += `<circle cx="${lx}" cy="${ly}" r="4.5" fill="#c9a84c"/>`;
+  const finalLabel = (vals[n-1] >= 0 ? '+' : '') + vals[n-1].toFixed(2) + 'u';
+  s += `<text x="${lx-8}" y="${ly-10}" text-anchor="end" fill="#c9a84c" font-size="13" font-weight="bold">${finalLabel}</text>`;
 
   svg.innerHTML = s;
 }
